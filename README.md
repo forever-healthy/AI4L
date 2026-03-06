@@ -1,8 +1,6 @@
-![FH Logo]
+![AI4L – AI for Practical Longevity](./assets/AI4L-Header.png)
+ 
 
-# AI4L – AI for Practical Longevity
-Forever Healthy Foundation: [forever-healthy.org](https://forever-healthy.org)
-
-Using AI to generate well-structured, evidence-based reviews of interventions aimed at optimizing health and longevity.
+Using AI to generate trustworthy, evidence-based reviews of interventions aimed at optimizing health and longevity.
 
 Coming soon! :-)
