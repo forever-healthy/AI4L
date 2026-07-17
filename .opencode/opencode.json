@@ -1,0 +1,66 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "d-clinicaltrialsgov": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "-i",
+        "-e",
+        "MCP_TRANSPORT_TYPE=stdio",
+        "-e",
+        "MCP_LOG_LEVEL=info",
+        "ghcr.io/cyanheads/clinicaltrialsgov-mcp-server:latest"
+      ],
+      "enabled": true
+    },
+    "d-pubmed": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "-i",
+        "-e",
+        "MCP_TRANSPORT_TYPE=stdio",
+        "-e",
+        "MCP_LOG_LEVEL=info",
+        "--env-file",
+        ".env",
+        "ghcr.io/cyanheads/pubmed-mcp-server:latest"
+      ],
+      "enabled": true
+    },
+    "d-fetch": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "mcp/fetch",
+        "--ignore-robots-txt",
+        "--user-agent=Chrome/145.0.7632.160"
+      ],
+      "enabled": true
+    },
+    "d-browser": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "-i",
+        "--init",
+        "--shm-size=2gb",
+        "--cap-add=SYS_ADMIN",
+        "-e",
+        "HEADLESS=true",
+        "mcr.microsoft.com/playwright/mcp:latest"
+      ],
+      "enabled": true
+    }
+  }
+}

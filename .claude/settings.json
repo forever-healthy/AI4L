@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "deny": ["WebFetch"],
+    "allow": [
+      "Edit(creation/**)",
+      "Write(creation/**)",
+      "Read(**)",
+      "Bash(python3:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(date:*)",
+      "Bash(awk:*)",
+      "Bash(sed:*)",
+      "Bash(mv:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "WebSearch",
+      "mcp__d-clinicaltrialsgov__*",
+      "mcp__d-pubmed__*",
+      "mcp__d-fetch__*",
+      "mcp__d-browser__*"
+    ]
+  },
+  "enabledMcpjsonServers": ["d-clinicaltrialsgov", "d-pubmed", "d-fetch", "d-browser"],
+  "enableAllProjectMcpServers": true,
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); dir=$(basename \"$(echo \"$input\" | jq -r '.cwd')\" | tr '[:lower:]' '[:upper:]'); model=$(echo \"$input\" | jq -r '.model.display_name // empty'); label=\"$dir\"; [ -n \"$model\" ] && label=\"$label | $model\"; printf '\\033[48;2;200;0;0m\\033[38;2;255;255;255m %s \\033[0m' \"$label\""
+  }
+}

@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use AI4L in your work, please cite it as below."
+title: "AI4L: AI for Practical Longevity"
+abstract: "An audit-driven prompting framework for generating high-quality, evidence-based reviews of health and longevity interventions."
+version: 1.2.0
+date-released: 2026-07-17
+authors:
+    - name: "Forever Healthy Foundation"
+    - given-names: Michael
+      family-names: Greve
+    - given-names: Heiko
+      family-names: Schneefeld
+license: MIT
+repository-code: "https://github.com/forever-healthy/AI4L"
+url: "https://forever-healthy.org"
+keywords:
+    - longevity
+    - evidence-review
+    - large-language-models
+    - prompt-engineering
+    - healthcare

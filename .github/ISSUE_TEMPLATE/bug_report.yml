@@ -1,0 +1,102 @@
+name: Bug Report
+description: Report a problem with AI4L (creation, audit, fix, or workflow)
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report. Please fill in as much detail as you can — it makes triage dramatically faster.
+
+        For general questions or discussion, please use [GitHub Discussions](https://github.com/forever-healthy/AI4L/discussions) instead.
+
+  - type: input
+    id: version
+    attributes:
+      label: AI4L version
+      description: The version listed in the `VERSION` file (e.g., `1.0.0`).
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Which environment were you running AI4L in?
+      options:
+        - Claude Code (CLI)
+        - OpenAI Codex (CLI)
+        - OpenCode (CLI)
+        - Claude Desktop
+        - Web Chat UI (claude.ai, ChatGPT, etc.)
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: model
+    attributes:
+      label: AI model
+      description: The exact model name and version, including any qualifier (e.g., `Opus 4.7`, `GPT 5.5`, `Gemini 3`).
+      placeholder: "Opus 4.7"
+    validations:
+      required: true
+
+  - type: input
+    id: command
+    attributes:
+      label: Command or prompt
+      description: The exact `/er` command (CLI) or prompt text (Chat UI) you used.
+      placeholder: "/er full Tadalafil"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the actual behavior you observed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+      description: Describe the behavior you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Minimal steps that reliably trigger the issue.
+      placeholder: |
+        1. Start `sbx run claude` in the AI4L directory
+        2. Run `/er full <topic>`
+        3. Observe ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: output
+    attributes:
+      label: Relevant output
+      description: |
+        Paste any relevant terminal output, error messages, or excerpts from the generated `_ER.md` / `_QA.md` files. For long files, link a gist instead.
+      render: text
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I am running the CLI inside the recommended Docker sandbox (`sbx`).
+          required: false
+        - label: I have verified the issue reproduces in a clean session (no prior conversation history).
+          required: false
+        - label: I have checked existing issues and discussions for duplicates.
+          required: true

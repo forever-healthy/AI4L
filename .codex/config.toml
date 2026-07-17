@@ -1,0 +1,55 @@
+# Repo-local Codex configuration.
+# Global auth, history, logs, and cache files should remain in CODEX_HOME.
+
+[mcp_servers.d-clinicaltrialsgov]
+command = "docker"
+args = [
+    "run",
+    "--rm",
+    "-i",
+    "-e", "MCP_TRANSPORT_TYPE=stdio",
+    "-e", "MCP_LOG_LEVEL=info",
+    "ghcr.io/cyanheads/clinicaltrialsgov-mcp-server:latest"
+]
+startup_timeout_sec = 180
+
+[mcp_servers.d-pubmed]
+command = "docker"
+args = [
+    "run",
+    "--rm",
+    "-i",
+    "-e", "MCP_TRANSPORT_TYPE=stdio",
+    "-e", "MCP_LOG_LEVEL=info",
+    "--env-file", ".env",
+    "ghcr.io/cyanheads/pubmed-mcp-server:latest"
+]
+startup_timeout_sec = 180
+
+[mcp_servers.d-fetch]
+command = "docker"
+args = [
+    "run",
+    "-i",
+    "--rm", "mcp/fetch",
+    "--ignore-robots-txt",
+    "--user-agent=Chrome/145.0.7632.160"
+]
+startup_timeout_sec = 180
+
+[mcp_servers.d-fetch.tools.fetch]
+approval_mode = "approve"
+
+[mcp_servers.d-browser]
+command = "docker"
+args = [
+    "run",
+    "--rm",
+    "-i",
+    "--init",
+    "--shm-size=2gb",
+    "--cap-add=SYS_ADMIN",
+    "-e", "HEADLESS=true",
+    "mcr.microsoft.com/playwright/mcp:latest"
+]
+startup_timeout_sec = 180

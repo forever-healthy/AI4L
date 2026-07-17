@@ -1,0 +1,10 @@
+.DS_Store
+
+/creation/*
+!/creation/.gitkeep
+!/creation/tmp
+!/creation/trash
+/creation/tmp/*
+!/creation/tmp/.gitkeep
+/creation/trash/*
+!/creation/trash/.gitkeep
