@@ -67,3 +67,22 @@ args = [
 enabled = true
 startup_timeout_sec = 90
 tool_timeout_sec = 60
+
+[mcp_servers.d-brightdata]
+command = "docker"
+args = [
+  "run",
+  "--rm",
+  "-i",
+  "--env-file",
+  ".env",
+  "-e",
+  "GROUPS=browser",
+  "node:22-alpine",
+  "sh",
+  "-c",
+  "API_TOKEN=$BRIGHTDATA_API_TOKEN exec npx -y @brightdata/mcp"
+]
+enabled = true
+startup_timeout_sec = 180   # npx downloads the package on cold start
+tool_timeout_sec = 180

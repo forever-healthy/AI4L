@@ -1,4 +1,4 @@
-![Version 1.2.0](https://img.shields.io/badge/Version-1.2.0-green.svg)
+![Version 1.3.0](https://img.shields.io/badge/Version-1.3.0-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -172,9 +172,17 @@ To avoid hallucinations and calculation errors, break down the audit process int
 
 * After creating the list, for each entry:
 
-  - try to access the url using `d-browser`. If `d-browser` does not receive a `HTTP status code` of `200` , try `d-fetch`. Note the status code in the `HTTP status code` column.
-  
-  - If the url loads sucessfully with a `200` status code, read the page content using `d-browser` or `d-fetch` and confirm that the content matches the link's title. If it does, mark the item in the `Match` column as passed with 🟢. If it does not, mark it as failed with 🔴 in the `Match` column and add a comment in the `Comment` column about the mismatch.
+  - For PubMed links, use `pubmed_fetch_articles` first. If the PMID resolves and the returned title matches the ER's claim, mark `Loaded` ✅ and `Verified By` `pubmed_fetch_articles`. Only if the PMID does not resolve, fall back to the chain below.
+
+  - try to retrieve the url using `d-browser`. If `d-browser` fails, try `d-fetch`. If `d-fetch` also fails, try `d-brightdata` (`scrape_as_markdown`), which can retrieve pages protected by bot detection.
+
+  - A retrieval has FAILED unless you are holding the genuine target page. A transport error, an error page (404, 500, …), a paywall, or a bot-detection interstitial (CAPTCHA, "Security Checkpoint", "Verify your browser") are all failures. A page you could not read is not verified.
+
+  - Mark the `Loaded` column ✅ or ❌. In `Verified By` note which tool retrieved it: `d-browser`, `d-fetch`, `d-brightdata`, or — for PubMed links — `pubmed_fetch_articles`.
+
+  - If all three fail, mark `Loaded` ❌, `Verified By` `none`, `Match` 🔴, and comment that the url could not be retrieved. If `d-brightdata` is not configured, say so in the `Comment` column — an unavailable tool is still a failure, NEVER a pass.
+
+  - If the page was retrieved, confirm that the content matches the link's title. If it does, mark the item in the `Match` column as passed with 🟢. If it does not, mark it as failed with 🔴 in the `Match` column and add a comment in the `Comment` column about the mismatch.
 
 
 #### 3. Audit
@@ -299,9 +307,9 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 ## URL Verification
 
-| Link                     | HTTP Status Code  | Match | Comment          |
-| ------------------------ | ----------------- | ----- | ---------------- |
-| [link_title](<link_url>) |                   |       |                  |
+| Link                     | Loaded | Verified By | Match | Comment          |
+| ------------------------ | ------ | ----------- | ----- | ---------------- |
+| [link_title](<link_url>) |        |             |       |                  |
 
 
 
@@ -446,13 +454,15 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 `URL verification: Each URL must pass two checks:`
 
-* 5.9 Each URL loads successfully with a "HTTP status code" of "200"
+* 5.9 Each URL retrieves the genuine target page
 
-`Use "d-browser" to load the URL. Confirm the response is "200". If the URL fails to load with "200", try again with "d-fetch". If it still does not load with "200", mark the item as failed with a comment about the URL not loading. Any other Response than "200" (e.g., 404, 403, 500) or failure to load after the two attempts is a FAIL.`
+`For PubMed links, use "pubmed_fetch_articles" first: a resolving PMID satisfies this item. If it does not resolve, fall through to the chain below.`
+
+`Use "d-browser" to load the URL. If it fails, try "d-fetch". If that also fails, try "d-brightdata" ("scrape_as_markdown"). Record the tool that succeeded in "Verified By". A FAIL is any outcome that is not the genuine target page — a transport error, an error page (404, 403, 500, …), or a bot wall / CAPTCHA / "security checkpoint" interstitial. A page you could not read is not verified. If all three fail — including when "d-brightdata" is not available in this environment — the item is a FAIL.`
 
 * 5.10 The page at each URL contains content matching the link's annotation in the ER (the page is about the cited topic; the article/resource title matches)
 
-`Use "d-browser" or, if it fails, "d-fetch" to read the page, then confirm the content matches the link's description in the ER (e.g., the page is about the cited topic, the article title matches what the ER claims). A generic landing page, paywall, or unrelated content fails this check.`
+`Use "d-browser" or, if it fails, "d-fetch", or, if that also fails, "d-brightdata" to read the page, then confirm the content matches the link's description in the ER (e.g., the page is about the cited topic, the article title matches what the ER claims). A generic landing page, paywall, bot wall, or unrelated content fails this check.`
 
 `For PubMed links, the auditor must instead use "pubmed_fetch_articles" to retrieve the article metadata and verify the returned title matches the title claimed in the ER. A mismatch means the PMID was fabricated or assigned to the wrong paper.`
 

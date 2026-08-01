@@ -1,6 +1,15 @@
 # AI4L - Change Log
 
 
+### v1.3.0 — 2026-08-01
+
+* Added Bright Data as a third-tier URL verification fallback (`scrape_as_markdown`) for pages protected by bot detection, after `d-browser` and `d-fetch`
+
+* Replaced the `HTTP Status Code` column in the URL Verification table with `Loaded` and `Verified By`, since a bot-wall page can still return a 200
+
+* PubMed links are now verified directly via `pubmed_fetch_articles` instead of going through the URL fallback chain
+
+
 ### v1.2.0 — 2026-07-17
 
 * Added Grok CLI support with an @agent translation layer that maps AI4L's `@er-*` agent calls to Grok's `spawn_subagent` tool

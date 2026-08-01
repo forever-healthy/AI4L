@@ -1,4 +1,4 @@
-![Version 1.2.0](https://img.shields.io/badge/Version-1.2.0-green.svg)
+![Version 1.3.0](https://img.shields.io/badge/Version-1.3.0-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Project Instructions
@@ -51,7 +51,7 @@
 
 When calling `pubmed_fetch_articles`, always pass 'pmids' as a proper JSON array of strings, never as a comma-separated string or single value
 
-When verifying URLs, use the `mcp__d-browser__*` tools (`browser_navigate` + `browser_snapshot`). If `d-browser` is blocked or unavailable, fall back to `mcp__d-fetch__fetch`. Do not use the built-in `WebFetch` tool.
+When verifying URLs, use the `mcp__d-browser__*` tools (`browser_navigate` + `browser_snapshot`). If `d-browser` is blocked or unavailable, fall back to `mcp__d-fetch__fetch`. If that also fails, fall back to `mcp__d-brightdata__scrape_as_markdown`, which can retrieve pages protected by bot detection. Do not use the built-in `WebFetch` tool.
 
 
 ### Temporary Files

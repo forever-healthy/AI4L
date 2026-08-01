@@ -1,4 +1,4 @@
-![Version 1.2.0](https://img.shields.io/badge/Version-1.2.0-green.svg)
+![Version 1.3.0](https://img.shields.io/badge/Version-1.3.0-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Using CLI Environments
@@ -112,7 +112,7 @@ grok
 
 ## MCP Servers
 
-We are using three local MCP servers with tools that significantly improve the quality of review creation and audit.
+We are using five local MCP servers with tools that significantly improve the quality of review creation and audit.
 
 The MCPs are configured in:
 
@@ -142,6 +142,16 @@ There is no need to install Docker Desktop separately, as the Docker SBX will ha
 * Lightweight HTTP fetcher used as a fallback when the browser MCP is blocked or unavailable
 * Set to ignore robots.txt and use a Chrome user agent
 * Faster than the browser MCP for sites without bot detection or JS-rendered content
+
+
+### Stealth Fallback (Bright Data)
+
+[@brightdata/mcp](https://github.com/brightdata/brightdata-mcp)
+
+* Third-tier fallback used when both the local browser and local fetch MCPs are blocked by bot detection
+* Uses Bright Data's free Web Unlocker tier (`scrape_as_markdown`) to retrieve pages that would otherwise return a bot wall or CAPTCHA
+* Requires a `BRIGHTDATA_API_TOKEN` — get a free account and API token at [brightdata.com](https://brightdata.com) and save it in `.env`
+* Optional: if `BRIGHTDATA_API_TOKEN` is not set, the auditor still tries this tier, fails, and honestly marks the URL as unverified rather than silently skipping it
 
 
 ### Clinical Trials MCP Server

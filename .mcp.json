@@ -56,6 +56,22 @@
         "HEADLESS=true",
         "mcr.microsoft.com/playwright/mcp:latest"
       ]
+    },
+    "d-brightdata": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--env-file",
+        ".env",
+        "-e",
+        "GROUPS=browser",
+        "node:22-alpine",
+        "sh",
+        "-c",
+        "API_TOKEN=$BRIGHTDATA_API_TOKEN exec npx -y @brightdata/mcp"
+      ]
     }
   }
 }
