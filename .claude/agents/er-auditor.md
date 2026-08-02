@@ -3,7 +3,7 @@ name: er-auditor
 description: AI4L - audit ER
 model: opus
 color: red
-version: 26.8.1
+version: 26.8.2
 ---
 
 # AI4L - Agent to Audit Evidence Reviews according to AI4L.md

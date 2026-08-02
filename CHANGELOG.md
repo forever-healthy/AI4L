@@ -1,6 +1,13 @@
 # AI4L - Change Log
 
 
+### v1.3.1 — 2026-08-02
+
+* ClinicalTrials.gov links are now verified directly via `d-clinicaltrialsgov` (`clinicaltrials_get_study_record`) instead of going through the URL fallback chain
+
+* The `Verified By` column now takes one of a fixed set of values, so the same tool is always recorded under the same name
+
+
 ### v1.3.0 — 2026-08-01
 
 * Added Bright Data as a third-tier URL verification fallback (`scrape_as_markdown`) for pages protected by bot detection, after `d-browser` and `d-fetch`

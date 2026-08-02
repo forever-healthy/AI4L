@@ -1,4 +1,4 @@
-![Version 1.3.0](https://img.shields.io/badge/Version-1.3.0-green.svg)
+![Version 1.3.1](https://img.shields.io/badge/Version-1.3.1-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -172,13 +172,15 @@ To avoid hallucinations and calculation errors, break down the audit process int
 
 * After creating the list, for each entry:
 
-  - For PubMed links, use `pubmed_fetch_articles` first. If the PMID resolves and the returned title matches the ER's claim, mark `Loaded` ✅ and `Verified By` `pubmed_fetch_articles`. Only if the PMID does not resolve, fall back to the chain below.
+  - For PubMed links, use `d-pubmed` (`pubmed_fetch_articles`) first. If the PMID resolves and the returned title matches the ER's claim, mark `Loaded` ✅ and `Verified By` `d-pubmed`. Only if the PMID does not resolve, fall back to the chain below.
+
+  - For ClinicalTrials.gov links, use `d-clinicaltrialsgov` (`clinicaltrials_get_study_record`) first. If the NCT ID resolves and the study title matches the ER's claim, mark `Loaded` ✅ and `Verified By` `d-clinicaltrialsgov`. Only if the NCT ID does not resolve, fall back to the chain below.
 
   - try to retrieve the url using `d-browser`. If `d-browser` fails, try `d-fetch`. If `d-fetch` also fails, try `d-brightdata` (`scrape_as_markdown`), which can retrieve pages protected by bot detection.
 
   - A retrieval has FAILED unless you are holding the genuine target page. A transport error, an error page (404, 500, …), a paywall, or a bot-detection interstitial (CAPTCHA, "Security Checkpoint", "Verify your browser") are all failures. A page you could not read is not verified.
 
-  - Mark the `Loaded` column ✅ or ❌. In `Verified By` note which tool retrieved it: `d-browser`, `d-fetch`, `d-brightdata`, or — for PubMed links — `pubmed_fetch_articles`.
+  - Mark the `Loaded` column ✅ or ❌. In `Verified By` use exactly one of these values, spelled exactly as written: `d-clinicaltrialsgov`, `d-pubmed`, `d-browser`, `d-fetch`, `d-brightdata`, or `none`. NEVER invent a variant spelling, a tool name not in this list, or a combination of them.
 
   - If all three fail, mark `Loaded` ❌, `Verified By` `none`, `Match` 🔴, and comment that the url could not be retrieved. If `d-brightdata` is not configured, say so in the `Comment` column — an unavailable tool is still a failure, NEVER a pass.
 
@@ -456,7 +458,9 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 5.9 Each URL retrieves the genuine target page
 
-`For PubMed links, use "pubmed_fetch_articles" first: a resolving PMID satisfies this item. If it does not resolve, fall through to the chain below.`
+`For PubMed links, use "d-pubmed" ("pubmed_fetch_articles") first: a resolving PMID satisfies this item. If it does not resolve, fall through to the chain below.`
+
+`For ClinicalTrials.gov links, use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") first: a resolving NCT ID satisfies this item. If it does not resolve, fall through to the chain below.`
 
 `Use "d-browser" to load the URL. If it fails, try "d-fetch". If that also fails, try "d-brightdata" ("scrape_as_markdown"). Record the tool that succeeded in "Verified By". A FAIL is any outcome that is not the genuine target page — a transport error, an error page (404, 403, 500, …), or a bot wall / CAPTCHA / "security checkpoint" interstitial. A page you could not read is not verified. If all three fail — including when "d-brightdata" is not available in this environment — the item is a FAIL.`
 
@@ -464,7 +468,9 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 `Use "d-browser" or, if it fails, "d-fetch", or, if that also fails, "d-brightdata" to read the page, then confirm the content matches the link's description in the ER (e.g., the page is about the cited topic, the article title matches what the ER claims). A generic landing page, paywall, bot wall, or unrelated content fails this check.`
 
-`For PubMed links, the auditor must instead use "pubmed_fetch_articles" to retrieve the article metadata and verify the returned title matches the title claimed in the ER. A mismatch means the PMID was fabricated or assigned to the wrong paper.`
+`For PubMed links, the auditor must instead use "d-pubmed" ("pubmed_fetch_articles") to retrieve the article metadata and verify the returned title matches the title claimed in the ER. A mismatch means the PMID was fabricated or assigned to the wrong paper.`
+
+`For ClinicalTrials.gov links, the auditor must instead use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") to retrieve the study record and verify the study title matches the trial claimed in the ER. A mismatch means the NCT ID was fabricated or assigned to the wrong trial.`
 
 
 ## 6. Frontmatter - Metadata
@@ -1007,7 +1013,12 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 28.12 Each link is verified per Section 5 (Loading, Content, Semantics)
 * 28.13 For PubMed links: the PubMed-retrieved title matches the title in the ER
+
+`Use "d-pubmed" ("pubmed_fetch_articles") to retrieve the article metadata for the PMID and check that the returned title matches the title given in the ER.`
+
 * 28.14 For clinicaltrials.gov links: the NCT ID resolves to a trial related to the intervention
+
+`Use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") to retrieve the study record for the NCT ID and check that the study title, condition, and intervention relate to the ER's claim.`
 
 
 ## 29. Conclusion
