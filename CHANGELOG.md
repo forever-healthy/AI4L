@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.2 — 2026-08-04
+
+* Removed the `model: sonnet` pin from `er-combiner` — sonnet was a floating alias that could silently drift to a newer Sonnet release; the agent now inherits the host session's model instead
+
+
 ### v1.3.1 — 2026-08-02
 
 * ClinicalTrials.gov links are now verified directly via `d-clinicaltrialsgov` (`clinicaltrials_get_study_record`) instead of going through the URL fallback chain
