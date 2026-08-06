@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.3 — 2026-08-06
+
+* Added Lifespan.io (lifespan.io) as a trusted source for the Recommended Reading section
+
+
 ### v1.3.2 — 2026-08-04
 
 * Removed the `model: sonnet` pin from `er-combiner` — sonnet was a floating alias that could silently drift to a newer Sonnet release; the agent now inherits the host session's model instead

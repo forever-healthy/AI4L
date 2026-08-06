@@ -3,7 +3,7 @@ name: er-auditor
 description: AI4L - audit ER
 model: opus
 color: red
-version: 1.3.2
+version: 1.3.3
 ---
 
 # AI4L - Agent to Audit Evidence Reviews according to AI4L.md
@@ -25,4 +25,4 @@ version: 1.3.2
 * Perform an QA audit on [evidence_review] by following the instructions in [ai4l_prompt]
 
 * Return `audit_filename: [audit_filename]`
-* Return `pass_rate: actual [pass_rate] of the audit (the one before the fixing step)`
+* Return `pass_rate: actual [pass_rate] of the audit`

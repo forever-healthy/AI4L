@@ -1,4 +1,4 @@
-![Version 1.3.2](https://img.shields.io/badge/Version-1.3.2-green.svg)
+![Version 1.3.3](https://img.shields.io/badge/Version-1.3.3-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -54,7 +54,7 @@ The following rules govern how this checklist must be used when performing an au
 
 ### No Sub-agents
 
-An auditing AI should not use sub-agents for tasks in the audit process (e.g., the 4-step process). Often, not all knowledge is passed to or available to sub-agents; they can lose context and become confused.
+An auditing AI should not use sub-agents for tasks in the audit process (e.g., the 5-step process). Often, not all knowledge is passed to or available to sub-agents; they can lose context and become confused.
 
 * DO NOT use sub-agents for any tasks in the audit process.
 * DO everything yourself.
@@ -608,6 +608,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
  - Andrew Huberman (hubermanlab.com)
  - Chris Kresser (chriskresser.com)
  - Life Extension Magazine (lifeextension.com)
+ - Lifespan.io (lifespan.io)
 
 `The auditor must verify that no relevant content from a prioritized expert is overlooked, especially where the ER claims no relevant content was found. Two independent searches are required for each expert:`
 

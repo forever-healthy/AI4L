@@ -3,7 +3,7 @@ name: er-fixer
 description: AI4L - audit & fix ER
 model: opus
 color: green
-version: 1.3.2
+version: 1.3.3
 ---
 
 # AI4L - Agent to Audit & Fix Evidence Reviews according to AI4L.md
@@ -28,7 +28,7 @@ version: 1.3.2
 
 * If the [pass_rate] of the audit is not 100% {
 
-  * Report `FIXER: pass_rate: [pass_rate]. WIll fix the issues found in the audit.`
+  * Report `FIXER: pass_rate: [pass_rate]. Will fix the issues found in the audit.`
   
   * Fix the issues found in [evidence_review] during the audit
   * Save the fixed version of the [evidence_review]
