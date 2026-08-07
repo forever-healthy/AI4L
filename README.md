@@ -1,4 +1,4 @@
-![Version 1.3.3](https://img.shields.io/badge/Version-1.3.3-green.svg)
+![Version 1.3.4](https://img.shields.io/badge/Version-1.3.4-green.svg)
 ![License MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 

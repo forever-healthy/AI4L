@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.4 — 2026-08-07
+
+* Tightened Recommended Reading: database, registry and directory entries are now excluded, an item from a priority expert must independently qualify on its own merits, and an item admitted via mechanism or therapeutic category must name that shared mechanism or target in its annotation (new items 9.11, 9.12, 9.24)
+
+
 ### v1.3.3 — 2026-08-06
 
 * Added Lifespan.io (lifespan.io) as a trusted source for the Recommended Reading section

@@ -1,4 +1,4 @@
-![Version 1.3.3](https://img.shields.io/badge/Version-1.3.3-green.svg)
+![Version 1.3.4](https://img.shields.io/badge/Version-1.3.4-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 404 (which is the number of all checklist items)
+* Set [total_items] to 407 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -597,6 +597,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 9.1 Section starts with a one-sentence description of its contents
 
 * 9.2 A real-time search was performed for the topic for content that is directly relevant and gives a "high-level" overview of the topic: they discuss the specific topic by name, or its primary mechanism/therapeutic category, in substantial depth
+
 * 9.3 A statement by the author about the search is placed inside an HTML comment
 
 * 9.4 Content is of eligible type: blog posts, podcast episodes, video presentations, YouTube lectures, expert commentary, and qualifying academic articles (primary research, narrative reviews, editorials — NOT systematic reviews or meta-analyses)
@@ -624,31 +625,39 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 9.9 The following are excluded: Forums, Reddit threads, community discussion boards, Q&A sites, social media posts
 * 9.10 The following are excluded: All mainstream media - TV, print, and radio, including their related online content (e.g., MSNBC, FOX, NYT, WAPO, ...)
 
-* 9.11 Exactly 5 items are listed (or fewer if justified with a brief explanation, visible to the user, of why only fewer could be found)
-* 9.12 No more than one item per expert, publication, or organization is included (no duplicates from the same source)
+* 9.11 The following are excluded: entries in a database, registry, or directory — pages that catalogue a compound or intervention rather than discuss it
 
-* 9.13 Items are presented in a bulleted list, not a numbered list
+* 9.12 An item from a priority expert (9.5) must independently satisfy 9.2 and 9.4 and fall outside the exclusions in 9.6–9.11; being the only item found on a priority platform is not itself a justification for inclusion
 
-* 9.14 The title of each item is linked to the actual article
-* 9.15 The title is shown in plain text, not bold text
-* 9.16 The title is followed by a reference to the author of the item in the form of " - <author>"
-* 9.17 ONLY if no author is available, the publication is used in the form of " - <publication>"
+* 9.13 Exactly 5 items are listed (or fewer if justified with a brief explanation, visible to the user, of why only fewer could be found)
+* 9.14 No more than one item per expert, publication, or organization is included (no duplicates from the same source)
 
-* 9.18 If the item is a scientific paper, the publication year of the paper is included in the form of " - <author>, <year>"
+* 9.15 Items are presented in a bulleted list, not a numbered list
 
-* 9.19 If the item is a scientific paper, the author attribution is an actual person's name or "<last name> et al.", not a journal name, article type descriptor, or organization name
+* 9.16 The title of each item is linked to the actual article
+* 9.17 The title is shown in plain text, not bold text
+* 9.18 The title is followed by a reference to the author of the item in the form of " - <author>"
+* 9.19 ONLY if no author is available, the publication is used in the form of " - <publication>"
+
+* 9.20 If the item is a scientific paper, the publication year of the paper is included in the form of " - <author>, <year>"
+
+* 9.21 If the item is a scientific paper, the author attribution is an actual person's name or "<last name> et al.", not a journal name, article type descriptor, or organization name
 
 `If uncertain, the auditor must look up the actual author(s) of the linked resource.`
 
-* 9.20 Each link is verified per Section 5 (Loading, Content, Semantics)
+* 9.22 Each link is verified per Section 5 (Loading, Content, Semantics)
 
-`To evaluate 9.20: re-run Section 5 items 5.1 through 5.10 against every link in this section. 9.20 fails if any applicable Section 5 item fails for any link.`
+`To evaluate 9.22: re-run Section 5 items 5.1 through 5.10 against every link in this section. 9.22 fails if any applicable Section 5 item fails for any link.`
 
-* 9.21 Each item has a 1–2 sentence annotation in a new paragraph explaining its specific value
-* 9.22 The new paragraph for the annotation is separated from the title by a blank line
+* 9.23 Each item has a 1–2 sentence annotation in a new paragraph explaining its specific value
 
-* 9.23 If content from one or more of the priority experts could not be found, a brief note, visible to the user, at the end of the section, explains why
-* 9.24 If fewer than 5 high-quality sources could be found, a brief note, visible to the user, explains this, and the list is not padded with marginally relevant content
+* 9.24 When an item qualifies via mechanism or therapeutic category (9.2) rather than naming the intervention, the annotation names the shared mechanism or target explicitly (e.g. "the ghrelin receptor GHSR-1a, which GHRP-2 activates").
+
+* 9.25 The new paragraph for the annotation is separated from the title by a blank line
+
+* 9.26 If content from one or more of the priority experts could not be found, a brief note, visible to the user, at the end of the section, explains why
+
+* 9.27 If fewer than 5 high-quality sources could be found, a brief note, visible to the user, explains this, and the list is not padded with marginally relevant content
 
 
 ## 10. Grokipedia
