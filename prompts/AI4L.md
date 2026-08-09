@@ -1,4 +1,4 @@
-![Version 1.3.4](https://img.shields.io/badge/Version-1.3.4-green.svg)
+![Version 1.3.5](https://img.shields.io/badge/Version-1.3.5-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 407 (which is the number of all checklist items)
+* Set [total_items] to 408 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -172,19 +172,33 @@ To avoid hallucinations and calculation errors, break down the audit process int
 
 * After creating the list, for each entry:
 
-  - For PubMed links, use `d-pubmed` (`pubmed_fetch_articles`) first. If the PMID resolves and the returned title matches the ER's claim, mark `Loaded` ✅ and `Verified By` `d-pubmed`. Only if the PMID does not resolve, fall back to the chain below.
+  - Mark the `Loaded` column either 🟢 or 🔴
 
-  - For ClinicalTrials.gov links, use `d-clinicaltrialsgov` (`clinicaltrials_get_study_record`) first. If the NCT ID resolves and the study title matches the ER's claim, mark `Loaded` ✅ and `Verified By` `d-clinicaltrialsgov`. Only if the NCT ID does not resolve, fall back to the chain below.
+  - Mark the `Match` column either 🟢 or 🔴
 
-  - try to retrieve the url using `d-browser`. If `d-browser` fails, try `d-fetch`. If `d-fetch` also fails, try `d-brightdata` (`scrape_as_markdown`), which can retrieve pages protected by bot detection.
+  - In `Verified By` use exactly one of these values, spelled exactly as written: `d-clinicaltrialsgov`, `d-pubmed`, `d-browser`, `d-fetch`, `d-brightdata`, or `none`. NEVER invent a variant spelling, a tool name not in this list, or a combination of them.
 
-  - A retrieval has FAILED unless you are holding the genuine target page. A transport error, an error page (404, 500, …), a paywall, or a bot-detection interstitial (CAPTCHA, "Security Checkpoint", "Verify your browser") are all failures. A page you could not read is not verified.
+  - For PubMed links, use `d-pubmed` (`pubmed_fetch_articles`) first. If the PMID resolves and the returned title matches the ER's claim, mark `Loaded` 🟢 and `Verified By` `d-pubmed`. Only if the PMID does not resolve, fall back to the chain below.
 
-  - Mark the `Loaded` column ✅ or ❌. In `Verified By` use exactly one of these values, spelled exactly as written: `d-clinicaltrialsgov`, `d-pubmed`, `d-browser`, `d-fetch`, `d-brightdata`, or `none`. NEVER invent a variant spelling, a tool name not in this list, or a combination of them.
+  - For ClinicalTrials.gov links, use `d-clinicaltrialsgov` (`clinicaltrials_get_study_record`) first. If the NCT ID resolves and the study title matches the ER's claim, mark `Loaded` 🟢 and `Verified By` `d-clinicaltrialsgov`. Only if the NCT ID does not resolve, fall back to the chain below.
 
-  - If all three fail, mark `Loaded` ❌, `Verified By` `none`, `Match` 🔴, and comment that the url could not be retrieved. If `d-brightdata` is not configured, say so in the `Comment` column — an unavailable tool is still a failure, NEVER a pass.
+  - Try to retrieve the url using `d-browser`. If `d-browser` fails, try `d-fetch`. If `d-fetch` also fails, then, if available, try `d-brightdata` (`scrape_as_markdown`), which can retrieve pages protected by bot detection.
 
-  - If the page was retrieved, confirm that the content matches the link's title. If it does, mark the item in the `Match` column as passed with 🟢. If it does not, mark it as failed with 🔴 in the `Match` column and add a comment in the `Comment` column about the mismatch.
+  - Loading has failed unless you are holding the genuine target page. A transport error, an error page (404, 500, …), or a bot-detection interstitial (CAPTCHA, "Security Checkpoint", "Verify your browser") are all failures.
+
+  - If all three fail, mark `Loaded` 🔴, `Verified By` `none`, and `Match` 🔴. Always comment on what happened.
+
+  - If the page was retrieved, confirm that the content matches the link's title. If it does, mark the item in the `Match` column as passed with 🟢. If it does not, or the content is behind a paywall, mark it as failed with 🔴 in the `Match` column and add a comment in the `Comment` column about the mismatch or the paywall.
+
+* Summarized Outcomes
+
+| Outcome                                                                       | Loaded | Match |
+| ----------------------------------------------------------------------------- | ------ | ----- |
+| genuine page, content matches                                                 | 🟢     | 🟢    |
+| genuine page, wrong content                                                   | 🟢     | 🔴    |
+| genuine page, content paywalled                                               | 🟢     | 🔴    |
+| 404 / 410 / parked / redirect to unrelated                                    | 🔴     | 🔴    |
+| bot wall / CAPTCHA / checkpoint / anti-bot 403                                | 🔴     | 🔴    |
 
 
 #### 3. Audit
@@ -462,15 +476,19 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 `For ClinicalTrials.gov links, use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") first: a resolving NCT ID satisfies this item. If it does not resolve, fall through to the chain below.`
 
-`Use "d-browser" to load the URL. If it fails, try "d-fetch". If that also fails, try "d-brightdata" ("scrape_as_markdown"). Record the tool that succeeded in "Verified By". A FAIL is any outcome that is not the genuine target page — a transport error, an error page (404, 403, 500, …), or a bot wall / CAPTCHA / "security checkpoint" interstitial. A page you could not read is not verified. If all three fail — including when "d-brightdata" is not available in this environment — the item is a FAIL.`
+`Use "d-browser" to load the URL. If it fails, try "d-fetch". If that also fails, then, if available, try "d-brightdata" ("scrape_as_markdown"). A FAIL is any outcome that is not the genuine target page — a transport error, an error page (404, 403, 500, …), or a bot wall / CAPTCHA / "security checkpoint" interstitial. A page you could not load is not verified.`
 
 * 5.10 The page at each URL contains content matching the link's annotation in the ER (the page is about the cited topic; the article/resource title matches)
 
-`Use "d-browser" or, if it fails, "d-fetch", or, if that also fails, "d-brightdata" to read the page, then confirm the content matches the link's description in the ER (e.g., the page is about the cited topic, the article title matches what the ER claims). A generic landing page, paywall, bot wall, or unrelated content fails this check.`
+`Use "d-browser" or, if it fails, "d-fetch", or, if that also fails, then, if available, "d-brightdata" to read the page, then confirm the content matches the link's description in the ER (e.g., the page is about the cited topic, the article title matches what the ER claims). A generic landing page, paywall, bot wall, or unrelated content fails this check.`
 
 `For PubMed links, the auditor must instead use "d-pubmed" ("pubmed_fetch_articles") to retrieve the article metadata and verify the returned title matches the title claimed in the ER. A mismatch means the PMID was fabricated or assigned to the wrong paper.`
 
 `For ClinicalTrials.gov links, the auditor must instead use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") to retrieve the study record and verify the study title matches the trial claimed in the ER. A mismatch means the NCT ID was fabricated or assigned to the wrong trial.`
+
+* 5.11 Every failing link has been repaired by replacing the URL with one that retrieves the cited source, or by removing the link when no such URL exists
+
+`A link that fails 5.9 or 5.10 is repaired in exactly one of two ways: replace the URL with one that retrieves the cited source, or remove the link and its annotation when no such URL exists. Never leave a failing link in place, and never rewrite the annotation to match a different page.`
 
 
 ## 6. Frontmatter - Metadata

@@ -1,6 +1,19 @@
 # AI4L - Change Log
 
 
+### v1.3.5 — 2026-08-09
+
+* Improved URL handling
+
+* A failing link is now repaired in exactly one of two ways — replace the URL with one that retrieves the cited source, or remove the link — so an unreachable source can no longer send the audit into repeated rounds (new item 5.11)
+
+* Bright Data is now explicitly optional in the URL verification chain; its absence is no longer stated as a reason to fail a link
+
+* A paywalled page now counts as loaded and fails on content instead of failing as a load error
+
+* The `Loaded` column uses 🟢/🔴 instead of ✅/❌
+
+
 ### v1.3.4 — 2026-08-07
 
 * Tightened Recommended Reading: database, registry and directory entries are now excluded, an item from a priority expert must independently qualify on its own merits, and an item admitted via mechanism or therapeutic category must name that shared mechanism or target in its annotation (new items 9.11, 9.12, 9.24)
