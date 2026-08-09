@@ -7,7 +7,9 @@
 
 * A failing link is now repaired by the fixer in exactly one of two ways — replace the URL with one that retrieves the cited source, or remove the link — so an unreachable source can no longer send the audit into repeated rounds
 
-* Every repaired or removed link is recorded in the audit's `## Fixes` section under a `LINK REPLACED` / `LINK REMOVED` label, with the original URL, the tools tried, and the outcome that failed it, so a dropped source leaves a trace and a pattern of failures from one host stays visible
+* Every repaired or removed link is recorded in the audit's `## Fixes` section under a `LINK REPLACED` / `LINK REMOVED` label, one entry per link, opening with a parseable line that gives the old URL, the new URL where there is one, the tools tried, and the outcome that failed it — so a dropped source leaves a trace and a pattern of failures from one host stays visible
+
+* A citation that never had a URL and got one is recorded as `LINK ADDED`, keeping it out of the failure counts
 
 * Bright Data is now explicitly optional in the URL verification chain; its absence is no longer stated as a reason to fail a link
 
