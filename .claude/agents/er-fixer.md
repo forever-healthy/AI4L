@@ -31,6 +31,9 @@ version: 1.3.5
   * Report `FIXER: pass_rate: [pass_rate]. Will fix the issues found in the audit.`
   
   * Fix the issues found in [evidence_review] during the audit
+
+  * When fixing a link that failed 5.9 or 5.10, repair it in exactly one of two ways: replace the URL with one that retrieves the cited source, or remove the link and its annotation when no such URL exists. Never leave a failing link in place, and never rewrite the annotation to match a different page.
+
   * Save the fixed version of the [evidence_review]
 
   * Report `FIXER: ER fixed: [evidence_review]`
@@ -48,6 +51,7 @@ version: 1.3.5
     - Bold covers only the item number(s) and the {short label} , followed by a colon
     - If one fix covers multiple items, combine: `**6.1 / 6.10 — {short label}:**`
     - Example: `3. **7.5 — PMC link format:** Replaced PMC link for Johnston et al. 2006 with s format.` (here `3` is the list position, `7.5` is the issue reference — they are different)
+    - For a repaired or removed link, the short label must be exactly `LINK REPLACED` or `LINK REMOVED`, and the entry must also give the original URL, the tools tried, and the outcome that failed it, and may run to 4 sentences instead of 2. Record this even when the repair was obviously correct (dead URL), so a pattern of failures from one host stays visible. When the link was removed, the ER no longer contains it, so this entry is the only remaining evidence that a source was dropped.
 
   * Report `FIXER: Fixes documented. Combining QA audit results and fixes...`
   * Append the content of [temporary_file] to the end of [audit_filename]

@@ -22,4 +22,4 @@ description: AI4L - audit ER
 * Perform an QA audit on [evidence_review] by following the instructions in [ai4l_prompt]
 
 * Return `audit_filename: [audit_filename]`
-* Return `pass_rate: actual [pass_rate] of the audit (the one before the fixing step)`
+* Return `pass_rate: actual [pass_rate] of the audit`

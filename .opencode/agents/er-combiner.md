@@ -19,8 +19,8 @@ ER_FILE="[er_filename]"
 CREATION_DIR="[creation_dir]"
 TRASH_DIR="[trash_dir]"
 
-# Derive base name by stripping _ER.md suffix
-base="${ER_FILE%_ER.md}"
+# Derive base name by stripping the .md extension (keeps the _ER suffix)
+base="${ER_FILE%.md}"
 
 # Find all timestamped QA files, sorted descending by name (date suffix is lexicographically sortable)
 mapfile -t qa_files < <(ls -r "${CREATION_DIR%/}/${base}_QA_"*.md 2>/dev/null || true)
@@ -47,7 +47,7 @@ audit_duration=$(printf '%02d:%02d' $((total_min / 60)) $((total_min % 60)))
 # Latest is first after reverse sort
 latest="${qa_files[0]}"
 
-# New filename: strip _YYYY-MMDD-HHMM suffix before .md
+# New filename: base already ends in _ER, so this yields ..._ER_QA.md (no date suffix)
 new_filename="${base}_QA.md"
 new_filepath="${CREATION_DIR%/}/${new_filename}"
 

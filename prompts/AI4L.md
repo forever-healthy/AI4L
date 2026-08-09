@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 408 (which is the number of all checklist items)
+* Set [total_items] to 407 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -485,10 +485,6 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 `For PubMed links, the auditor must instead use "d-pubmed" ("pubmed_fetch_articles") to retrieve the article metadata and verify the returned title matches the title claimed in the ER. A mismatch means the PMID was fabricated or assigned to the wrong paper.`
 
 `For ClinicalTrials.gov links, the auditor must instead use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") to retrieve the study record and verify the study title matches the trial claimed in the ER. A mismatch means the NCT ID was fabricated or assigned to the wrong trial.`
-
-* 5.11 Every failing link has been repaired by replacing the URL with one that retrieves the cited source, or by removing the link when no such URL exists
-
-`A link that fails 5.9 or 5.10 is repaired in exactly one of two ways: replace the URL with one that retrieves the cited source, or remove the link and its annotation when no such URL exists. Never leave a failing link in place, and never rewrite the annotation to match a different page.`
 
 
 ## 6. Frontmatter - Metadata
