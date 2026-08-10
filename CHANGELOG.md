@@ -3,7 +3,21 @@
 
 ### v1.3.6 — 2026-08-10
 
+* Added item 2.12: a finding attributed to a specific paper, or to a body of reviews, carries a link to that paper or to one of those reviews
+
+* Changed items 9.12/9.13: up to 5 items are listed, each qualifying on its own merits, and where fewer qualify the shortfall is explained to the user
+
+* Added item 13.9: where the intervention involves a trade-off, the listed papers must cover both sides of it, or the section states which side is unrepresented
+
+* Added items 16.2 and 18.2: each benefit and each risk is a distinct outcome, not the same one restated at another granularity, split by population or endpoint, or repeated under another evidence level
+
+* Clarified items 16.17 and 18.17: the annotation is typically 60–80 words and never more than 90
+
+* Clarified items 16.22/16.23 and 18.22/18.23: the magnitude line takes an outcome figure where the literature has one, otherwise the direction plus its conditions, and only then "Not quantified in available studies."
+
 * Clarified item 20.6: populations to avoid must appear under a fixed bolded label, or "None identified" when there are none
+
+* Added item 27.6: each Optimal Functional Range cell states a value or range, or says no established target exists and gives what to track instead
 
 
 ### v1.3.5 — 2026-08-09

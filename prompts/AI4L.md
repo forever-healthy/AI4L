@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 407 (which is the number of all checklist items)
+* Set [total_items] to 412 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -395,6 +395,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 2.11 Content is framed for the target audience (see 1.12), not as population-level outcomes.
 
+* 2.12 A finding attributed to a specific paper, or to a body of reviews (e.g., "Cochrane reviews of X show…"), carries a link to that paper, or to one of those reviews.
+
 
 ## 3. General Formatting
 
@@ -641,9 +643,10 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 9.11 The following are excluded: entries in a database, registry, or directory — pages that catalogue a compound or intervention rather than discuss it
 
-* 9.12 An item from a priority expert (9.5) must independently satisfy 9.2 and 9.4 and fall outside the exclusions in 9.6–9.11; being the only item found on a priority platform is not itself a justification for inclusion
+* 9.12 Up to 5 items are listed. Every item independently satisfies 9.2 and 9.4 and falls outside the exclusions in 9.6–9.11; neither reaching the count nor an item's presence on a priority platform is itself a justification for inclusion
 
-* 9.13 Exactly 5 items are listed (or fewer if justified with a brief explanation, visible to the user, of why only fewer could be found)
+* 9.13 Where fewer than five qualify, fewer are listed, with a brief explanation visible to the user of why
+
 * 9.14 No more than one item per expert, publication, or organization is included (no duplicates from the same source)
 
 * 9.15 Items are presented in a bulleted list, not a numbered list
@@ -766,13 +769,15 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 13.7 All papers listed are relevant to the specific intervention being analyzed
 * 13.8 All papers listed are actually a systematic review or meta-analysis (not a narrative review or primary study)
 
-* 13.9 The title of each paper is linked to the paper's PubMed abstract page using the format "https://pubmed.ncbi.nlm.nih.gov/PMID/"
+* 13.9 Where the intervention involves a trade-off, the listed papers include at least one on the claimed effect and at least one on the principal risk, cost, or forgone benefit, where the literature provides a systematic review or meta-analysis for each. Where it does not, the section states which is unrepresented.
 
-* 13.10 No links point to publisher websites (e.g., ahajournals.org, sciencedirect.com, wiley.com)
+* 13.10 The title of each paper is linked to the paper's PubMed abstract page using the format "https://pubmed.ncbi.nlm.nih.gov/PMID/"
 
-* 13.11 Each link is verified per Section 5 (Loading, Content, Semantics)
+* 13.11 No links point to publisher websites (e.g., ahajournals.org, sciencedirect.com, wiley.com)
 
-* 13.12 The PubMed-retrieved title matches the title in the ER
+* 13.12 Each link is verified per Section 5 (Loading, Content, Semantics)
+
+* 13.13 The PubMed-retrieved title matches the title in the ER
 
 `The auditor must retrieve the metadata for every PubMed link in this section (e.g., by fetching the PMID or using a PubMed lookup tool) and verify that the title returned by PubMed matches the title stated in the ER. A mismatch means the PMID was fabricated or assigned to the wrong paper.`
 
@@ -811,45 +816,50 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 ## 16. Expected Benefits
 
 * 16.1 All major known benefits of the intervention are addressed (no significant omissions)
+* 16.2 Each item is a distinct outcome. The same outcome is not restated at a different granularity, split by population or endpoint, or repeated under another evidence level; where two items share a mechanism and an endpoint, they are merged.
 
-* 16.2 Content is framed for the target audience (see 1.12), not as population-level outcomes.
+* 16.3 Content is framed for the target audience (see 1.12), not as population-level outcomes.
 
-* 16.3 A dedicated search for the intervention's complete benefit profile was performed using clinical and expert sources before writing this section
+* 16.4 A dedicated search for the intervention's complete benefit profile was performed using clinical and expert sources before writing this section
 
 `The auditor should perform an in-depth search using all available search tools (e.g., the built-in "WebSearch", "pubmed_search_articles", or an MCP-provided search tool) to cross-check and verify that the list of benefits presented in this section is complete, and no benefits have been left unaddressed.`
 
-* 16.4 Each item is assigned a "Level of Evidence" grade
-* 16.5 Only the following four levels are used exactly: High, Medium, Low, Speculative
-* 16.6 No hybrid or intermediate levels are used (e.g., no "Low-Medium" or "Medium-High")
+* 16.5 Each item is assigned a "Level of Evidence" grade
+* 16.6 Only the following four levels are used exactly: High, Medium, Low, Speculative
+* 16.7 No hybrid or intermediate levels are used (e.g., no "Low-Medium" or "Medium-High")
 
-* 16.7 Items are grouped by evidence level
-* 16.8 The groups are presented in the order: High, Medium, Low, Speculative
-* 16.9 The group High is presented as "### High 🟩 🟩 🟩"
-* 16.10 The group Medium is presented as "### Medium 🟩 🟩"
-* 16.11 The group Low is presented as "### Low 🟩"
-* 16.12 The group Speculative is presented as "### Speculative 🟨"
+* 16.8 Items are grouped by evidence level
+* 16.9 The groups are presented in the order: High, Medium, Low, Speculative
+* 16.10 The group High is presented as "### High 🟩 🟩 🟩"
+* 16.11 The group Medium is presented as "### Medium 🟩 🟩"
+* 16.12 The group Low is presented as "### Low 🟩"
+* 16.13 The group Speculative is presented as "### Speculative 🟨"
 
-* 16.13 The actual item titles are presented in H4
-* 16.14 The actual item levels are not shown on a per-item basis
+* 16.14 The actual item titles are presented in H4
+* 16.15 The actual item levels are not shown on a per-item basis
 
-* 16.15 Each item includes an annotation paragraph between the H4 title and the Magnitude line
-* 16.16 The annotation is 2–5 sentences covering: what the benefit is, the proposed mechanism (if relevant), the evidence basis (e.g., "meta-analysis of 20 RCTs", "large observational cohort"), and any contextual nuance (limitations, population specifics, conflicting findings)
-* 16.17 The annotation is preceded and followed by a blank line
-* 16.18 Speculative items also include an annotation; if no controlled studies exist, it notes the basis is mechanistic or anecdotal only
+* 16.16 Each item includes an annotation paragraph between the H4 title and the Magnitude line
 
-* 16.19 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
-* 16.20 Conflicted evidence is explained in the annotation text
+* 16.17 The annotation is 2–5 sentences, typically 60–80 words and never more than 90, covering: what the benefit is, the proposed mechanism (if relevant), the evidence basis (e.g., "meta-analysis of 20 RCTs", "large observational cohort"), and any contextual nuance (limitations, population specifics, conflicting findings)
 
-* 16.21 Each item (except Speculative) includes a "**Magnitude:** " line with a specific number, range, or comparison
-* 16.22 If no quantitative data are available, the exact phrasing "**Magnitude:** Not quantified in available studies." is used
-* 16.23 Items classified as "Speculative" do NOT include a magnitude line
-* 16.24 The magnitude line is preceded by a blank line
+* 16.18 The annotation is preceded and followed by a blank line
+* 16.19 Speculative items also include an annotation; if no controlled studies exist, it notes the basis is mechanistic or anecdotal only
 
-* 16.25 Each item's evidence grade is appropriate, given the cited studies and data
-* 16.26 Each item is verifiable by the sources cited or by independent lookup
-* 16.27 Magnitude values are plausible and consistent with known clinical data
-* 16.28 No items are overstated relative to their evidence level
-* 16.29 No items are understated relative to their evidence level
+* 16.20 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
+* 16.21 Conflicted evidence is explained in the annotation text
+
+* 16.22 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports:
+  a. an actual outcome as a figure — effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure;
+  b. the direction plus the conditions under which it holds (e.g., "prevalence rises steeply above 2 mg/L"), together with a statement that the literature report no outcome figure.
+* 16.23 If the literature supports neither, the line reads exactly "**Magnitude:** Not quantified in available studies."
+* 16.24 Items classified as "Speculative" do NOT include a magnitude line
+* 16.25 The magnitude line is preceded by a blank line
+
+* 16.26 Each item's evidence grade is appropriate, given the cited studies and data
+* 16.27 Each item is verifiable by the sources cited or by independent lookup
+* 16.28 Magnitude values are plausible and consistent with known clinical data
+* 16.29 No items are overstated relative to their evidence level
+* 16.30 No items are understated relative to their evidence level
 
 
 ## 17. Benefit-Modifying Factors
@@ -867,45 +877,50 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 ## 18. Potential Risks & Side Effects
 
 * 18.1 All major known risks and side effects of the intervention are addressed (no significant omissions)
+* 18.2 Each item is a distinct outcome. The same outcome is not restated at a different granularity, split by population or endpoint, or repeated under another evidence level; where two items share a mechanism and an endpoint, they are merged.
 
-* 18.2 Content is framed for the target audience (see 1.12), not as population-level outcomes.
+* 18.3 Content is framed for the target audience (see 1.12), not as population-level outcomes.
 
-* 18.3 A dedicated search for the intervention's complete side effect profile was performed using a drug reference source (e.g., prescribing information, drugs.com, Mayo Clinic) before writing this section
+* 18.4 A dedicated search for the intervention's complete side effect profile was performed using a drug reference source (e.g., prescribing information, drugs.com, Mayo Clinic) before writing this section
 
 `The auditor should perform an in-depth search using all available search tools (e.g., the built-in "WebSearch", "pubmed_search_articles", or an MCP-provided search tool) to cross-check and verify that the list of risks and side effects presented in this section is complete, and no risks or side effects have been left unaddressed.`
 
-* 18.4 Each item is assigned a "Level of Evidence" grade
-* 18.5 Only the following four levels are used exactly: High, Medium, Low, Speculative
-* 18.6 No hybrid or intermediate levels are used (e.g., no "Low-Medium" or "Medium-High")
+* 18.5 Each item is assigned a "Level of Evidence" grade
+* 18.6 Only the following four levels are used exactly: High, Medium, Low, Speculative
+* 18.7 No hybrid or intermediate levels are used (e.g., no "Low-Medium" or "Medium-High")
 
-* 18.7 Items are grouped by evidence level
-* 18.8 The groups are presented in the order: High, Medium, Low, Speculative
-* 18.9 The group High is presented as "### High 🟥 🟥 🟥"
-* 18.10 The group Medium is presented as "### Medium 🟥 🟥"
-* 18.11 The group Low is presented as "### Low 🟥"
-* 18.12 The group Speculative is presented as "### Speculative 🟨"
+* 18.8 Items are grouped by evidence level
+* 18.9 The groups are presented in the order: High, Medium, Low, Speculative
+* 18.10 The group High is presented as "### High 🟥 🟥 🟥"
+* 18.11 The group Medium is presented as "### Medium 🟥 🟥"
+* 18.12 The group Low is presented as "### Low 🟥"
+* 18.13 The group Speculative is presented as "### Speculative 🟨"
 
-* 18.13 The actual item titles are presented in H4
-* 18.14 The actual item levels are not shown on a per-item basis
+* 18.14 The actual item titles are presented in H4
+* 18.15 The actual item levels are not shown on a per-item basis
 
-* 18.15 Each item includes an annotation paragraph between the H4 title and the Magnitude line
-* 18.16 The annotation is 2–5 sentences covering: what the risk is, the proposed mechanism (if known), the evidence basis (e.g., "clinical trials", "FDA information", "post-marketing reports"), and any contextual nuance (severity, reversibility, at-risk populations, comparison to other agents in the class)
-* 18.17 The annotation is preceded and followed by a blank line
-* 18.18 Speculative items also include an annotation; if no controlled data exist, it notes the basis is mechanistic or from isolated reports
+* 18.16 Each item includes an annotation paragraph between the H4 title and the Magnitude line
 
-* 18.19 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
-* 18.20 Conflicted evidence is explained in the annotation text
+* 18.17 The annotation is 2–5 sentences, typically 60–80 words and never more than 90, covering: what the risk is, the proposed mechanism (if known), the evidence basis (e.g., "clinical trials", "FDA information", "post-marketing reports"), and any contextual nuance (severity, reversibility, at-risk populations, comparison to other agents in the class)
 
-* 18.21 Each item (except Speculative) includes a "**Magnitude:** " line with a specific number, range, or comparison
-* 18.22 If no quantitative data are available, the exact phrasing "**Magnitude:** Not quantified in available studies." is used
-* 18.23 Items classified as "Speculative" do NOT include a magnitude line
-* 18.24 The magnitude line is preceded by a blank line
+* 18.18 The annotation is preceded and followed by a blank line
+* 18.19 Speculative items also include an annotation; if no controlled data exist, it notes the basis is mechanistic or from isolated reports
 
-* 18.25 Each item's evidence grade is appropriate given the cited studies and data
-* 18.26 Each item is verifiable by the sources cited or by independent lookup
-* 18.27 Magnitude values are plausible and consistent with known clinical data
-* 18.28 No items are overstated relative to their evidence level
-* 18.29 No items are understated relative to their evidence level
+* 18.20 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
+* 18.21 Conflicted evidence is explained in the annotation text
+
+* 18.22 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports:
+  a. an actual outcome as a figure — effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure;
+  b. the direction plus the conditions under which it holds (e.g., "prevalence rises steeply above 2 mg/L"), together with a statement that the literature report no outcome figure.
+* 18.23 If the literature supports neither, the line reads exactly "**Magnitude:** Not quantified in available studies."
+* 18.24 Items classified as "Speculative" do NOT include a magnitude line
+* 18.25 The magnitude line is preceded by a blank line
+
+* 18.26 Each item's evidence grade is appropriate given the cited studies and data
+* 18.27 Each item is verifiable by the sources cited or by independent lookup
+* 18.28 Magnitude values are plausible and consistent with known clinical data
+* 18.29 No items are overstated relative to their evidence level
+* 18.30 No items are understated relative to their evidence level
 
 
 ## 19. Risk-Modifying Factors
@@ -1015,15 +1030,17 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 27.3 Lab tests are presented in a table with the following columns: Biomarker, Optimal Functional Range, Why Measure It?, Context/Notes
 * 27.4 Optimal ranges reflect functional medicine practitioner guidance (not just conventional reference ranges)
 * 27.5 Where the conventional reference range differs meaningfully from the optimal functional range, it is included in the Context/Notes column
-* 27.6 The "Why Measure It?" column provides extremely concise explanations
-* 27.7 The Context/Notes column covers relevant details such as fasting requirements, best paired tests, and time-of-day considerations
-* 27.8 Qualitative markers are discussed (e.g., sleep quality, energy levels, cognitive clarity)
+* 27.6 Each Optimal Functional Range cell states a value or range. Where no established target exists, the cell says so and gives what to track instead (e.g., change from the individual's own baseline).
 
-* 27.9 Baseline testing is introduced with a descriptive statement outside the biomarker table (not only implied by the table's contents)
-* 27.10 Ongoing monitoring is introduced with a cadence statement specifying timepoints (e.g., "at 1 week, 4 weeks, then every 3–6 months" or "every 6–12 months")
-* 27.11 Qualitative markers are presented as a bulleted list
+* 27.7 The "Why Measure It?" column provides extremely concise explanations
+* 27.8 The Context/Notes column covers relevant details such as fasting requirements, best paired tests, and time-of-day considerations
+* 27.9 Qualitative markers are discussed (e.g., sleep quality, energy levels, cognitive clarity)
 
-* 27.12 If the section is not applicable to the intervention, this is briefly noted
+* 27.10 Baseline testing is introduced with a descriptive statement outside the biomarker table (not only implied by the table's contents)
+* 27.11 Ongoing monitoring is introduced with a cadence statement specifying timepoints (e.g., "at 1 week, 4 weeks, then every 3–6 months" or "every 6–12 months")
+* 27.12 Qualitative markers are presented as a bulleted list
+
+* 27.13 If the section is not applicable to the intervention, this is briefly noted
 
 
 ## 28. Emerging Research
