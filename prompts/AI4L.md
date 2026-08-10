@@ -1,4 +1,4 @@
-![Version 1.3.5](https://img.shields.io/badge/Version-1.3.5-green.svg)
+![Version 1.3.6](https://img.shields.io/badge/Version-1.3.6-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -923,15 +923,23 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 ## 20. Key Interactions & Contraindications
 
 * 20.1 Common prescription drug interactions are listed
+
 * 20.2 Over-the-counter medication interactions are listed
+
 * 20.3 Supplement interactions are listed
+
 * 20.4 Supplements known to have additive effects with the intervention are included (e.g., supplements that also lower blood pressure when evaluating an antihypertensive)
+
 * 20.5 Other intervention interactions are discussed where applicable
-* 20.6 Populations who should avoid this intervention are clearly identified
+
+* 20.6 Populations who should avoid this intervention are listed under the exact bolded label "**Populations who should avoid [intervention]:**", followed by a bulleted list. If there are none, the same label is present with the single item "None identified". The label is never omitted, renamed, or merged into another list.
 
 * 20.7 For drug or supplement interventions: when listing a drug class, include representative named drugs in parentheses (e.g., "CYP3A4 inhibitors (ketoconazole, ritonavir, grapefruit juice)")
+
 * 20.8 Each interaction states a severity (e.g., absolute contraindication, caution, monitor) and the clinical consequence (e.g., severe hypotension, increased bleeding risk)
+
 * 20.9 If a mitigating action is known (dose reduction, timing separation, monitoring schedule), it is stated
+
 * 20.10 Populations to avoid include specific thresholds or classifications where applicable (e.g., "recent MI (<90 days)", "Child-Pugh Class C", "NYHA Class IV") — not only general categories
 
 

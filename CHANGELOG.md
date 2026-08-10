@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.6 — 2026-08-10
+
+* Clarified item 20.6: populations to avoid must appear under a fixed bolded label, or "None identified" when there are none
+
+
 ### v1.3.5 — 2026-08-09
 
 * Improved URL handling

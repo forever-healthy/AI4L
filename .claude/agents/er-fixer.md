@@ -3,7 +3,7 @@ name: er-fixer
 description: AI4L - audit & fix ER
 model: opus
 color: green
-version: 1.3.5
+version: 1.3.6
 ---
 
 # AI4L - Agent to Audit & Fix Evidence Reviews according to AI4L.md
@@ -59,14 +59,13 @@ version: 1.3.5
 
     - Example: `3. **7.5 — PMC link format:** Replaced PMC link for Johnston et al. 2006 with s format.` (here `3` is the list position, `7.5` is the issue reference — they are different)
 
+    - One entry per link (never batch several links into one entry, even if the combining rule above would otherwise allow it). Open the entry with a parseable first line, prose optional after:
+
     - If a link was swapped for a working one, short label `LINK REPLACED`, first line `LINK REPLACED: old: <failing-url> | new: <new-url> | tried: <tools> | outcome: <what failed>`.
 
     - If a link was removed with no replacement, short label `LINK REMOVED`, first line `LINK REMOVED: <failing-url> | tried: <tools> | outcome: <what failed>`. Record this even when the removal was obviously correct (dead URL) — this entry is the only remaining evidence the source was dropped.
 
     - If a citation had no URL at all (e.g. a bare author mention) and a link was added, short label `LINK ADDED`, first line `LINK ADDED: <new-url> | outcome: <why>` — this is not a repair and must not be counted as one.
-    
-    - One entry per link (never batch several links into one entry, even if the combining rule above would otherwise allow it). Open the entry with a parseable first line, prose optional after:
-    
 
   * Report `FIXER: Fixes documented. Combining QA audit results and fixes...`
   * Append the content of [temporary_file] to the end of [audit_filename]

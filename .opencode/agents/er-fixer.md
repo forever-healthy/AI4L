@@ -41,14 +41,28 @@ description: AI4L - audit & fix ER
   * Start with `## Fixes [audit_date reformatted as '%d/%m/%Y %H:%M']`
 
   * Then note all the fixed issues in this format:
+  
     - Analog to the `## Issues` section, but with the following changes/similarities:
+
     - Numbered list
+
     - Each entry: `1. **{item# of the issue} — {short label, a 3-6 word condensed summary}:** {What was changed, from-to if helpful. 1-2 sentences max.}`
+
     - `{item# of the issue}` MUST be the exact section.item reference from the `## Issues` section (e.g., `6.1`, `17.2`), NOT the sequential list position number
+
     - Bold covers only the item number(s) and the {short label} , followed by a colon
+
     - If one fix covers multiple items, combine: `**6.1 / 6.10 — {short label}:**`
+
     - Example: `3. **7.5 — PMC link format:** Replaced PMC link for Johnston et al. 2006 with s format.` (here `3` is the list position, `7.5` is the issue reference — they are different)
-    - For a repaired or removed link, the short label must be exactly `LINK REPLACED` or `LINK REMOVED`, and the entry must also give the original URL, the tools tried, and the outcome that failed it, and may run to 4 sentences instead of 2. Record this even when the repair was obviously correct (dead URL), so a pattern of failures from one host stays visible. When the link was removed, the ER no longer contains it, so this entry is the only remaining evidence that a source was dropped.
+
+    - One entry per link (never batch several links into one entry, even if the combining rule above would otherwise allow it). Open the entry with a parseable first line, prose optional after:
+
+    - If a link was swapped for a working one, short label `LINK REPLACED`, first line `LINK REPLACED: old: <failing-url> | new: <new-url> | tried: <tools> | outcome: <what failed>`.
+
+    - If a link was removed with no replacement, short label `LINK REMOVED`, first line `LINK REMOVED: <failing-url> | tried: <tools> | outcome: <what failed>`. Record this even when the removal was obviously correct (dead URL) — this entry is the only remaining evidence the source was dropped.
+
+    - If a citation had no URL at all (e.g. a bare author mention) and a link was added, short label `LINK ADDED`, first line `LINK ADDED: <new-url> | outcome: <why>` — this is not a repair and must not be counted as one.
 
   * Report `FIXER: Fixes documented. Combining QA audit results and fixes...`
   * Append the content of [temporary_file] to the end of [audit_filename]
