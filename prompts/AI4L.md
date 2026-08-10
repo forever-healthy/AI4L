@@ -1,4 +1,4 @@
-![Version 1.3.6](https://img.shields.io/badge/Version-1.3.6-green.svg)
+![Version 1.3.7](https://img.shields.io/badge/Version-1.3.7-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 412 (which is the number of all checklist items)
+* Set [total_items] to 429 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -676,6 +676,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 9.27 If fewer than 5 high-quality sources could be found, a brief note, visible to the user, explains this, and the list is not padded with marginally relevant content
 
+* 9.28 Each annotation is at most 35 words
+
 
 ## 10. Grokipedia
 
@@ -699,6 +701,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 10.8 If no article exists, this is explicitly stated
 * 10.9 The section has no introductory text (besides the invisible HTML comment on the search)
+
+* 10.10 Each annotation is at most 35 words
 
 
 ## 11. Examine
@@ -727,6 +731,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 11.11 The section has no introductory text (besides the invisible HTML comment on the search)
 
+* 11.12 Each annotation is at most 35 words
+
 
 ## 12. ConsumerLab
 
@@ -753,6 +759,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 12.10 If the intervention is a prescription drug and no article was found, this is noted with an explanation (e.g., "ConsumerLab does not typically cover prescription medications")
 
 * 12.11 The section has no introductory text (besides the invisible HTML comment on the search)
+
+* 12.12 Each annotation is at most 35 words
 
 ## 13. Systematic Reviews
 
@@ -781,18 +789,20 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 `The auditor must retrieve the metadata for every PubMed link in this section (e.g., by fetching the PMID or using a PubMed lookup tool) and verify that the title returned by PubMed matches the title stated in the ER. A mismatch means the PMID was fabricated or assigned to the wrong paper.`
 
-* 13.13 The title is shown in plain text, not bold text
-* 13.14 The title is followed by a reference to the author(s) and the publication year of the paper
-* 13.15 For single-author works "- <last name>, <year>" is used
-* 13.16 For dual-author works "- <last name> & <last name>, <year>" is used
-* 13.17 For works with more than two authors "- <last name> et al., <year>" is used
+* 13.14 The title is shown in plain text, not bold text
+* 13.15 The title is followed by a reference to the author(s) and the publication year of the paper
+* 13.16 For single-author works "- <last name>, <year>" is used
+* 13.17 For dual-author works "- <last name> & <last name>, <year>" is used
+* 13.18 For works with more than two authors "- <last name> et al., <year>" is used
 
 `The auditor must verify that each author attribution is an actual person's name, not a journal name, article type descriptor, or organization name. If uncertain, the auditor must look up the actual author(s) of the linked resource.`
 
-* 13.18 Each result has a 1–2 sentence annotation explaining its specific value (in a new paragraph)
-* 13.19 The new paragraph for the annotation is separated from the title by a blank line
+* 13.19 Each result has a 1–2 sentence annotation explaining its specific value (in a new paragraph)
+* 13.20 The new paragraph for the annotation is separated from the title by a blank line
 
-* 13.20 If no results exist, a statement follows the exact format: "No systematic reviews or meta-analyses for \<intervention> were found on PubMed as of \<current date>."
+* 13.21 If no results exist, a statement follows the exact format: "No systematic reviews or meta-analyses for \<intervention> were found on PubMed as of \<current date>."
+
+* 13.22 Each annotation is at most 25 words
 
 ## 14. Mechanism of Action
 
@@ -801,6 +811,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 14.3 Relevant pathway names and acronyms are properly explained per glossary rules
 * 14.4 Where competing mechanistic explanations exist for or against the intervention, both are presented
 * 14.5 If the intervention is a pharmacological compound, state its key pharmacological properties: half-life, selectivity, tissue distribution, and metabolism (primary pathway and relevant enzymes, e.g., CYP3A4)
+
+* 14.6 The mechanism section is 150–250 words
 
 
 ## 15. Historical Context & Evolution
@@ -811,6 +823,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 15.4 Historical research is not dismissed with labels such as "debunked," "discredited," or "disproven" — the evidence for and against is presented, and the reader can assess the current standing
 * 15.5 When describing the evolution of scientific opinion, the section does not frame the current consensus as the final word — it notes what changed and why, including what new evidence emerged on either side
 * 15.6 If the section does not apply to the intervention, this is briefly noted
+
+* 15.7 The historical context is 150–250 words
 
 
 ## 16. Expected Benefits
@@ -840,7 +854,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 16.16 Each item includes an annotation paragraph between the H4 title and the Magnitude line
 
-* 16.17 The annotation is 2–5 sentences, typically 60–80 words and never more than 90, covering: what the benefit is, the proposed mechanism (if relevant), the evidence basis (e.g., "meta-analysis of 20 RCTs", "large observational cohort"), and any contextual nuance (limitations, population specifics, conflicting findings)
+* 16.17 The annotation is 2–5 sentences and at most 90 words for High and Medium, 50 for Low, 35 for Speculative, covering: what the benefit is, the proposed mechanism (if relevant), the evidence basis (e.g., "meta-analysis of 20 RCTs", "large observational cohort"), and any contextual nuance (limitations, population specifics, conflicting findings)
 
 * 16.18 The annotation is preceded and followed by a blank line
 * 16.19 Speculative items also include an annotation; if no controlled studies exist, it notes the basis is mechanistic or anecdotal only
@@ -873,6 +887,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 17.7 If none of the above is relevant to the intervention, it is briefly stated
 
+* 17.8 Each factor is at most 45 words
+
 
 ## 18. Potential Risks & Side Effects
 
@@ -901,7 +917,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 18.16 Each item includes an annotation paragraph between the H4 title and the Magnitude line
 
-* 18.17 The annotation is 2–5 sentences, typically 60–80 words and never more than 90, covering: what the risk is, the proposed mechanism (if known), the evidence basis (e.g., "clinical trials", "FDA information", "post-marketing reports"), and any contextual nuance (severity, reversibility, at-risk populations, comparison to other agents in the class)
+* 18.17 The annotation is 2–5 sentences and at most 90 words for High and Medium, 50 for Low, 35 for Speculative, covering: what the risk is, the proposed mechanism (if known), the evidence basis (e.g., "clinical trials", "FDA information", "post-marketing reports"), and any contextual nuance (severity, reversibility, at-risk populations, comparison to other agents in the class)
 
 * 18.18 The annotation is preceded and followed by a blank line
 * 18.19 Speculative items also include an annotation; if no controlled data exist, it notes the basis is mechanistic or from isolated reports
@@ -933,6 +949,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 19.6 Each factor is presented as a bulleted item with a short bold label followed by a descriptive explanation
 
 * 19.7 If none of the above is relevant to the intervention, it is briefly stated
+
+* 19.8 Each factor is at most 40 words
 
 
 ## 20. Key Interactions & Contraindications
@@ -967,6 +985,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 21.5 Strategies include specific parameters where applicable: doses, frequencies, thresholds, timeframes, or quantitative targets (e.g., "dose escalation of 250–500 mg every 1–2 weeks", "annual eGFR monitoring")
 * 21.6 Each strategy explicitly states the risk or consequence it mitigates (by naming the risk or describing what the strategy prevents)
 
+* 21.7 Each strategy is at most 40 words
+
 
 ## 22. Therapeutic Protocol
 
@@ -985,6 +1005,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 22.11 Pre-existing health conditions that may influence response are discussed
 * 22.12 Each protocol item is presented as a bulleted item with a short bold label followed by descriptive explanation
 
+* 22.13 Each item is at most 40 words
+
 
 ## 23. Discontinuation & Cycling
 
@@ -994,6 +1016,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 23.4 Whether cycling is recommended for maintaining efficacy is addressed
 * 23.5 Each discontinuation or cycling consideration is presented as a bulleted item with a short bold label followed by descriptive explanation
 
+* 23.6 Each item is at most 40 words
+
 ## 24. Sourcing and Quality
 
 * 24.1 Source, purity, and formulation considerations are addressed
@@ -1001,6 +1025,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 24.3 Reputable brands or compounding pharmacies are mentioned where relevant
 * 24.4 If the section is not applicable to the intervention, this is briefly noted
 * 24.5 Each sourcing consideration is presented as a bulleted item with a short bold label followed by descriptive explanation
+
+* 24.6 Each item is at most 45 words
 
 
 
@@ -1012,6 +1038,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 25.4 Cost and accessibility are briefly noted if the intervention is exceptionally expensive or difficult to access
 * 25.5 Each consideration is presented as a bulleted item with a short bold label followed by descriptive explanation (e.g., "**Time to effect:**")
 
+* 25.6 Each item is at most 45 words
+
 
 ## 26. Interaction with Foundational Habits
 
@@ -1021,6 +1049,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 26.4 Interaction with stress management is analyzed (e.g., Affects cortisol or stress response?)
 * 26.5 Each interaction is presented as a bulleted item with a bold label (Sleep, Nutrition, Exercise, Stress management) followed by a descriptive explanation
 * 26.6 Each interaction states the direction of the interaction (direct, indirect, none, potentiating, blunting), the proposed mechanism where known, and specific practical considerations where applicable (e.g., foods to include or avoid, timing relative to dosing, technique variants, named studies)
+
+* 26.7 Each item is at most 55 words
 
 
 ## 27. Monitoring Protocol & Defining Success
@@ -1041,6 +1071,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 27.12 Qualitative markers are presented as a bulleted list
 
 * 27.13 If the section is not applicable to the intervention, this is briefly noted
+
+* 27.14 The baseline and ongoing narrative outside the biomarker table is 100–150 words
 
 
 ## 28. Emerging Research
@@ -1066,6 +1098,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 `Use "d-pubmed" ("pubmed_fetch_articles") to retrieve the article metadata for the PMID and check that the returned title matches the title given in the ER.`
 
 * 28.14 For clinicaltrials.gov links: the NCT ID resolves to a trial related to the intervention
+
+* 28.15 Each item is at most 55 words
 
 `Use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") to retrieve the study record for the NCT ID and check that the study title, condition, and intervention relate to the ER's claim.`
 

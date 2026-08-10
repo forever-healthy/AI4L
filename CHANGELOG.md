@@ -1,6 +1,13 @@
 # AI4L - Change Log
 
 
+### v1.3.7 — 2026-08-10
+
+* Added length caps across the checklist to curb model wordiness: annotation and item limits in sections 9–13 and 17–28, and word ranges for the Mechanism of Action, Historical Context and Monitoring narratives (new items 9.28, 10.10, 11.12, 12.12, 13.22, 14.6, 15.7, 17.8, 19.8, 21.7, 22.13, 23.6, 24.6, 25.6, 26.7, 27.14, 28.15)
+
+* Changed items 16.17/18.17: the annotation cap now scales with evidence level — at most 90 words for High and Medium, 50 for Low, 35 for Speculative
+
+
 ### v1.3.6 — 2026-08-10
 
 * Added item 2.12: a finding attributed to a specific paper, or to a body of reviews, carries a link to that paper or to one of those reviews
