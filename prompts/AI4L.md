@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 429 (which is the number of all checklist items)
+* Set [total_items] to 430 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -974,6 +974,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 20.9 If a mitigating action is known (dose reduction, timing separation, monitoring schedule), it is stated
 
 * 20.10 Populations to avoid include specific thresholds or classifications where applicable (e.g., "recent MI (<90 days)", "Child-Pugh Class C", "NYHA Class IV") — not only general categories
+
+* 20.11 Each interaction is at most 45 words
 
 
 ## 21. Risk Mitigation Strategies
