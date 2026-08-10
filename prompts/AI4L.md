@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 430 (which is the number of all checklist items)
+* Set [total_items] to 431 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -427,6 +427,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 3.13 Gene and protein symbols: follow field convention, not CMS. Examples: "FOXO4", "mTOR", "p53", "HIF-1α", "NF-κB", "IGF-1". Human gene symbols are all-caps; mouse gene symbols are title-case with the rest lowercase ("Foxo4").
 
 * 3.14 Chemical compound names and IUPAC forms: keep hyphens, numeric locants, and lowercase elements as written ("N-acetylcysteine" in body text, "N-Acetylcysteine" only if it is the canonical_name/short_topic where CMS title-case applies to the word after the prefix).
+
+* 3.15 Every word count in this document excludes HTML comments. They record provenance for the auditor, not content for the reader, and the search statements required in Sections 9–12 are on their own longer than the annotation limits those sections set.
 
 
 
