@@ -62,7 +62,7 @@
       ],
       "enabled": true
     },
-    "d-brightdata": {
+    "d-proxy-1": {
       "type": "local",
       "command": [
         "docker",

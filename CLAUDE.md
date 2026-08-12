@@ -1,4 +1,4 @@
-![Version 1.3.7](https://img.shields.io/badge/Version-1.3.7-green.svg)
+![Version 1.3.8](https://img.shields.io/badge/Version-1.3.8-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Project Instructions
@@ -53,7 +53,7 @@ When calling `d-pubmed` (`pubmed_fetch_articles`), always pass 'pmids' as a prop
 
 When verifying ClinicalTrials.gov URLs, use `mcp__d-clinicaltrialsgov__clinicaltrials_get_study_record` first. If the NCT ID resolves, that is the verification; only if it does not resolve, fall back to the chain below.
 
-When verifying URLs, use the `mcp__d-browser__*` tools (`browser_navigate` + `browser_snapshot`). If `d-browser` is blocked or unavailable, fall back to `mcp__d-fetch__fetch`. If that also fails, fall back to `mcp__d-brightdata__scrape_as_markdown`, which can retrieve pages protected by bot detection. Do not use the built-in `WebFetch` tool.
+When verifying URLs, use the `mcp__d-browser__*` tools (`browser_navigate` + `browser_snapshot`). If `d-browser` is blocked or unavailable, fall back to `mcp__d-fetch__fetch`. If that also fails, fall back to `d-proxy-1` and then `d-proxy-2` — bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers. Do not use the built-in `WebFetch` tool.
 
 
 ### Temporary Files

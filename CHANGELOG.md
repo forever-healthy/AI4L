@@ -1,6 +1,15 @@
 # AI4L - Change Log
 
 
+### v1.3.8 — 2026-08-12
+
+* Changed items 16.23/18.23: "Not quantified in available studies." now costs a sentence stating why the literature gives none, instead of standing alone
+
+* Added items 16.31 and 18.31: each graded item except Speculative cites at least one PubMed link
+
+* The URL verification chain now names retrieval tiers instead of a provider — `d-browser`, `d-fetch`, `d-proxy-1`, `d-proxy-2` — so a provider can be swapped in the MCP config without changing the prompt
+
+
 ### v1.3.7 — 2026-08-10
 
 * Added length caps across the checklist to curb model wordiness: annotation and item limits in sections 9–13 and 17–28, and word ranges for the Mechanism of Action, Historical Context and Monitoring narratives (new items 9.28, 10.10, 11.12, 12.12, 13.22, 14.6, 15.7, 17.8, 19.8, 20.11, 21.7, 22.13, 23.6, 24.6, 25.6, 26.7, 27.14, 28.15)

@@ -57,7 +57,7 @@
         "mcr.microsoft.com/playwright/mcp:latest"
       ]
     },
-    "d-brightdata": {
+    "d-proxy-1": {
       "command": "docker",
       "args": [
         "run",

@@ -1,4 +1,4 @@
-![Version 1.3.7](https://img.shields.io/badge/Version-1.3.7-green.svg)
+![Version 1.3.8](https://img.shields.io/badge/Version-1.3.8-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Using CLI Environments
@@ -144,14 +144,13 @@ There is no need to install Docker Desktop separately, as the Docker SBX will ha
 * Faster than the browser MCP for sites without bot detection or JS-rendered content
 
 
-### Stealth Fallback (Bright Data)
+### Stealth Fallback Tiers (`d-proxy-1`, `d-proxy-2`)
 
-[@brightdata/mcp](https://github.com/brightdata/brightdata-mcp)
-
-* Third-tier fallback used when both the local browser and local fetch MCPs are blocked by bot detection
-* Uses Bright Data's free Web Unlocker tier (`scrape_as_markdown`) to retrieve pages that would otherwise return a bot wall or CAPTCHA
-* Requires a `BRIGHTDATA_API_TOKEN` — get a free account and API token at [brightdata.com](https://brightdata.com) and save it in `.env`
-* Optional: if `BRIGHTDATA_API_TOKEN` is not set, the auditor still tries this tier, fails, and honestly marks the URL as unverified rather than silently skipping it
+* Third- and fourth-tier fallbacks used when both the local browser and local fetch MCPs are blocked by bot detection
+* The prompt names only the tier, never the provider or a specific tool, so a provider can be swapped here without editing the prompt — which would otherwise bump the prompt version
+* `d-proxy-1` currently runs [@brightdata/mcp](https://github.com/brightdata/brightdata-mcp), whose free Web Unlocker tier retrieves pages that would otherwise return a bot wall or CAPTCHA. Requires a `BRIGHTDATA_API_TOKEN` — get a free account and API token at [brightdata.com](https://brightdata.com) and save it in `.env`
+* `d-proxy-2` is unconfigured by default. Add a second provider when one tier refuses a whole class of sites by policy rather than by bot detection; a different failure surface is the point
+* Optional: if a tier is unconfigured or its token is missing, the auditor still tries it, fails, and honestly marks the URL as unverified rather than silently skipping it
 
 
 ### Clinical Trials MCP Server

@@ -1,4 +1,4 @@
-![Version 1.3.7](https://img.shields.io/badge/Version-1.3.7-green.svg)
+![Version 1.3.8](https://img.shields.io/badge/Version-1.3.8-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 431 (which is the number of all checklist items)
+* Set [total_items] to 433 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -176,17 +176,17 @@ To avoid hallucinations and calculation errors, break down the audit process int
 
   - Mark the `Match` column either 🟢 or 🔴
 
-  - In `Verified By` use exactly one of these values, spelled exactly as written: `d-clinicaltrialsgov`, `d-pubmed`, `d-browser`, `d-fetch`, `d-brightdata`, or `none`. NEVER invent a variant spelling, a tool name not in this list, or a combination of them.
+  - In `Verified By` use exactly one of these values, spelled exactly as written: `d-clinicaltrialsgov`, `d-pubmed`, `d-browser`, `d-fetch`, `d-proxy-1`, `d-proxy-2`, or `none`. NEVER invent a variant spelling, a tool name not in this list, or a combination of them.
 
   - For PubMed links, use `d-pubmed` (`pubmed_fetch_articles`) first. If the PMID resolves and the returned title matches the ER's claim, mark `Loaded` 🟢 and `Verified By` `d-pubmed`. Only if the PMID does not resolve, fall back to the chain below.
 
   - For ClinicalTrials.gov links, use `d-clinicaltrialsgov` (`clinicaltrials_get_study_record`) first. If the NCT ID resolves and the study title matches the ER's claim, mark `Loaded` 🟢 and `Verified By` `d-clinicaltrialsgov`. Only if the NCT ID does not resolve, fall back to the chain below.
 
-  - Try to retrieve the url using `d-browser`. If `d-browser` fails, try `d-fetch`. If `d-fetch` also fails, then, if available, try `d-brightdata` (`scrape_as_markdown`), which can retrieve pages protected by bot detection.
+  - Try to retrieve the url using `d-browser`. If `d-browser` fails, try `d-fetch`. If `d-fetch` also fails, then, if available, try `d-proxy-1`, and if that also fails, `d-proxy-2`. These are bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers.
 
   - Loading has failed unless you are holding the genuine target page. A transport error, an error page (404, 500, …), or a bot-detection interstitial (CAPTCHA, "Security Checkpoint", "Verify your browser") are all failures.
 
-  - If all three fail, mark `Loaded` 🔴, `Verified By` `none`, and `Match` 🔴. Always comment on what happened.
+  - If every tier fails, mark `Loaded` 🔴, `Verified By` `none`, and `Match` 🔴. Always comment on what happened.
 
   - If the page was retrieved, confirm that the content matches the link's title. If it does, mark the item in the `Match` column as passed with 🟢. If it does not, or the content is behind a paywall, mark it as failed with 🔴 in the `Match` column and add a comment in the `Comment` column about the mismatch or the paywall.
 
@@ -480,11 +480,11 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 `For ClinicalTrials.gov links, use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") first: a resolving NCT ID satisfies this item. If it does not resolve, fall through to the chain below.`
 
-`Use "d-browser" to load the URL. If it fails, try "d-fetch". If that also fails, then, if available, try "d-brightdata" ("scrape_as_markdown"). A FAIL is any outcome that is not the genuine target page — a transport error, an error page (404, 403, 500, …), or a bot wall / CAPTCHA / "security checkpoint" interstitial. A page you could not load is not verified.`
+`Use "d-browser" to load the URL. If it fails, try "d-fetch". If that also fails, then, if available, try "d-proxy-1", and if that also fails, "d-proxy-2" — bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers. A FAIL is any outcome that is not the genuine target page — a transport error, an error page (404, 403, 500, …), or a bot wall / CAPTCHA / "security checkpoint" interstitial. A page you could not load is not verified.`
 
 * 5.10 The page at each URL contains content matching the link's annotation in the ER (the page is about the cited topic; the article/resource title matches)
 
-`Use "d-browser" or, if it fails, "d-fetch", or, if that also fails, then, if available, "d-brightdata" to read the page, then confirm the content matches the link's description in the ER (e.g., the page is about the cited topic, the article title matches what the ER claims). A generic landing page, paywall, bot wall, or unrelated content fails this check.`
+`Use "d-browser" or, if it fails, "d-fetch", or, if that also fails, then, if available, "d-proxy-1" and then "d-proxy-2" to read the page, then confirm the content matches the link's description in the ER (e.g., the page is about the cited topic, the article title matches what the ER claims). A generic landing page, paywall, bot wall, or unrelated content fails this check.`
 
 `For PubMed links, the auditor must instead use "d-pubmed" ("pubmed_fetch_articles") to retrieve the article metadata and verify the returned title matches the title claimed in the ER. A mismatch means the PMID was fabricated or assigned to the wrong paper.`
 
@@ -867,7 +867,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 16.22 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports:
   a. an actual outcome as a figure — effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure;
   b. the direction plus the conditions under which it holds (e.g., "prevalence rises steeply above 2 mg/L"), together with a statement that the literature report no outcome figure.
-* 16.23 If the literature supports neither, the line reads exactly "**Magnitude:** Not quantified in available studies."
+* 16.23 If the literature supports neither, the line begins exactly "**Magnitude:** Not quantified in available studies." and continues with one sentence stating why the literature gives none (e.g., no controlled trial has measured this outcome; only case reports exist)
 * 16.24 Items classified as "Speculative" do NOT include a magnitude line
 * 16.25 The magnitude line is preceded by a blank line
 
@@ -876,6 +876,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 16.28 Magnitude values are plausible and consistent with known clinical data
 * 16.29 No items are overstated relative to their evidence level
 * 16.30 No items are understated relative to their evidence level
+
+* 16.31 Each item (except Speculative) cites at least one PubMed link in the item
 
 
 ## 17. Benefit-Modifying Factors
@@ -930,7 +932,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 18.22 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports:
   a. an actual outcome as a figure — effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure;
   b. the direction plus the conditions under which it holds (e.g., "prevalence rises steeply above 2 mg/L"), together with a statement that the literature report no outcome figure.
-* 18.23 If the literature supports neither, the line reads exactly "**Magnitude:** Not quantified in available studies."
+* 18.23 If the literature supports neither, the line begins exactly "**Magnitude:** Not quantified in available studies." and continues with one sentence stating why the literature gives none (e.g., no controlled trial has measured this outcome; only case reports exist)
 * 18.24 Items classified as "Speculative" do NOT include a magnitude line
 * 18.25 The magnitude line is preceded by a blank line
 
@@ -939,6 +941,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 18.28 Magnitude values are plausible and consistent with known clinical data
 * 18.29 No items are overstated relative to their evidence level
 * 18.30 No items are understated relative to their evidence level
+
+* 18.31 Each item (except Speculative) cites at least one PubMed link in the item
 
 
 ## 19. Risk-Modifying Factors

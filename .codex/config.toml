@@ -54,7 +54,7 @@ args = [
 ]
 startup_timeout_sec = 180
 
-[mcp_servers.d-brightdata]
+[mcp_servers.d-proxy-1]
 command = "docker"
 args = [
     "run",
