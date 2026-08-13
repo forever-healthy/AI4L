@@ -22,7 +22,6 @@
       "mcp__d-browser__*"
     ]
   },
-  "enabledMcpjsonServers": ["d-clinicaltrialsgov", "d-pubmed", "d-fetch", "d-browser"],
   "enableAllProjectMcpServers": true,
   "statusLine": {
     "type": "command",

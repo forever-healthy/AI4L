@@ -1,7 +1,7 @@
 # AI4L - Change Log
 
 
-### v1.3.8 — 2026-08-12
+### v1.3.8 — 2026-08-13
 
 * Changed items 16.23/18.23: "Not quantified in available studies." now costs a sentence stating why the literature gives none, instead of standing alone
 
