@@ -1,4 +1,4 @@
-![Version 1.3.8](https://img.shields.io/badge/Version-1.3.8-green.svg)
+![Version 1.3.9](https://img.shields.io/badge/Version-1.3.9-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 433 (which is the number of all checklist items)
+* Set [total_items] to 434 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -472,7 +472,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 5.8 No link points directly to a PDF file. A URL whose path ends in ".pdf" (optionally followed by a query string or fragment) or that serves "application/pdf" is a FAIL. Links must resolve to an HTML landing or abstract page (e.g., the PubMed, DOI, or publisher article page), never a raw PDF download.
 
-`URL verification: Each URL must pass two checks:`
+`URL verification: Each URL must pass three checks:`
 
 * 5.9 Each URL retrieves the genuine target page
 
@@ -483,6 +483,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 `Use "d-browser" to load the URL. If it fails, try "d-fetch". If that also fails, then, if available, try "d-proxy-1", and if that also fails, "d-proxy-2" — bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers. A FAIL is any outcome that is not the genuine target page — a transport error, an error page (404, 403, 500, …), or a bot wall / CAPTCHA / "security checkpoint" interstitial. A page you could not load is not verified.`
 
 * 5.10 The page at each URL contains content matching the link's annotation in the ER (the page is about the cited topic; the article/resource title matches)
+
+* 5.11 Link text that describes a specific study, trial, or finding resolves to that study — not to a reference work, monograph, database entry, or review that merely mentions it. Link text pointing to such a secondary source names it as one (e.g. "a drug monograph", "a systematic review"), never as the primary finding.
 
 `Use "d-browser" or, if it fails, "d-fetch", or, if that also fails, then, if available, "d-proxy-1" and then "d-proxy-2" to read the page, then confirm the content matches the link's description in the ER (e.g., the page is about the cited topic, the article title matches what the ER claims). A generic landing page, paywall, bot wall, or unrelated content fails this check.`
 

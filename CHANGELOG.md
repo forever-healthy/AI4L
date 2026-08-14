@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.9 — 2026-08-14
+
+* Added item 5.11: link text describing a specific study, trial, or finding resolves to that study, not to a reference work, monograph, database entry, or review that merely mentions it
+
+
 ### v1.3.8 — 2026-08-13
 
 * Changed items 16.23/18.23: "Not quantified in available studies." now costs a sentence stating why the literature gives none, instead of standing alone
