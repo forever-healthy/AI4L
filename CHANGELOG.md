@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.10 — 2026-08-17
+
+* Rewrote PERSONA.md as a system prompt aligned with AI4L.md, covering ER-style intervention analysis and live URL verification before any link is shown
+
+
 ### v1.3.9 — 2026-08-14
 
 * Added item 5.11: link text describing a specific study, trial, or finding resolves to that study, not to a reference work, monograph, database entry, or review that merely mentions it

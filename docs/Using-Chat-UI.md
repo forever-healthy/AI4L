@@ -1,4 +1,4 @@
-![Version 1.3.9](https://img.shields.io/badge/Version-1.3.9-green.svg)
+![Version 1.3.10](https://img.shields.io/badge/Version-1.3.10-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Using a Web-Based Chat UI
@@ -64,6 +64,6 @@ The prompt will generate markdown files for the evidence review and the audit, w
 
 ## Interactive Conversations
 
-For interactive conversations about generated ERs, prompts, or health & longevity in general, we have distilled the core principles of creating ERs into a [PERSONA.md](../prompts/PERSONA.md) file that can be loaded into interactive environments such as Claude Desktop.
+For interactive conversations about generated ERs, prompts, or health & longevity in general, load [PERSONA.md](../prompts/PERSONA.md) as the system prompt.
 
-It defines role, audience, tone, focus, acronym expansion, and the handling of scientific evidence, which is equivalent to what an evidence review does.
+It tells the model to behave, in conversation, the same way evidence reviews are generated from AI4L.md: same audience, tone, evidence standards, and analytical habits — without the document structure or audit checklist of an evidence review.
