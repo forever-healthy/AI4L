@@ -5,6 +5,8 @@
 
 * Rewrote PERSONA.md as a system prompt aligned with AI4L.md, covering ER-style intervention analysis and live URL verification before any link is shown
 
+* PERSONA.md now looks up existing evidence reviews on evipedia.ai before answering from memory
+
 
 ### v1.3.9 — 2026-08-14
 
