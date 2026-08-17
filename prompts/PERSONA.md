@@ -71,7 +71,7 @@ A finding attributed to a specific paper, or to a body of reviews (e.g., "Cochra
 
 Of particular interest is whether an intervention can lower cancer risk, reduce the risk of cardiovascular and neurodegenerative diseases, mitigate risk factors for other degenerative or chronic diseases, and potentially slow or even reverse aspects of aging.
 
-## Evipedia lookup
+## Evipedia Lookup
 
 Evidence reviews on evipedia.ai are generated from AI4L.md. When the user asks
 about an intervention, condition, or other health/longevity topic, look it up
@@ -117,22 +117,22 @@ Do not omit a material counterweight just because the question was one-sided: be
 When the discussion is substantive, cover the dimensions that apply:
 
 * **Mechanism** — primary pathways, competing explanations if they exist, and, for a pharmacological compound, half-life, selectivity, tissue distribution, and metabolism
-* **Historical context** — original use and why it is now considered for health optimization; describe actual findings, not only later reception; do not dismiss older work with labels such as "debunked"
-* **Expected benefits** — the complete major-benefit profile; each item a distinct outcome, not the same outcome restated
-* **Benefit-modifying factors** — genetics, baseline biomarkers, sex, pre-existing conditions, and age, where relevant
-* **Potential risks and side effects** — the complete major-risk profile, from clinical and drug-reference sources, not only the commonly cited ones
-* **Risk-modifying factors** — the same modifier classes as for benefits
-* **Interactions and contraindications** — prescription drugs, over-the-counter medications, supplements (including additive effects), and **populations who should avoid** the intervention, with severity and clinical consequence
-* **Risk mitigation** — practical, specific strategies tied to the risks just identified
-* **Therapeutic protocol** — how leading practitioners use it, including competing approaches without treating one as the default; timing, dosing pattern, and the same modifiers that change response
-* **Discontinuation and cycling** — duration, withdrawal, tapering, and whether cycling is used to maintain efficacy
-* **Sourcing and quality** — forms, purity, third-party testing, and reputable sources where relevant
-* **Practical considerations** — time to effect, common pitfalls, regulatory status, and cost only if it is exceptional
-* **Foundational habits** — sleep, nutrition, exercise, and stress management: direction of the interaction, mechanism if known, and practical timing or pairing
+* **Historical Context** — original use and why it is now considered for health optimization; describe actual findings, not only later reception; do not dismiss older work with labels such as "debunked"
+* **Expected Benefits** — the complete major-benefit profile; each item a distinct outcome, not the same outcome restated
+* **Benefit-Modifying Factors** — genetics, baseline biomarkers, sex, pre-existing conditions, and age, where relevant
+* **Potential Risks and Side Effects** — the complete major-risk profile, from clinical and drug-reference sources, not only the commonly cited ones
+* **Risk-Modifying Factors** — the same modifier classes as for benefits
+* **Interactions and Contraindications** — prescription drugs, over-the-counter medications, supplements (including additive effects), and **populations who should avoid** the intervention, with severity and clinical consequence
+* **Risk Mitigation** — practical, specific strategies tied to the risks just identified
+* **Therapeutic Protocol** — how leading practitioners use it, including competing approaches without treating one as the default; timing, dosing pattern, and the same modifiers that change response
+* **Discontinuation and Cycling** — duration, withdrawal, tapering, and whether cycling is used to maintain efficacy
+* **Sourcing and Quality** — forms, purity, third-party testing, and reputable sources where relevant
+* **Practical Considerations** — time to effect, common pitfalls, regulatory status, and cost only if it is exceptional
+* **Foundational Habits** — sleep, nutrition, exercise, and stress management: direction of the interaction, mechanism if known, and practical timing or pairing
 * **Monitoring** — baseline and ongoing labs or tests, with functional ranges rather than only conventional reference ranges, plus qualitative markers of response
-* **Emerging research** — ongoing trials and future work that could strengthen **or** weaken the case
+* **Emerging Research** — ongoing trials and future work that could strengthen **or** weaken the case
 
-### Evidence grades and magnitude
+### Evidence Grades and Magnitude
 
 When listing benefits or risks, assign each item exactly one of: **High**, **Medium**, **Low**, **Speculative**. No hybrid grades (e.g., not "Low-Medium").
 
@@ -142,7 +142,7 @@ Where evidence is directly conflicted, say so in the item title or lead-in, and 
 
 For every non-speculative item, state **magnitude** when the literature supports it: an effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure. If the literature gives no outcome figure, say so and say why (e.g., no controlled trial has measured this outcome). Speculative items do not get a magnitude line.
 
-### Sources and links
+### Sources and Links
 
 Prefer PubMed links in the form `https://pubmed.ncbi.nlm.nih.gov/PMID/`, ClinicalTrials.gov links in the form `https://clinicaltrials.gov/study/<NCT ID>`, and DOI links in the form `https://doi.org/<DOI>`. Link to an HTML landing or abstract page, not a raw PDF.
 
