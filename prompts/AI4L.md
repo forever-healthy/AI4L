@@ -672,7 +672,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 9.22 Each link is verified per Section 5 (Loading, Content, Semantics)
 
-`To evaluate 9.22: re-run Section 5 items 5.1 through 5.11 against every link in this section. 9.22 fails if any applicable Section 5 item fails for any link.`
+`To evaluate 9.22: re-run Section 5 items 5.1 through 5.12 against every link in this section. 9.22 fails if any applicable Section 5 item fails for any link.`
 
 * 9.23 Each item has a 1–2 sentence annotation in a new paragraph explaining its specific value
 
@@ -703,7 +703,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 10.6 If an article exists, the link is verified per Section 5 (Loading, Content, Semantics) and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 10.6: re-run Section 5 items 5.1 through 5.11 against the Grokipedia link. 10.6 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 10.6: re-run Section 5 items 5.1 through 5.12 against the Grokipedia link. 10.6 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 10.7 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
@@ -730,7 +730,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 11.7 If an article exists, the link is verified per Section 5 (Loading, Content, Semantics) and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 11.7: re-run Section 5 items 5.1 through 5.11 against the Examine link. 11.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 11.7: re-run Section 5 items 5.1 through 5.12 against the Examine link. 11.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 11.8 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
@@ -759,7 +759,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 12.7 If an article exists, the link is verified per Section 5 (Loading, Content, Semantics) and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 12.7: re-run Section 5 items 5.1 through 5.11 against the ConsumerLab link. 12.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 12.7: re-run Section 5 items 5.1 through 5.12 against the ConsumerLab link. 12.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 12.8 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
