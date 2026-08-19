@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.12 — 2026-08-19
+
+* Added item 5.6: no link points to PubMed Central — an article available on PMC is linked by its PubMed ID (former items 5.6–5.11 renumbered to 5.7–5.12)
+
+
 ### v1.3.11 — 2026-08-19
 
 * When a conversation stays on an intervention Evipedia has not reviewed, PERSONA.md now offers to propose it to the Evipedia editorial team, or to generate an Evipedia-style review immediately with AI4L
