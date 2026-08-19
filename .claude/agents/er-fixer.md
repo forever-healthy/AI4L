@@ -3,7 +3,7 @@ name: er-fixer
 description: AI4L - audit & fix ER
 model: opus
 color: green
-version: 1.3.10
+version: 1.3.11
 ---
 
 # AI4L - Agent to Audit & Fix Evidence Reviews according to AI4L.md

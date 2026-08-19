@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.11 — 2026-08-19
+
+* When a conversation stays on an intervention Evipedia has not reviewed, PERSONA.md now offers to propose it to the Evipedia editorial team, or to generate an Evipedia-style review immediately with AI4L
+
+
 ### v1.3.10 — 2026-08-17
 
 * Rewrote PERSONA.md as a system prompt aligned with AI4L.md, covering ER-style intervention analysis and live URL verification before any link is shown

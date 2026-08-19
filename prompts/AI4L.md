@@ -1,4 +1,4 @@
-![Version 1.3.10](https://img.shields.io/badge/Version-1.3.10-green.svg)
+![Version 1.3.11](https://img.shields.io/badge/Version-1.3.11-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
