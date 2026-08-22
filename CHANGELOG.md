@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.14 — 2026-08-22
+
+* PERSONA.md opens with a summary of the features it adds to a conversation and links the AI4L repository
+
+
 ### v1.3.13 — 2026-08-22
 
 * A url the fixer adds, removes or replaces is now recorded as a header-only table of three pipe-separated fields on its own line under the fix's label — one uniform shape for `LINK REPLACED`, `LINK REMOVED` and `LINK ADDED`, and an edit that leaves the url untouched is no longer reported as a url change
