@@ -1,4 +1,4 @@
-![Version 1.3.14](https://img.shields.io/badge/Version-1.3.14-green.svg)[![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
+![Version 1.3.15](https://img.shields.io/badge/Version-1.3.15-green.svg)[![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # OpenAI Codex Instructions
 

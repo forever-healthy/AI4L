@@ -1,4 +1,4 @@
-![Version 1.3.14](https://img.shields.io/badge/Version-1.3.14-green.svg)
+![Version 1.3.15](https://img.shields.io/badge/Version-1.3.15-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 435 (which is the number of all checklist items)
+* Set [total_items] to 439 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -842,7 +842,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 16.3 Content is framed for the target audience (see 1.12), not as population-level outcomes.
 
-* 16.4 A dedicated search for the intervention's complete benefit profile was performed using clinical and expert sources before writing this section
+* 16.4 A dedicated search for the intervention's complete benefit profile was performed using clinical and expert sources before writing this section. A statement by the author about the search is placed inside an HTML comment at the start of the section.
 
 `The auditor should perform an in-depth search using all available search tools (e.g., the built-in "WebSearch", "pubmed_search_articles", or an MCP-provided search tool) to cross-check and verify that the list of benefits presented in this section is complete, and no benefits have been left unaddressed.`
 
@@ -868,7 +868,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 16.19 Speculative items also include an annotation; if no controlled studies exist, it notes the basis is mechanistic or anecdotal only
 
 * 16.20 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
-* 16.21 Conflicted evidence is explained in the annotation text
+* 16.21 Conflicted evidence is explained in the annotation text. The annotation's last sentence states the net reading of the conflict in one sentence.
 
 * 16.22 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports:
   a. an actual outcome as a figure — effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure;
@@ -884,6 +884,14 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 16.30 No items are understated relative to their evidence level
 
 * 16.31 Each item (except Speculative) cites at least one PubMed link in the item
+
+* 16.32 The evidence level reflects the class of evidence behind the item. High: a human clinical endpoint (symptoms, events, function) or a clinical surrogate validated against outcomes in people (e.g., blood pressure, LDL, HbA1c, bone mineral density, eGFR, a named validated scale), shown in more than one trial. Medium: the same class of outcome in a single trial or in consistent observational data. Low: human data that are uncontrolled, indirect, or conflicting. Speculative: no human outcome data — in-vitro assays, animal work, and unvalidated biomarkers (e.g., MIC or zone assays, MDA, SOD, total antioxidant capacity) cap here regardless of how consistent they are.
+
+`Who was studied belongs in the annotation (16.17), not in the grade. A replicated human HbA1c or blood-pressure finding in a disease population may be High; an MIC, MDA, SOD, or "total antioxidant capacity" finding is Speculative.`
+
+* 16.33 All four evidence-level headings (High, Medium, Low, Speculative) are present, in that order. A level with no items still carries the heading. An empty High or Medium is followed by one sentence naming the class of evidence that falls short; an empty Low or Speculative carries the heading alone. That sentence is not an H4 item and has no Magnitude line.
+
+`Example: "No benefit reaches High: the human trials are small uncontrolled series, and the antimicrobial data are in-vitro MIC assays." A missing heading is a fail even when the skip is justified. A because-line that only says evidence is limited, without naming the evidence class, is a fail.`
 
 
 ## 17. Benefit-Modifying Factors
@@ -907,7 +915,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 18.3 Content is framed for the target audience (see 1.12), not as population-level outcomes.
 
-* 18.4 A dedicated search for the intervention's complete side effect profile was performed using a drug reference source (e.g., prescribing information, drugs.com, Mayo Clinic) before writing this section
+* 18.4 A dedicated search for the intervention's complete side effect profile was performed using a drug reference source (e.g., prescribing information, drugs.com, Mayo Clinic) before writing this section. A statement by the author about the search is placed inside an HTML comment at the start of the section.
 
 `The auditor should perform an in-depth search using all available search tools (e.g., the built-in "WebSearch", "pubmed_search_articles", or an MCP-provided search tool) to cross-check and verify that the list of risks and side effects presented in this section is complete, and no risks or side effects have been left unaddressed.`
 
@@ -933,7 +941,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 18.19 Speculative items also include an annotation; if no controlled data exist, it notes the basis is mechanistic or from isolated reports
 
 * 18.20 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
-* 18.21 Conflicted evidence is explained in the annotation text
+* 18.21 Conflicted evidence is explained in the annotation text. The annotation's last sentence states the net reading of the conflict in one sentence.
 
 * 18.22 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports:
   a. an actual outcome as a figure — effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure;
@@ -949,6 +957,14 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 18.30 No items are understated relative to their evidence level
 
 * 18.31 Each item (except Speculative) cites at least one PubMed link in the item
+
+* 18.32 The evidence level reflects the class of evidence behind the item. High: a human clinical endpoint (symptoms, events, function, documented adverse events) or a clinical surrogate validated against outcomes in people (e.g., blood pressure, LDL, HbA1c, bone mineral density, eGFR, a named validated scale), shown in more than one trial. Medium: the same class of outcome in a single trial or in consistent observational data. Low: human data that are uncontrolled, indirect, or conflicting. Speculative: no human outcome data — in-vitro cytotoxicity, animal work, and unvalidated biomarkers cap here regardless of how consistent they are.
+
+`Who was studied belongs in the annotation (18.17), not in the grade. A replicated human adverse-event finding in a disease population may be High; an in-vitro cytotoxicity or unvalidated biomarker shift is Speculative.`
+
+* 18.33 All four evidence-level headings (High, Medium, Low, Speculative) are present, in that order. A level with no items still carries the heading. An empty High or Medium is followed by one sentence naming the class of evidence that falls short; an empty Low or Speculative carries the heading alone. That sentence is not an H4 item and has no Magnitude line.
+
+`A missing heading is a fail even when the skip is justified. A because-line that only says evidence is limited, without naming the evidence class, is a fail.`
 
 
 ## 19. Risk-Modifying Factors

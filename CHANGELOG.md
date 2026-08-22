@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.15 — 2026-08-22
+
+* Defined the four evidence levels (new items 16.32/18.32), required all four level headings even when empty (16.33/18.33), the net reading of conflicted evidence (16.21/18.21), and the search statement in an HTML comment (16.4/18.4)
+
+
 ### v1.3.14 — 2026-08-22
 
 * PERSONA.md opens with a summary of the features it adds to a conversation and links the AI4L repository
