@@ -5,6 +5,8 @@
 
 This directory contains example evidence reviews and matching QA audits for various interventions.
 
+Every evidence review published on [evipedia.ai](https://evipedia.ai) is generated with AI4L.
+
 All ERs required multiple "Audit > Fix > Audit > ... " passes to reach a real 100% pass rate, as can be seen at the end of the audit files for each example.
 
 The table at the beginning of the files is metadata in YAML format. GitHub displays it as a table, but it will be hidden by a standard markdown renderer.
