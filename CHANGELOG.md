@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.13 — 2026-08-22
+
+* A url the fixer adds, removes or replaces is now recorded as a header-only table of three pipe-separated fields on its own line under the fix's label — one uniform shape for `LINK REPLACED`, `LINK REMOVED` and `LINK ADDED`, and an edit that leaves the url untouched is no longer reported as a url change
+
+
 ### v1.3.12 — 2026-08-19
 
 * Added item 5.6: no link points to PubMed Central — an article available on PMC is linked by its PubMed ID (former items 5.6–5.11 renumbered to 5.7–5.12)
