@@ -3,7 +3,7 @@ name: er-fixer
 description: AI4L - audit & fix ER
 model: opus
 color: green
-version: 1.3.16
+version: 1.3.17
 ---
 
 # AI4L - Agent to Audit & Fix Evidence Reviews according to AI4L.md
@@ -61,11 +61,13 @@ version: 1.3.16
 
   **URL Changes**
     
-    - When a fix adds, removes or replaces a url, what follows the bold `**{item#} — {short label}:**` prefix is, in a new line, a machine-parseable record, in the form of a header-only table with three pipe-separated fields: `| <MARKER>: <urls> | tried: <tools> | outcome: <why> |` followed by `| --- | --- | --- |` to make it semantically correct. 
+    - When a fix adds, removes or replaces a url, what follows the bold `**{item#} — {short label}:**` prefix is, after a blank line and indented to the list item's text column, a machine-parseable record as a single-row headerless table with three pipe-separated fields: `| <MARKER>: <urls> | tried: <tools> | outcome: <why> |`
+
+    - The record row stands alone: no header row, and no `| --- | --- | --- |` after it — a trailing delimiter row stops it from rendering as a table.
 
     The ER's URL table lists only what it still cites, so once a source is dropped or swapped this record is the only evidence it was ever there.
 
-    - One table per fix — never batch several fixes into one entry. Prose may follow the record.
+    - One table per fix — never batch several fixes into one entry. Prose may follow the record, at the same indent.
 
     The cases are:
 

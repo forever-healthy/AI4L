@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.17 — 2026-08-23
+
+* The fixer's URL-change record is now a headerless single-row table, so it renders as a table instead of a line of pipes
+
+
 ### v1.3.16 — 2026-08-23
 
 * Added item 5.13: no link points to a web archive or cache, and an archive copy is never a valid replacement for a url that will not load
