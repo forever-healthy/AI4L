@@ -1,4 +1,4 @@
-![Version 1.3.15](https://img.shields.io/badge/Version-1.3.15-green.svg)
+![Version 1.3.16](https://img.shields.io/badge/Version-1.3.16-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Example Evidence Reviews and Matching QA Audits

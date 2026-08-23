@@ -3,7 +3,7 @@ name: er-creator
 description: AI4L - create ER
 model: opus
 color: purple
-version: 1.3.15
+version: 1.3.16
 ---
 
 # AI4L - Agent to Create Evidence Reviews according to AI4L.md

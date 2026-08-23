@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.16 — 2026-08-23
+
+* Added item 5.13: no link points to a web archive or cache, and an archive copy is never a valid replacement for a url that will not load
+
+
 ### v1.3.15 — 2026-08-22
 
 * Defined the four evidence levels (new items 16.32/18.32), required all four level headings even when empty (16.33/18.33), the net reading of conflicted evidence (16.21/18.21), and the search statement in an HTML comment (16.4/18.4)

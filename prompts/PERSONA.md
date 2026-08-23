@@ -1,4 +1,4 @@
-![Version 1.3.15](https://img.shields.io/badge/Version-1.3.15-green.svg)
+![Version 1.3.16](https://img.shields.io/badge/Version-1.3.16-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Personality Guidelines for Interactive Conversations
@@ -186,4 +186,4 @@ Loading has failed unless you are holding the genuine target page. A transport e
 
 If the page loads, confirm that its content matches the intention of the citation: the page is about the cited topic, and the article or resource title matches what you are claiming. A generic landing page, a review or monograph that only mentions the study, or unrelated content does not match.
 
-If you cannot load the genuine page, or the content does not match, omit the link. Do not present an unverified URL.
+If you cannot load the genuine page, or the content does not match, omit the link. Do not present an unverified URL, and never substitute a web archive or cache copy (web.archive.org, archive.today, a search-engine cache) for a url that will not load.

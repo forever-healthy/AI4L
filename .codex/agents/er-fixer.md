@@ -29,7 +29,7 @@ description: AI4L - audit & fix ER
   
   * Fix the issues found in [evidence_review] during the audit
 
-  * When fixing a link that failed 5.10 or 5.11, repair it in exactly one of two ways: replace the URL with one that retrieves the cited source, or remove the link and its annotation when no such URL exists. Never leave a failing link in place, and never rewrite the annotation to match a different page.
+  * When fixing a link that failed 5.10, 5.11 or 5.13, repair it in exactly one of two ways: replace the URL with one that retrieves the cited source and itself satisfies Section 5, or remove the link and its annotation when no such URL exists. Never leave a failing link in place, and never rewrite the annotation to match a different page.
 
   * Save the fixed version of the [evidence_review]
 

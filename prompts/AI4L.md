@@ -1,4 +1,4 @@
-![Version 1.3.15](https://img.shields.io/badge/Version-1.3.15-green.svg)
+![Version 1.3.16](https://img.shields.io/badge/Version-1.3.16-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 439 (which is the number of all checklist items)
+* Set [total_items] to 440 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -182,7 +182,7 @@ To avoid hallucinations and calculation errors, break down the audit process int
 
   - For ClinicalTrials.gov links, use `d-clinicaltrialsgov` (`clinicaltrials_get_study_record`) first. If the NCT ID resolves and the study title matches the ER's claim, mark `Loaded` 🟢 and `Verified By` `d-clinicaltrialsgov`. Only if the NCT ID does not resolve, fall back to the chain below.
 
-  - Try to retrieve the url using `d-browser`. If `d-browser` fails, try `d-fetch`. If `d-fetch` also fails, then, if available, try `d-proxy-1`, and if that also fails, `d-proxy-2`. These are bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers.
+  - Try to retrieve the url using `d-browser`. If `d-browser` fails, try `d-fetch`. If `d-fetch` also fails, then, if available, try `d-proxy-1`, and if that also fails, `d-proxy-2`. These are bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers. An archive or cache is NOT a retrieval tier and can never satisfy this item.
 
   - Loading has failed unless you are holding the genuine target page. A transport error, an error page (404, 500, …), or a bot-detection interstitial (CAPTCHA, "Security Checkpoint", "Verify your browser") are all failures.
 
@@ -484,17 +484,20 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 `For ClinicalTrials.gov links, use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") first: a resolving NCT ID satisfies this item. If it does not resolve, fall through to the chain below.`
 
-`Use "d-browser" to load the URL. If it fails, try "d-fetch". If that also fails, then, if available, try "d-proxy-1", and if that also fails, "d-proxy-2" — bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers. A FAIL is any outcome that is not the genuine target page — a transport error, an error page (404, 403, 500, …), or a bot wall / CAPTCHA / "security checkpoint" interstitial. A page you could not load is not verified.`
+`Use "d-browser" to load the URL. If it fails, try "d-fetch". If that also fails, then, if available, try "d-proxy-1", and if that also fails, "d-proxy-2" — bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers. An archive or cache is NOT a retrieval tier and can never satisfy this item. A FAIL is any outcome that is not the genuine target page — a transport error, an error page (404, 403, 500, …), or a bot wall / CAPTCHA / "security checkpoint" interstitial. A page you could not load is not verified.`
 
 * 5.11 The page at each URL contains content matching the link's annotation in the ER (the page is about the cited topic; the article/resource title matches)
 
 * 5.12 Link text that describes a specific study, trial, or finding resolves to that study — not to a reference work, monograph, database entry, or review that merely mentions it. Link text pointing to such a secondary source names it as one (e.g. "a drug monograph", "a systematic review"), never as the primary finding.
+
+* 5.13 No link points to a web archive or cache — web.archive.org, archive.today/archive.ph, or a search-engine cache. If the live URL cannot be retrieved, the link is REMOVED rather than replaced with an archived copy.
 
 `Use "d-browser" or, if it fails, "d-fetch", or, if that also fails, then, if available, "d-proxy-1" and then "d-proxy-2" to read the page, then confirm the content matches the link's description in the ER (e.g., the page is about the cited topic, the article title matches what the ER claims). A generic landing page, paywall, bot wall, or unrelated content fails this check.`
 
 `For PubMed links, the auditor must instead use "d-pubmed" ("pubmed_fetch_articles") to retrieve the article metadata and verify the returned title matches the title claimed in the ER. A mismatch means the PMID was fabricated or assigned to the wrong paper.`
 
 `For ClinicalTrials.gov links, the auditor must instead use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") to retrieve the study record and verify the study title matches the trial claimed in the ER. A mismatch means the NCT ID was fabricated or assigned to the wrong trial.`
+
 
 
 ## 6. Frontmatter - Metadata
@@ -672,7 +675,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 9.22 Each link is verified per Section 5 (Loading, Content, Semantics)
 
-`To evaluate 9.22: re-run Section 5 items 5.1 through 5.12 against every link in this section. 9.22 fails if any applicable Section 5 item fails for any link.`
+`To evaluate 9.22: re-run Section 5 items 5.1 through 5.13 against every link in this section. 9.22 fails if any applicable Section 5 item fails for any link.`
 
 * 9.23 Each item has a 1–2 sentence annotation in a new paragraph explaining its specific value
 
@@ -703,7 +706,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 10.6 If an article exists, the link is verified per Section 5 (Loading, Content, Semantics) and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 10.6: re-run Section 5 items 5.1 through 5.12 against the Grokipedia link. 10.6 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 10.6: re-run Section 5 items 5.1 through 5.13 against the Grokipedia link. 10.6 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 10.7 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
@@ -730,7 +733,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 11.7 If an article exists, the link is verified per Section 5 (Loading, Content, Semantics) and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 11.7: re-run Section 5 items 5.1 through 5.12 against the Examine link. 11.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 11.7: re-run Section 5 items 5.1 through 5.13 against the Examine link. 11.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 11.8 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
@@ -759,7 +762,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 12.7 If an article exists, the link is verified per Section 5 (Loading, Content, Semantics) and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 12.7: re-run Section 5 items 5.1 through 5.12 against the ConsumerLab link. 12.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 12.7: re-run Section 5 items 5.1 through 5.13 against the ConsumerLab link. 12.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 12.8 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
