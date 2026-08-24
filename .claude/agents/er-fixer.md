@@ -3,7 +3,7 @@ name: er-fixer
 description: AI4L - audit & fix ER
 model: opus
 color: green
-version: 1.3.17
+version: 1.3.18
 ---
 
 # AI4L - Agent to Audit & Fix Evidence Reviews according to AI4L.md
@@ -64,6 +64,8 @@ version: 1.3.17
     - When a fix adds, removes or replaces a url, what follows the bold `**{item#} — {short label}:**` prefix is, after a blank line and indented to the list item's text column, a machine-parseable record as a single-row headerless table with three pipe-separated fields: `| <MARKER>: <urls> | tried: <tools> | outcome: <why> |`
 
     - The record row stands alone: no header row, and no `| --- | --- | --- |` after it — a trailing delimiter row stops it from rendering as a table.
+
+    - Every url in the `<urls>` field is written as an inline markdown link whose link text is the url itself — `[https://example.org/page](https://example.org/page)` — so it renders as a clickable hyperlink. Never leave a bare url; it renders as plain text. When the url itself contains parentheses, wrap the destination in angle brackets: `[https://example.org/a_(b)](<https://example.org/a_(b)>)`.
 
     The ER's URL table lists only what it still cites, so once a source is dropped or swapped this record is the only evidence it was ever there.
 

@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.18 — 2026-08-24
+
+* Every url in the fixer's URL-change record is now an inline markdown link, so the record's urls render as clickable hyperlinks instead of plain text
+
+
 ### v1.3.17 — 2026-08-23
 
 * The fixer's URL-change record is now a headerless single-row table, so it renders as a table instead of a line of pipes

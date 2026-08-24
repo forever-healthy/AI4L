@@ -62,6 +62,8 @@ description: AI4L - audit & fix ER
 
     - The record row stands alone: no header row, and no `| --- | --- | --- |` after it — a trailing delimiter row stops it from rendering as a table.
 
+    - Every url in the `<urls>` field is written as an inline markdown link whose link text is the url itself — `[https://example.org/page](https://example.org/page)` — so it renders as a clickable hyperlink. Never leave a bare url; it renders as plain text. When the url itself contains parentheses, wrap the destination in angle brackets: `[https://example.org/a_(b)](<https://example.org/a_(b)>)`.
+
     The ER's URL table lists only what it still cites, so once a source is dropped or swapped this record is the only evidence it was ever there.
 
     - One table per fix — never batch several fixes into one entry. Prose may follow the record, at the same indent.
