@@ -2,7 +2,7 @@
 name: er-combiner
 description: AI4L - combine all QA files of an ER using bash (lossless)
 color: orange
-version: 1.3.19
+version: 1.3.20
 ---
 
 # AI4L - Bash Agent to Combine all QA files of an ER into a single file

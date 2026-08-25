@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.20 — 2026-08-25
+
+* The persona proposes an intervention to the Evipedia editorial team with the renamed `suggest_review` MCP tool
+
+
 ### v1.3.19 — 2026-08-25
 
 * The persona now renders every Evipedia review title as a markdown link to the review's permalink, never as plain text
