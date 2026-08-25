@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.19 — 2026-08-25
+
+* The persona now renders every Evipedia review title as a markdown link to the review's permalink, never as plain text
+
+
 ### v1.3.18 — 2026-08-24
 
 * Every url in the fixer's URL-change record is now an inline markdown link, so the record's urls render as clickable hyperlinks instead of plain text
