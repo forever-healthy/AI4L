@@ -2,12 +2,14 @@
 name: er-combiner
 description: AI4L - combine all QA files of an ER using bash (lossless)
 color: orange
-version: 1.3.20
+version: 1.3.21
 ---
 
 # AI4L - Bash Agent to Combine all QA files of an ER into a single file
 
 * Set [er_filename] to $ARGUMENTS
+
+* READ SCOPE — you may read ONLY the QA files belonging to [er_filename], via the script below. Never read another evidence review or another review's QA files, and never glob or search for them beyond the script's own pattern.
 
 * Report `COMBINER: Work on QA files for [er_filename]`
 

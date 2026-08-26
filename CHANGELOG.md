@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.21 — 2026-08-26
+
+* All four ER agents now state an explicit read scope, so an agent reads only the review it was given, that review's QA files and the prompt — by any means of access, shell commands and globs included
+
+
 ### v1.3.20 — 2026-08-25
 
 * The persona proposes an intervention to the Evipedia editorial team with the renamed `suggest_review` MCP tool

@@ -7,6 +7,8 @@ description: AI4L - combine all QA files of an ER using bash (lossless)
 
 * Set [er_filename] to $ARGUMENTS
 
+* READ SCOPE — you may read ONLY the QA files belonging to [er_filename], via the script below. Never read another evidence review or another review's QA files, and never glob or search for them beyond the script's own pattern.
+
 * Report `COMBINER: Work on QA files for [er_filename]`
 
 Run this bash script (substituting [er_filename], [creation_dir], and [trash_dir] for their actual values):

@@ -1,4 +1,4 @@
-![Version 1.3.20](https://img.shields.io/badge/Version-1.3.20-green.svg)
+![Version 1.3.21](https://img.shields.io/badge/Version-1.3.21-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Using CLI Environments

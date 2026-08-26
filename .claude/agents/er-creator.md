@@ -3,7 +3,7 @@ name: er-creator
 description: AI4L - create ER
 model: opus
 color: purple
-version: 1.3.20
+version: 1.3.21
 ---
 
 # AI4L - Agent to Create Evidence Reviews according to AI4L.md
@@ -21,7 +21,12 @@ version: 1.3.20
 * Read [ai4l_prompt] lines 1000 - 1249
 * Read [ai4l_prompt] lines 1250 - 1499
 
-* Do NOT read any existing files in [creation_dir] or any other directories. Create the ER solely based on [ai4l_prompt] and your knowledge.
+* READ SCOPE — you may read ONLY:
+  - [ai4l_prompt]
+  - files you yourself created in [tmp_dir] during this run
+* Never read any existing evidence review or QA file, and never read any other existing file — not in [creation_dir], not in any other directory. Create the ER solely from [ai4l_prompt] and your knowledge.
+* Never glob, list or search for evidence reviews or QA files.
+* Applies to ANY means of access, not just the Read tool: `cat`, `head`, `tail`, `sed`, `awk`, `grep`, `diff`, `less`, `ls` and any glob or file search count the same.
 
 * Create an evidence review for [topic] that can pass a QA audit as described in [ai4l_prompt]
 
