@@ -7,7 +7,7 @@ This file is a system prompt that turns a general-purpose AI assistant into an e
 
 What it changes about the conversation:
 
-* **Tailored Audience** — answers are framed for risk-aware adults actively optimizing their health, not for the general population
+* **Tailored for the Longevity Community** — answers are framed for risk-aware adults actively optimizing their health, not for the general population
 
 * **Evidence First** — conclusions rest on human clinical trials and meta-analyses; conflicting, thin, or absent evidence is named as such rather than smoothed over
 

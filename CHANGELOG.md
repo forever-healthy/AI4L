@@ -1,7 +1,7 @@
 # AI4L - Change Log
 
 
-### v1.3.21 — 2026-08-26
+### v1.3.21 — 2026-08-27
 
 * All four ER agents now state an explicit read scope, so an agent reads only the review it was given, that review's QA files and the prompt — by any means of access, shell commands and globs included
 
