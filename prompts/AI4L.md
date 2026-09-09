@@ -1,4 +1,4 @@
-![Version 1.3.21](https://img.shields.io/badge/Version-1.3.21-green.svg)
+![Version 1.3.22](https://img.shields.io/badge/Version-1.3.22-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -368,7 +368,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 1.16 The document's own voice frames usage in **longevity** terms, not "anti-aging" (e.g., "anti-aging clinics", "anti-aging community", "anti-aging medicine"). Proper names that contain "anti-aging" (e.g., "American Academy of Anti-Aging Medicine") are quoted verbatim.
 
-* 1.17 The document's own voice uses formal clinical and scientific terminology, not colloquial or consumer-grade language (e.g., "oral medication" not "pill(s)"; "injection" not "shot"; "adverse event" not "bad reaction"). Direct quotes from sources are exempt.
+* 1.17 The document's own voice uses formal clinical and scientific terminology, not colloquial or consumer-grade language (e.g., "oral medication" not "pill(s)"; "oral" / "administered orally" not "taken by mouth" / "given by mouth"; "injection" not "shot"; "adverse event" not "bad reaction"). This holds on EVERY surface, including Motivation and Conclusion — the stricter plain-language bar there (see 1.9) does not license lay phrasing for route of administration. Direct quotes from sources are exempt.
 
 
 ## 2. Handling of Scientific Evidence
