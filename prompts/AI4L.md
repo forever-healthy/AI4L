@@ -1,4 +1,4 @@
-![Version 1.3.23](https://img.shields.io/badge/Version-1.3.23-green.svg)
+![Version 1.3.24](https://img.shields.io/badge/Version-1.3.24-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 449 (which is the number of all checklist items)
+* Set [total_items] to 448 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -475,22 +475,21 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 5.1 All links are syntactically valid (proper URL format)
 * 5.2 All links use standard Markdown syntax: "[text](URL)"
-* 5.3 No URLs appear to have been constructed by guessing or interpolating from memory
-* 5.4 All pipe characters "\|" in markdown link text are replaced with an en-dash "–"
+* 5.3 All pipe characters "\|" in markdown link text are replaced with an en-dash "–"
 
-* 5.5 PubMed links use the format "https://pubmed.ncbi.nlm.nih.gov/PMID/" — not publisher sites (e.g., not ahajournals.org, sciencedirect.com, wiley.com)
+* 5.4 PubMed links use the format "https://pubmed.ncbi.nlm.nih.gov/PMID/" — not publisher sites (e.g., not ahajournals.org, sciencedirect.com, wiley.com)
 
-* 5.6 No link points to PubMed Central — an article available on PMC is linked by its PubMed ID in the format "https://pubmed.ncbi.nlm.nih.gov/PMID/"
+* 5.5 No link points to PubMed Central — an article available on PMC is linked by its PubMed ID in the format "https://pubmed.ncbi.nlm.nih.gov/PMID/"
 
-* 5.7 ClinicalTrials.gov links use the format "https://clinicaltrials.gov/study/<NCT ID>"
+* 5.6 ClinicalTrials.gov links use the format "https://clinicaltrials.gov/study/<NCT ID>"
 
-* 5.8 DOI links use the format "https://doi.org/<DOI>"
+* 5.7 DOI links use the format "https://doi.org/<DOI>"
 
-* 5.9 No link points directly to a PDF file. A URL whose path ends in ".pdf" (optionally followed by a query string or fragment) or that serves "application/pdf" is a FAIL. Links must resolve to an HTML landing or abstract page (e.g., the PubMed, DOI, or publisher article page), never a raw PDF download.
+* 5.8 No link points directly to a PDF file. A URL whose path ends in ".pdf" (optionally followed by a query string or fragment) or that serves "application/pdf" is a FAIL. Links must resolve to an HTML landing or abstract page (e.g., the PubMed, DOI, or publisher article page), never a raw PDF download.
 
 `URL verification: Each URL must pass three checks:`
 
-* 5.10 Each URL retrieves the genuine target page
+* 5.9 Each URL retrieves the genuine target page
 
 `For PubMed links, use "d-pubmed" ("pubmed_fetch_articles") first: a resolving PMID satisfies this item. If it does not resolve, fall through to the chain below.`
 
@@ -498,11 +497,11 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 `Use "d-browser" to load the URL. If it fails, try "d-fetch". If that also fails, then, if available, try "d-proxy-1", and if that also fails, "d-proxy-2" — bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers. An archive or cache is NOT a retrieval tier and can never satisfy this item. A FAIL is any outcome that is not the genuine target page — a transport error, an error page (404, 403, 500, …), or a bot wall / CAPTCHA / "security checkpoint" interstitial. A page you could not load is not verified.`
 
-* 5.11 The page at each URL contains content matching the link's annotation in the ER (the page is about the cited topic; the article/resource title matches)
+* 5.10 The page at each URL contains content matching the link's annotation in the ER (the page is about the cited topic; the article/resource title matches)
 
-* 5.12 Link text that describes a specific study, trial, or finding resolves to that study — not to a reference work, monograph, database entry, or review that merely mentions it. Link text pointing to such a secondary source names it as one (e.g. "a drug monograph", "a systematic review"), never as the primary finding.
+* 5.11 Link text that describes a specific study, trial, or finding resolves to that study — not to a reference work, monograph, database entry, or review that merely mentions it. Link text pointing to such a secondary source names it as one (e.g. "a drug monograph", "a systematic review"), never as the primary finding.
 
-* 5.13 No link points to a web archive or cache — web.archive.org, archive.today/archive.ph, or a search-engine cache. If the live URL cannot be retrieved, the link is REMOVED rather than replaced with an archived copy.
+* 5.12 No link points to a web archive or cache — web.archive.org, archive.today/archive.ph, or a search-engine cache. If the live URL cannot be retrieved, the link is REMOVED rather than replaced with an archived copy.
 
 `Use "d-browser" or, if it fails, "d-fetch", or, if that also fails, then, if available, "d-proxy-1" and then "d-proxy-2" to read the page, then confirm the content matches the link's description in the ER (e.g., the page is about the cited topic, the article title matches what the ER claims). A generic landing page, paywall, bot wall, or unrelated content fails this check.`
 
@@ -556,7 +555,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 6.17 If [intervention] names two or more agents intended to be used together, [canonical_topic] is stated as "Combining [canonical_name] to/for/as [goal]" (e.g., "PDE5 Inhibitors & Statins : Cancer" → "Combining PDE5 Inhibitors & Statins to Treat Cancer"). Any wording in [initial_topic] that marks joint use ("Combined", "Co-administration of", "Using a combination of") is replaced by "Combining". This applies even when the initial topic gave only a bare list.
 
-* 6.18 "Combining" is not added where the agents are named for comparison rather than joint use, or where [canonical_name] does not itself list the agents (a combination known under a single name, e.g., GlyNAC, ECA, Protandim)
+* 6.18 If the agents are named for comparison rather than joint use, or if [canonical_name] does not itself list the agents (a combination known under a single name, e.g., GlyNAC, ECA, Protandim), "Combining" is not added to [canonical_topic]
 
 * 6.19 [canonical_topic] is capitalized following the "Chicago Manual of Style" rules, subject to the scientific-nomenclature overrides in section 3
 
@@ -693,7 +692,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 9.22 Each link is verified per Section 5 (Loading, Content, Semantics)
 
-`To evaluate 9.22: re-run Section 5 items 5.1 through 5.13 against every link in this section. 9.22 fails if any applicable Section 5 item fails for any link.`
+`To evaluate 9.22: re-run Section 5 items 5.1 through 5.12 against every link in this section. 9.22 fails if any applicable Section 5 item fails for any link.`
 
 * 9.23 Each item has a 1–2 sentence annotation in a new paragraph explaining its specific value
 
@@ -724,7 +723,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 10.6 If an article exists, the link is verified per Section 5 (Loading, Content, Semantics) and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 10.6: re-run Section 5 items 5.1 through 5.13 against the Grokipedia link. 10.6 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 10.6: re-run Section 5 items 5.1 through 5.12 against the Grokipedia link. 10.6 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 10.7 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
@@ -751,7 +750,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 11.7 If an article exists, the link is verified per Section 5 (Loading, Content, Semantics) and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 11.7: re-run Section 5 items 5.1 through 5.13 against the Examine link. 11.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 11.7: re-run Section 5 items 5.1 through 5.12 against the Examine link. 11.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 11.8 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
@@ -780,7 +779,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 12.7 If an article exists, the link is verified per Section 5 (Loading, Content, Semantics) and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 12.7: re-run Section 5 items 5.1 through 5.13 against the ConsumerLab link. 12.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 12.7: re-run Section 5 items 5.1 through 5.12 against the ConsumerLab link. 12.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 12.8 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
@@ -898,7 +897,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 16.20 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
 * 16.21 Conflicted evidence is explained in the annotation text. The annotation's last sentence states the net reading of the conflict in one sentence.
 
-* 16.22 A benefit that does not bear on [goal] carries a "⭕️ Not Central to [goal]" flag directly after the item name in the title (not in the annotation), and the annotation states what it does bear on
+* 16.22 If a benefit does not bear on [goal], it carries a "⭕️ Not Central to [goal]" flag directly after the item name in the title (not in the annotation), and the annotation states what it does bear on
 
 * 16.23 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports:
   a. an actual outcome as a figure — effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure;

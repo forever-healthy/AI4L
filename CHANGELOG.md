@@ -1,6 +1,12 @@
 # AI4L - Change Log
 
 
+### v1.3.24 — 2026-09-11
+
+* Two checklist items now lead with the condition they test, so an audit marks them not-applicable instead of passing them unexamined
+* Dropped the item asking whether a url looked guessed — intent cannot be observed, and every link is already verified by retrieving it
+
+
 ### v1.3.23 — 2026-09-11
 
 * A combination of two or more agents is now one intervention: the title reads "Combining ...", the reason the agents are given together is stated, and every benefit and risk says whether the evidence tested the combination or a single named agent
