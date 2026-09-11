@@ -1,4 +1,4 @@
-![Version 1.3.22](https://img.shields.io/badge/Version-1.3.22-green.svg)
+![Version 1.3.23](https://img.shields.io/badge/Version-1.3.23-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 440 (which is the number of all checklist items)
+* Set [total_items] to 449 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -38,6 +38,18 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 ## Auditor Instructions
 
 The following rules govern how this checklist must be used when performing an audit:
+
+
+### The intervention may be a combination
+
+[intervention] is whatever the ER's topic names — a single agent, or a combination of two or more agents given together (e.g., "PDE5 Inhibitors & Statins", "Ivermectin, Mebendazole & Fenbendazole").
+
+Where the topic names a combination, the combination is the intervention. It is the unit of analysis for every section: benefits, risks, mechanism, protocol, monitoring and conclusion are about the agents given together, not about each agent separately. An ER that reviews the agents one by one and never addresses their joint use fails the sections it splits.
+
+Two consequences for the auditor:
+
+* When an item cites a trial of a single agent, check that the ER says so and names the agent (16.35 / 18.34). An effect established for one agent — benefit or risk — is delivered by the combination and keeps its grade, since taking the combination means taking that agent. What needs evidence on the two together is the claim that the combination does more, or harms more, than either agent alone.
+* Effects arising only from co-administration — a shared metabolic pathway, overlapping half-lives, additive effect on a shared target — belong to the intervention itself (14.7, 18.1), not to Key Interactions (section 20), which covers what the intervention interacts with outside itself.
 
 
 ### Start Fresh
@@ -534,49 +546,55 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 6.13 The [intervention] is inspected and, if multiple variations, names, alternates, synonyms, or spellings exist, all of them, except [canonical_name], are stated as a comma-separated list as "alternate_names: [alternate_names]" (e.g., "Low Dose Naltrexone, LDN, Naltrexone")
 
+* 6.14 If [intervention] is a combination, [alternate_names] groups each agent's alternates with the agent they belong to (e.g., "Sildenafil, Tadalafil (PDE5 Inhibitors); Atorvastatin, Rosuvastatin (Statins)")
+
 `Reconstructing the topic.`
 
-* 6.14 The [canonical_topic] is stated as "canonical_topic: 'Replacing [intervention] by [canonical_name] in [topic]' (e.g., "LDN to Optimize Immune Function" → "canonical_topic: Low-Dose Naltrexone to Optimize Immune Function")
+* 6.15 The [canonical_topic] is stated as "canonical_topic: 'Replacing [intervention] by [canonical_name] in [topic]' (e.g., "LDN to Optimize Immune Function" → "canonical_topic: Low-Dose Naltrexone to Optimize Immune Function")
 
-* 6.15 The [canonical_topic] is simplified in a way that prepositions and wordiness are removed where possible, but the essence is not altered (e.g., "Using a combination of Ivermectin, Mebendazole & Fenbendazole to Fight Cancer" → "Ivermectin, Mebendazole & Fenbendazole to Fight Cancer")
+* 6.16 The [canonical_topic] is simplified in a way that prepositions and wordiness are removed where possible, but the essence is not altered (e.g., "Using a combination of Ivermectin, Mebendazole & Fenbendazole to Fight Cancer" → "Combining Ivermectin, Mebendazole & Fenbendazole to Fight Cancer"). The word "Combining" is never removed — it is essential, not wordiness.
 
-* 6.16 [canonical_topic] is capitalized following the "Chicago Manual of Style" rules, subject to the scientific-nomenclature overrides in section 3
+* 6.17 If [intervention] names two or more agents intended to be used together, [canonical_topic] is stated as "Combining [canonical_name] to/for/as [goal]" (e.g., "PDE5 Inhibitors & Statins : Cancer" → "Combining PDE5 Inhibitors & Statins to Treat Cancer"). Any wording in [initial_topic] that marks joint use ("Combined", "Co-administration of", "Using a combination of") is replaced by "Combining". This applies even when the initial topic gave only a bare list.
+
+* 6.18 "Combining" is not added where the agents are named for comparison rather than joint use, or where [canonical_name] does not itself list the agents (a combination known under a single name, e.g., GlyNAC, ECA, Protandim)
+
+* 6.19 [canonical_topic] is capitalized following the "Chicago Manual of Style" rules, subject to the scientific-nomenclature overrides in section 3
 
 `Allowing multiple reviews of the same intervention for different goals. The default goal has no extension. Variations have a one-word extension in parentheses.`
 
-* 6.17 If [goal] is "Health & Longevity" [short_goal] is stated as "short_goal: Longevity".
+* 6.20 If [goal] is "Health & Longevity" [short_goal] is stated as "short_goal: Longevity".
 
-* 6.18 If [goal] is not "Health & Longevity", a one keyword form of [goal] containing no verb, is stated as "short_goal: [short_goal]" (e.g., "Optimize Immune Function" → "Immune", "Improve Insulin Sensitivity" → "Insulin", "Support Cardiovascular Health" → "Cardiovascular", "Reduce Inflammation" → "Inflammation", "Skin Rejuvenation" → "Skin")
+* 6.21 If [goal] is not "Health & Longevity", a one keyword form of [goal] containing no verb, is stated as "short_goal: [short_goal]" (e.g., "Optimize Immune Function" → "Immune", "Improve Insulin Sensitivity" → "Insulin", "Support Cardiovascular Health" → "Cardiovascular", "Reduce Inflammation" → "Inflammation", "Skin Rejuvenation" → "Skin")
 
-* 6.19 If [short_goal] is "Longevity" [short_topic] is stated as "short_topic: [canonical_name]"
+* 6.22 If [short_goal] is "Longevity" [short_topic] is stated as "short_topic: [canonical_name]"
 
-* 6.20 If [short_goal] is not "Longevity" [short_topic] is stated as "short_topic: [canonical_name] ([short_goal])" (e.g., "Low-Dose Naltrexone (Immune)", "Metformin (Cancer)")
+* 6.23 If [short_goal] is not "Longevity" [short_topic] is stated as "short_topic: [canonical_name] ([short_goal])" (e.g., "Low-Dose Naltrexone (Immune)", "Metformin (Cancer)")
 
-* 6.21 [short_topic] is capitalized following the "Chicago Manual of Style" rules, subject to the scientific-nomenclature overrides in rule section 3
+* 6.24 [short_topic] is capitalized following the "Chicago Manual of Style" rules, subject to the scientific-nomenclature overrides in rule section 3
 
-* 6.22 [short_topic_lc]  is stated as "short_topic_lc: ``{[short_topic] converted to lowercase, then spaces and dashes are replaced with underscores, then any remaining non-alphanumeric, non-underscore characters are removed, then any consecutive underscores are collapsed to a single underscore, then any leading or trailing underscores are stripped}`` " (e.g., "Low-Dose Naltrexone (Immune)" → "low_dose_naltrexone_immune", "L-Theanine" → "l_theanine", "EPA & DHA" → "epa_dha", "Vitamin K2 (MK-4 & MK-7)" → "vitamin_k2_mk_4_mk_7"))
+* 6.25 [short_topic_lc] is stated as "short_topic_lc: ``{[short_topic] converted to lowercase, then consecutive whitespace is collapsed to a single space, then spaces and dashes are replaced with underscores, then any remaining non-alphanumeric, non-underscore characters are removed, then any consecutive underscores are collapsed to a single underscore, then any leading or trailing underscores are stripped}``" (e.g., "Low-Dose Naltrexone (Immune)" → "low_dose_naltrexone_immune", "L-Theanine" → "l_theanine", "EPA & DHA" → "epa_dha", "Ivermectin, Mebendazole & Fenbendazole (Cancer)" → "ivermectin_mebendazole_fenbendazole_cancer")
 
 `AI name & Prompt`
 
-* 6.23 Version of the AI4L.md file used to create the document is stated as "prompt_version: [Version of AI4L.md]"
-* 6.24 Creation date and time of the document is stated as "creation_date: [YYYY-MMDD-HHMM]" (e.g., 2026-0501-1430)
+* 6.26 Version of the AI4L.md file used to create the document is stated as "prompt_version: [Version of AI4L.md]"
+* 6.27 Creation date and time of the document is stated as "creation_date: [YYYY-MMDD-HHMM]" (e.g., 2026-0501-1430)
 
-* 6.25 The nickname of the AI used to create the document is stated as "creator_ai_nickname: [creator_ai_nickname]"
-* 6.26 The nickname of the AI is just a single word model name without version, etc. (e.g., Opus, Sonnet, Grok, Gemini, ChatGPT)
+* 6.28 The nickname of the AI used to create the document is stated as "creator_ai_nickname: [creator_ai_nickname]"
+* 6.29 The nickname of the AI is just a single word model name without version, etc. (e.g., Opus, Sonnet, Grok, Gemini, ChatGPT)
 
-* 6.27 The full name of the AI used to create the document is stated as "creator_ai_fullname: [creator_ai_fullname]"
-* 6.28 The full name of the AI consists of the [creator_ai_nickname] and the model version number and no additional qualifier (e.g., Opus 4.6, Sonnet 3.2, Grok 4.5, Gemini 3.1, ChatGPT 5.4)
+* 6.30 The full name of the AI used to create the document is stated as "creator_ai_fullname: [creator_ai_fullname]"
+* 6.31 The full name of the AI consists of the [creator_ai_nickname] and the model version number and no additional qualifier (e.g., Opus 4.6, Sonnet 3.2, Grok 4.5, Gemini 3.1, ChatGPT 5.4)
 
-* 6.29 The knowledge cutoff of the AI is stated as "knowledge_cutoff: [knowledge_cutoff]"
+* 6.32 The knowledge cutoff of the AI is stated as "knowledge_cutoff: [knowledge_cutoff]"
 
 `Filename formatting rules allow for multiple ERs for the same intervention with different goals.`
 
-* 6.30 The filename of the document is stated as "filename: [short_topic_lc]_[creation_date]_[creator_ai_nickname]_ER.md"
+* 6.33 The filename of the document is stated as "filename: [short_topic_lc]_[creation_date]_[creator_ai_nickname]_ER.md"
  (e.g., "Low-Dose Naltrexone (Immune)" → "low_dose_naltrexone_immune_2026-MMDD-HHMM_creator_ai_nickname_ER.md")
 
 `Cleanliness and consistency of frontmatter values`
 
-* 6.31 All frontmatter values are trimmed: no leading or trailing whitespace, no surrounding quotes unless the value contains a colon, bracket, or leading special character that requires YAML quoting.
+* 6.34 All frontmatter values are trimmed: no leading or trailing whitespace, no surrounding quotes unless the value contains a colon, bracket, or leading special character that requires YAML quoting.
 
 
 ## 7. Title
@@ -815,6 +833,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 13.22 Each annotation is at most 25 words
 
+* 13.23 If the intervention is a combination and no systematic review or meta-analysis covers the combination, reviews of a single agent may be listed only if the annotation states that the paper is about that agent alone
+
 ## 14. Mechanism of Action
 
 * 14.1 The primary biological pathways or mechanisms are explained
@@ -823,7 +843,11 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 14.4 Where competing mechanistic explanations exist for or against the intervention, both are presented
 * 14.5 If the intervention is a pharmacological compound, state its key pharmacological properties: half-life, selectivity, tissue distribution, and metabolism (primary pathway and relevant enzymes, e.g., CYP3A4)
 
-* 14.6 The mechanism section is 150–250 words
+* 14.6 If the intervention is a combination, the reason the agents are given together is stated — additive, synergistic, or sequential — and the mechanism of that combined effect is explained
+
+* 14.7 If the intervention is a combination, the pharmacological consequences of co-administration are stated (e.g., a shared metabolic pathway, overlapping half-lives, an additive effect on a shared physiological target)
+
+* 14.8 The mechanism section is 150–250 words
 
 
 ## 15. Historical Context & Evolution
@@ -841,6 +865,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 ## 16. Expected Benefits
 
 * 16.1 All major known benefits of the intervention are addressed (no significant omissions)
+
 * 16.2 Each item is a distinct outcome. The same outcome is not restated at a different granularity, split by population or endpoint, or repeated under another evidence level; where two items share a mechanism and an endpoint, they are merged.
 
 * 16.3 Content is framed for the target audience (see 1.12), not as population-level outcomes.
@@ -873,28 +898,32 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 16.20 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
 * 16.21 Conflicted evidence is explained in the annotation text. The annotation's last sentence states the net reading of the conflict in one sentence.
 
-* 16.22 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports:
+* 16.22 A benefit that does not bear on [goal] carries a "🔹 Not Central to [goal]" flag directly after the item name in the title (not in the annotation), and the annotation states what it does bear on
+
+* 16.23 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports:
   a. an actual outcome as a figure — effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure;
   b. the direction plus the conditions under which it holds (e.g., "prevalence rises steeply above 2 mg/L"), together with a statement that the literature report no outcome figure.
-* 16.23 If the literature supports neither, the line begins exactly "**Magnitude:** Not quantified in available studies." and continues with one sentence stating why the literature gives none (e.g., no controlled trial has measured this outcome; only case reports exist)
-* 16.24 Items classified as "Speculative" do NOT include a magnitude line
-* 16.25 The magnitude line is preceded by a blank line
+* 16.24 If the literature supports neither, the line begins exactly "**Magnitude:** Not quantified in available studies." and continues with one sentence stating why the literature gives none (e.g., no controlled trial has measured this outcome; only case reports exist)
+* 16.25 Items classified as "Speculative" do NOT include a magnitude line
+* 16.26 The magnitude line is preceded by a blank line
 
-* 16.26 Each item's evidence grade is appropriate, given the cited studies and data
-* 16.27 Each item is verifiable by the sources cited or by independent lookup
-* 16.28 Magnitude values are plausible and consistent with known clinical data
-* 16.29 No items are overstated relative to their evidence level
-* 16.30 No items are understated relative to their evidence level
+* 16.27 Each item's evidence grade is appropriate, given the cited studies and data
+* 16.28 Each item is verifiable by the sources cited or by independent lookup
+* 16.29 Magnitude values are plausible and consistent with known clinical data
+* 16.30 No items are overstated relative to their evidence level
+* 16.31 No items are understated relative to their evidence level
 
-* 16.31 Each item (except Speculative) cites at least one PubMed link in the item
+* 16.32 Each item (except Speculative) cites at least one PubMed link in the item
 
-* 16.32 The evidence level reflects the class of evidence behind the item. High: a human clinical endpoint (symptoms, events, function) or a clinical surrogate validated against outcomes in people (e.g., blood pressure, LDL, HbA1c, bone mineral density, eGFR, a named validated scale), shown in more than one trial. Medium: the same class of outcome in a single trial or in consistent observational data. Low: human data that are uncontrolled, indirect, or conflicting. Speculative: no human outcome data — in-vitro assays, animal work, and unvalidated biomarkers (e.g., MIC or zone assays, MDA, SOD, total antioxidant capacity) cap here regardless of how consistent they are.
+* 16.33 The evidence level reflects the class of evidence behind the item. High: a human clinical endpoint (symptoms, events, function) or a clinical surrogate validated against outcomes in people (e.g., blood pressure, LDL, HbA1c, bone mineral density, eGFR, a named validated scale), shown in more than one trial. Medium: the same class of outcome in a single trial or in consistent observational data. Low: human data that are uncontrolled, indirect, or conflicting. Speculative: no human outcome data — in-vitro assays, animal work, and unvalidated biomarkers (e.g., MIC or zone assays, MDA, SOD, total antioxidant capacity) cap here regardless of how consistent they are.
 
 `Who was studied belongs in the annotation (16.17), not in the grade. A replicated human HbA1c or blood-pressure finding in a disease population may be High; an MIC, MDA, SOD, or "total antioxidant capacity" finding is Speculative.`
 
-* 16.33 All four evidence-level headings (High, Medium, Low, Speculative) are present, in that order. A level with no items still carries the heading. An empty High or Medium is followed by one sentence naming the class of evidence that falls short; an empty Low or Speculative carries the heading alone. That sentence is not an H4 item and has no Magnitude line.
+* 16.34 All four evidence-level headings (High, Medium, Low, Speculative) are present, in that order. A level with no items still carries the heading. An empty High or Medium is followed by one sentence naming the class of evidence that falls short; an empty Low or Speculative carries the heading alone. That sentence is not an H4 item and has no Magnitude line.
 
 `Example: "No benefit reaches High: the human trials are small uncontrolled series, and the antimicrobial data are in-vitro MIC assays." A missing heading is a fail even when the skip is justified. A because-line that only says evidence is limited, without naming the evidence class, is a fail.`
+
+* 16.35 If the intervention is a combination, each item states whether the cited evidence tested the combination or only one of its agents, naming the agent. A benefit established for one agent is delivered by the combination and keeps the grade its evidence supports. A claim that the combination achieves more than either agent alone rests on evidence testing the two together and is graded on that evidence.
 
 
 ## 17. Benefit-Modifying Factors
@@ -913,7 +942,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 ## 18. Potential Risks & Side Effects
 
-* 18.1 All major known risks and side effects of the intervention are addressed (no significant omissions)
+* 18.1 All major known risks and side effects of the intervention are addressed (no significant omissions). For a combination, this includes risks arising only from co-administration
 * 18.2 Each item is a distinct outcome. The same outcome is not restated at a different granularity, split by population or endpoint, or repeated under another evidence level; where two items share a mechanism and an endpoint, they are merged.
 
 * 18.3 Content is framed for the target audience (see 1.12), not as population-level outcomes.
@@ -969,6 +998,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 `A missing heading is a fail even when the skip is justified. A because-line that only says evidence is limited, without naming the evidence class, is a fail.`
 
+* 18.34 If the intervention is a combination, each item states whether the cited evidence tested the combination or only one of its agents, naming the agent. A risk established for one agent is carried by the combination and keeps the grade its evidence supports. A claim that the combination is riskier than either agent alone rests on evidence testing the two together and is graded on that evidence.
+
 
 ## 19. Risk-Modifying Factors
 
@@ -1023,7 +1054,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 ## 22. Therapeutic Protocol
 
-* 22.1 A standard protocol is described as used by leading practitioners
+* 22.1 A standard protocol is described as used by leading practitioners. For a combination, the protocol is one regimen: the dose of each agent, their ratio, and their timing relative to each other
 * 22.2 Where competing therapeutic approaches exist (e.g., conventional vs. integrative), the main alternatives are presented without framing one as the default
 * 22.3 Where possible, the expert or clinic that popularized each approach is cited
 * 22.4 Best time of day for the intervention is discussed
@@ -1043,7 +1074,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 ## 23. Discontinuation & Cycling
 
-* 23.1 Whether the intervention is meant to be lifelong or short-term is addressed
+* 23.1 Whether the intervention is meant to be lifelong or short-term is addressed. For a combination, whether the agents are stopped together or separately is addressed
 * 23.2 Known withdrawal effects (if any) are discussed
 * 23.3 Tapering-off protocol is discussed (if applicable)
 * 23.4 Whether cycling is recommended for maintaining efficacy is addressed
@@ -1053,7 +1084,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 ## 24. Sourcing and Quality
 
-* 24.1 Source, purity, and formulation considerations are addressed
+* 24.1 Source, purity, and formulation considerations are addressed. For a combination, each agent is covered
 * 24.2 What to look for is explained (e.g., third-party testing, specific nutrient forms)
 * 24.3 Reputable brands or compounding pharmacies are mentioned where relevant
 * 24.4 If the section is not applicable to the intervention, this is briefly noted
@@ -1088,8 +1119,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 ## 27. Monitoring Protocol & Defining Success
 
-* 27.1 Baseline labs and tests are specified (what to do before starting)
-* 27.2 Ongoing labs and tests are specified with monitoring frequency
+* 27.1 Baseline labs and tests are specified (what to do before starting). For a combination, any test required by a single agent is included
+* 27.2 Ongoing labs and tests are specified with monitoring frequency. For a combination, any test required by a single agent is included
 * 27.3 Lab tests are presented in a table with the following columns: Biomarker, Optimal Functional Range, Why Measure It?, Context/Notes
 * 27.4 Optimal ranges reflect functional medicine practitioner guidance (not just conventional reference ranges)
 * 27.5 Where the conventional reference range differs meaningfully from the optimal functional range, it is included in the Context/Notes column
