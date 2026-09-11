@@ -4,7 +4,7 @@
 ### v1.3.23 — 2026-09-11
 
 * A combination of two or more agents is now one intervention: the title reads "Combining ...", the reason the agents are given together is stated, and every benefit and risk says whether the evidence tested the combination or a single named agent
-* A benefit that does not bear on the review's goal is kept but flagged "🔹 Not Central to ...", so an off-goal effect no longer leads the evidence list
+* A benefit that does not bear on the review's goal is kept but flagged "⭕️ Not Central to ...", so an off-goal effect no longer leads the evidence list
 
 
 ### v1.3.22 — 2026-09-09

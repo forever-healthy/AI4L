@@ -898,7 +898,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 16.20 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
 * 16.21 Conflicted evidence is explained in the annotation text. The annotation's last sentence states the net reading of the conflict in one sentence.
 
-* 16.22 A benefit that does not bear on [goal] carries a "🔹 Not Central to [goal]" flag directly after the item name in the title (not in the annotation), and the annotation states what it does bear on
+* 16.22 A benefit that does not bear on [goal] carries a "⭕️ Not Central to [goal]" flag directly after the item name in the title (not in the annotation), and the annotation states what it does bear on
 
 * 16.23 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports:
   a. an actual outcome as a figure — effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure;
