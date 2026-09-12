@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.26 — 2026-09-12
+
+* A combination review lists each agent's own names and abbreviations among the alternate names again, so a search for one agent finds the review
+
+
 ### v1.3.25 — 2026-09-12
 
 * The Grokipedia, Examine and ConsumerLab sections now search through every retrieval tier before calling an article absent, and an absence is challenged only when the auditor actually retrieves the article — a site that answers inconsistently can no longer send the audit loop back and forth
