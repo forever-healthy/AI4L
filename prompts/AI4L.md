@@ -1,4 +1,4 @@
-![Version 1.3.24](https://img.shields.io/badge/Version-1.3.24-green.svg)
+![Version 1.3.25](https://img.shields.io/badge/Version-1.3.25-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 448 (which is the number of all checklist items)
+* Set [total_items] to 447 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -543,57 +543,55 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 6.12 [canonical_name] is capitalized following the "Chicago Manual of Style" rules, subject to the scientific-nomenclature overrides in section 3
 
-* 6.13 The [intervention] is inspected and, if multiple variations, names, alternates, synonyms, or spellings exist, all of them, except [canonical_name], are stated as a comma-separated list as "alternate_names: [alternate_names]" (e.g., "Low Dose Naltrexone, LDN, Naltrexone")
-
-* 6.14 If [intervention] is a combination, [alternate_names] groups each agent's alternates with the agent they belong to (e.g., "Sildenafil, Tadalafil (PDE5 Inhibitors); Atorvastatin, Rosuvastatin (Statins)")
+* 6.13 The [intervention] is inspected and, if multiple variations, names, alternates, synonyms, or spellings exist, all of them, except [canonical_name], are stated as a comma-separated list as "alternate_names: [alternate_names]" (e.g., "Low Dose Naltrexone, LDN, Naltrexone"). Entries are bare names: a brand or abbreviation is its own entry ("Evolocumab, Repatha"), a non-name qualifier is omitted ("(steamed)", "(trans-isomer)"), parentheses inside a chemical name are kept ("Cr(III)")
 
 `Reconstructing the topic.`
 
-* 6.15 The [canonical_topic] is stated as "canonical_topic: 'Replacing [intervention] by [canonical_name] in [topic]' (e.g., "LDN to Optimize Immune Function" → "canonical_topic: Low-Dose Naltrexone to Optimize Immune Function")
+* 6.14 The [canonical_topic] is stated as "canonical_topic: 'Replacing [intervention] by [canonical_name] in [topic]' (e.g., "LDN to Optimize Immune Function" → "canonical_topic: Low-Dose Naltrexone to Optimize Immune Function")
 
-* 6.16 The [canonical_topic] is simplified in a way that prepositions and wordiness are removed where possible, but the essence is not altered (e.g., "Using a combination of Ivermectin, Mebendazole & Fenbendazole to Fight Cancer" → "Combining Ivermectin, Mebendazole & Fenbendazole to Fight Cancer"). The word "Combining" is never removed — it is essential, not wordiness.
+* 6.15 The [canonical_topic] is simplified in a way that prepositions and wordiness are removed where possible, but the essence is not altered (e.g., "Using a combination of Ivermectin, Mebendazole & Fenbendazole to Fight Cancer" → "Combining Ivermectin, Mebendazole & Fenbendazole to Fight Cancer"). The word "Combining" is never removed — it is essential, not wordiness.
 
-* 6.17 If [intervention] names two or more agents intended to be used together, [canonical_topic] is stated as "Combining [canonical_name] to/for/as [goal]" (e.g., "PDE5 Inhibitors & Statins : Cancer" → "Combining PDE5 Inhibitors & Statins to Treat Cancer"). Any wording in [initial_topic] that marks joint use ("Combined", "Co-administration of", "Using a combination of") is replaced by "Combining". This applies even when the initial topic gave only a bare list.
+* 6.16 If [intervention] names two or more agents intended to be used together, [canonical_topic] is stated as "Combining [canonical_name] to/for/as [goal]" (e.g., "PDE5 Inhibitors & Statins : Cancer" → "Combining PDE5 Inhibitors & Statins to Treat Cancer"). Any wording in [initial_topic] that marks joint use ("Combined", "Co-administration of", "Using a combination of") is replaced by "Combining". This applies even when the initial topic gave only a bare list.
 
-* 6.18 If the agents are named for comparison rather than joint use, or if [canonical_name] does not itself list the agents (a combination known under a single name, e.g., GlyNAC, ECA, Protandim), "Combining" is not added to [canonical_topic]
+* 6.17 If the agents are named for comparison rather than joint use, or if [canonical_name] does not itself list the agents (a combination known under a single name, e.g., GlyNAC, ECA, Protandim), "Combining" is not added to [canonical_topic]
 
-* 6.19 [canonical_topic] is capitalized following the "Chicago Manual of Style" rules, subject to the scientific-nomenclature overrides in section 3
+* 6.18 [canonical_topic] is capitalized following the "Chicago Manual of Style" rules, subject to the scientific-nomenclature overrides in section 3
 
 `Allowing multiple reviews of the same intervention for different goals. The default goal has no extension. Variations have a one-word extension in parentheses.`
 
-* 6.20 If [goal] is "Health & Longevity" [short_goal] is stated as "short_goal: Longevity".
+* 6.19 If [goal] is "Health & Longevity" [short_goal] is stated as "short_goal: Longevity".
 
-* 6.21 If [goal] is not "Health & Longevity", a one keyword form of [goal] containing no verb, is stated as "short_goal: [short_goal]" (e.g., "Optimize Immune Function" → "Immune", "Improve Insulin Sensitivity" → "Insulin", "Support Cardiovascular Health" → "Cardiovascular", "Reduce Inflammation" → "Inflammation", "Skin Rejuvenation" → "Skin")
+* 6.20 If [goal] is not "Health & Longevity", a one keyword form of [goal] containing no verb, is stated as "short_goal: [short_goal]" (e.g., "Optimize Immune Function" → "Immune", "Improve Insulin Sensitivity" → "Insulin", "Support Cardiovascular Health" → "Cardiovascular", "Reduce Inflammation" → "Inflammation", "Skin Rejuvenation" → "Skin")
 
-* 6.22 If [short_goal] is "Longevity" [short_topic] is stated as "short_topic: [canonical_name]"
+* 6.21 If [short_goal] is "Longevity" [short_topic] is stated as "short_topic: [canonical_name]"
 
-* 6.23 If [short_goal] is not "Longevity" [short_topic] is stated as "short_topic: [canonical_name] ([short_goal])" (e.g., "Low-Dose Naltrexone (Immune)", "Metformin (Cancer)")
+* 6.22 If [short_goal] is not "Longevity" [short_topic] is stated as "short_topic: [canonical_name] ([short_goal])" (e.g., "Low-Dose Naltrexone (Immune)", "Metformin (Cancer)")
 
-* 6.24 [short_topic] is capitalized following the "Chicago Manual of Style" rules, subject to the scientific-nomenclature overrides in rule section 3
+* 6.23 [short_topic] is capitalized following the "Chicago Manual of Style" rules, subject to the scientific-nomenclature overrides in rule section 3
 
-* 6.25 [short_topic_lc] is stated as "short_topic_lc: ``{[short_topic] converted to lowercase, then consecutive whitespace is collapsed to a single space, then spaces and dashes are replaced with underscores, then any remaining non-alphanumeric, non-underscore characters are removed, then any consecutive underscores are collapsed to a single underscore, then any leading or trailing underscores are stripped}``" (e.g., "Low-Dose Naltrexone (Immune)" → "low_dose_naltrexone_immune", "L-Theanine" → "l_theanine", "EPA & DHA" → "epa_dha", "Ivermectin, Mebendazole & Fenbendazole (Cancer)" → "ivermectin_mebendazole_fenbendazole_cancer")
+* 6.24 [short_topic_lc] is stated as "short_topic_lc: ``{[short_topic] converted to lowercase, then consecutive whitespace is collapsed to a single space, then spaces and dashes are replaced with underscores, then any remaining non-alphanumeric, non-underscore characters are removed, then any consecutive underscores are collapsed to a single underscore, then any leading or trailing underscores are stripped}``" (e.g., "Low-Dose Naltrexone (Immune)" → "low_dose_naltrexone_immune", "L-Theanine" → "l_theanine", "EPA & DHA" → "epa_dha", "Ivermectin, Mebendazole & Fenbendazole (Cancer)" → "ivermectin_mebendazole_fenbendazole_cancer")
 
 `AI name & Prompt`
 
-* 6.26 Version of the AI4L.md file used to create the document is stated as "prompt_version: [Version of AI4L.md]"
-* 6.27 Creation date and time of the document is stated as "creation_date: [YYYY-MMDD-HHMM]" (e.g., 2026-0501-1430)
+* 6.25 Version of the AI4L.md file used to create the document is stated as "prompt_version: [Version of AI4L.md]"
+* 6.26 Creation date and time of the document is stated as "creation_date: [YYYY-MMDD-HHMM]" (e.g., 2026-0501-1430)
 
-* 6.28 The nickname of the AI used to create the document is stated as "creator_ai_nickname: [creator_ai_nickname]"
-* 6.29 The nickname of the AI is just a single word model name without version, etc. (e.g., Opus, Sonnet, Grok, Gemini, ChatGPT)
+* 6.27 The nickname of the AI used to create the document is stated as "creator_ai_nickname: [creator_ai_nickname]"
+* 6.28 The nickname of the AI is just a single word model name without version, etc. (e.g., Opus, Sonnet, Grok, Gemini, ChatGPT)
 
-* 6.30 The full name of the AI used to create the document is stated as "creator_ai_fullname: [creator_ai_fullname]"
-* 6.31 The full name of the AI consists of the [creator_ai_nickname] and the model version number and no additional qualifier (e.g., Opus 4.6, Sonnet 3.2, Grok 4.5, Gemini 3.1, ChatGPT 5.4)
+* 6.29 The full name of the AI used to create the document is stated as "creator_ai_fullname: [creator_ai_fullname]"
+* 6.30 The full name of the AI consists of the [creator_ai_nickname] and the model version number and no additional qualifier (e.g., Opus 4.6, Sonnet 3.2, Grok 4.5, Gemini 3.1, ChatGPT 5.4)
 
-* 6.32 The knowledge cutoff of the AI is stated as "knowledge_cutoff: [knowledge_cutoff]"
+* 6.31 The knowledge cutoff of the AI is stated as "knowledge_cutoff: [knowledge_cutoff]"
 
 `Filename formatting rules allow for multiple ERs for the same intervention with different goals.`
 
-* 6.33 The filename of the document is stated as "filename: [short_topic_lc]_[creation_date]_[creator_ai_nickname]_ER.md"
+* 6.32 The filename of the document is stated as "filename: [short_topic_lc]_[creation_date]_[creator_ai_nickname]_ER.md"
  (e.g., "Low-Dose Naltrexone (Immune)" → "low_dose_naltrexone_immune_2026-MMDD-HHMM_creator_ai_nickname_ER.md")
 
 `Cleanliness and consistency of frontmatter values`
 
-* 6.34 All frontmatter values are trimmed: no leading or trailing whitespace, no surrounding quotes unless the value contains a colon, bracket, or leading special character that requires YAML quoting.
+* 6.33 All frontmatter values are trimmed: no leading or trailing whitespace, no surrounding quotes unless the value contains a colon, bracket, or leading special character that requires YAML quoting.
 
 
 ## 7. Title
@@ -709,14 +707,13 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 ## 10. Grokipedia
 
-* 10.1 grokipedia.com was searched directly for the intervention using the browser tool
-* 10.2 A statement by the author about the search is placed inside an HTML comment
+* 10.1 grokipedia.com was searched directly for the intervention, using the Section 5 retrieval tiers in order until one returns the site's search results
+* 10.2 A statement by the author about the search is placed inside an HTML comment, naming the retrieval tiers tried and what each returned
 
-* 10.3 An independent direct search of grokipedia.com by the auditor using the browser tool has confirmed the presence/absence of the intervention
+* 10.3 If the document states that no Grokipedia article exists, an independent direct search of grokipedia.com by the auditor confirms that none exists
 
-`The auditor must independently verify the presence/absence of the intervention on grokipedia.com by searching the site directly using the browser tool: "browser_navigate" to load grokipedia.com's search results for the intervention, then "browser_snapshot" to read the results.`
+`The auditor must independently verify the claimed absence by searching grokipedia.com directly, using the same retrieval tiers as Section 5: "d-browser" ("browser_navigate" to load the site's search results for the intervention, then "browser_snapshot" to read them); if d-browser fails, "d-fetch"; if that also fails, "d-proxy-1" and then "d-proxy-2". The item fails only when the auditor retrieves an article the document says does not exist. Absence is confirmed only once every tier has been tried and none returned an article — a failure, error page, or bot wall on one tier is not absence, and where the document cites an article this item is N/A, the link being verified under Section 5 instead.`
 
-`If the auditor's search contradicts the statement in the document, set all other items in this section to "N/A" and proceed with the next section.`
 
 * 10.4 If an article exists, a link to the Grokipedia article is provided
 * 10.5 Suffixes in the link title, such as " — <sitename>", are removed from the link title
@@ -735,14 +732,13 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 ## 11. Examine
 
-* 11.1 examine.com was searched directly for the intervention using the browser tool
-* 11.2 A statement by the author about the search is placed inside an HTML comment
+* 11.1 examine.com was searched directly for the intervention, using the Section 5 retrieval tiers in order until one returns the site's search results
+* 11.2 A statement by the author about the search is placed inside an HTML comment, naming the retrieval tiers tried and what each returned
 
-* 11.3 An independent direct search of examine.com by the auditor using the browser tool has confirmed the presence/absence of the intervention
+* 11.3 If the document states that no Examine article exists, an independent direct search of examine.com by the auditor confirms that none exists
 
-`The auditor must independently verify the presence/absence of the intervention on examine.com by searching the site directly using the browser tool: "browser_navigate" to load examine.com's search results for the intervention, then "browser_snapshot" to read the results.`
+`The auditor must independently verify the claimed absence by searching examine.com directly, using the same retrieval tiers as Section 5: "d-browser" ("browser_navigate" to load the site's search results for the intervention, then "browser_snapshot" to read them); if d-browser fails, "d-fetch"; if that also fails, "d-proxy-1" and then "d-proxy-2". The item fails only when the auditor retrieves an article the document says does not exist. Absence is confirmed only once every tier has been tried and none returned an article — a failure, error page, or bot wall on one tier is not absence, and where the document cites an article this item is N/A, the link being verified under Section 5 instead.`
 
-`If the auditor's search contradicts the statement in the document, set all other items in this section to "N/A" and proceed with the next section.`
 
 * 11.4 If an article exists, a link to the Examine article is provided
 * 11.5 The link title is the title of the Examine article
@@ -764,14 +760,13 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 ## 12. ConsumerLab
 
-* 12.1 consumerlab.com was searched directly for the intervention using the browser tool
-* 12.2 A statement by the author about the search is placed inside an HTML comment
+* 12.1 consumerlab.com was searched directly for the intervention, using the Section 5 retrieval tiers in order until one returns the site's search results
+* 12.2 A statement by the author about the search is placed inside an HTML comment, naming the retrieval tiers tried and what each returned
 
-* 12.3 An independent direct search of consumerlab.com by the auditor using the browser tool has confirmed the presence/absence of the intervention
+* 12.3 If the document states that no ConsumerLab article exists, an independent direct search of consumerlab.com by the auditor confirms that none exists
 
-`The auditor must independently verify the presence/absence of the intervention on consumerlab.com by searching the site directly using the browser tool: "browser_navigate" to load consumerlab.com's search results for the intervention, then "browser_snapshot" to read the results.`
+`The auditor must independently verify the claimed absence by searching consumerlab.com directly, using the same retrieval tiers as Section 5: "d-browser" ("browser_navigate" to load the site's search results for the intervention, then "browser_snapshot" to read them); if d-browser fails, "d-fetch"; if that also fails, "d-proxy-1" and then "d-proxy-2". The item fails only when the auditor retrieves an article the document says does not exist. Absence is confirmed only once every tier has been tried and none returned an article — a failure, error page, or bot wall on one tier is not absence, and where the document cites an article this item is N/A, the link being verified under Section 5 instead.`
 
-`If the auditor's search contradicts the statement in the document, set all other items in this section to "N/A" and proceed with the next section.`
 
 * 12.4 If an article exists, a link to the ConsumerLab article is provided
 * 12.5 The link title is the title of the ConsumerLab article

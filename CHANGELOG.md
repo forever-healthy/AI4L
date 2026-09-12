@@ -1,6 +1,12 @@
 # AI4L - Change Log
 
 
+### v1.3.25 — 2026-09-12
+
+* The Grokipedia, Examine and ConsumerLab sections now search through every retrieval tier before calling an article absent, and an absence is challenged only when the auditor actually retrieves the article — a site that answers inconsistently can no longer send the audit loop back and forth
+* Alternate names are plain names, one entry each, so every brand name and abbreviation reaches the search index
+
+
 ### v1.3.24 — 2026-09-11
 
 * Two checklist items now lead with the condition they test, so an audit marks them not-applicable instead of passing them unexamined

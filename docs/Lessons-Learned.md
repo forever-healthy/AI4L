@@ -1,4 +1,4 @@
-![Version 1.3.24](https://img.shields.io/badge/Version-1.3.24-green.svg)
+![Version 1.3.25](https://img.shields.io/badge/Version-1.3.25-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Our Experience: Challenges and Solutions
