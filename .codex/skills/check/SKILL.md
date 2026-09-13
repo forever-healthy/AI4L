@@ -1,7 +1,7 @@
 ---
 name: check
 description: Project Verification & Consistency Checking
-version: 1.3.26
+version: 1.3.27
 ---
 
 # AI4L - Project Verification & Consistency Checking

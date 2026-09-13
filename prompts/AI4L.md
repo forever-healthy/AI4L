@@ -1,4 +1,4 @@
-![Version 1.3.26](https://img.shields.io/badge/Version-1.3.26-green.svg)
+![Version 1.3.27](https://img.shields.io/badge/Version-1.3.27-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -563,7 +563,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 6.20 If [goal] is "Health & Longevity" [short_goal] is stated as "short_goal: Longevity".
 
-* 6.21 If [goal] is not "Health & Longevity", a one keyword form of [goal] containing no verb, is stated as "short_goal: [short_goal]" (e.g., "Optimize Immune Function" → "Immune", "Improve Insulin Sensitivity" → "Insulin", "Support Cardiovascular Health" → "Cardiovascular", "Reduce Inflammation" → "Inflammation", "Skin Rejuvenation" → "Skin")
+* 6.21 If [goal] is not "Health & Longevity", a one keyword form of [goal] containing no verb, taken from the words of [goal] itself and never a synonym, is stated as "short_goal: [short_goal]" (e.g., "Optimize Immune Function" → "Immune", "Improve Insulin Sensitivity" → "Insulin", "Support Cardiovascular Health" → "Cardiovascular", "Reduce Inflammation" → "Inflammation", "Skin Rejuvenation" → "Skin", "Muscle Growth" → "Muscle")
 
 * 6.22 If [short_goal] is "Longevity" [short_topic] is stated as "short_topic: [canonical_name]"
 

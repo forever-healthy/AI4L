@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.27 — 2026-09-13
+
+* The short goal is taken from the wording of the goal itself and never a synonym, so the same topic always yields the same filename and address
+
+
 ### v1.3.26 — 2026-09-12
 
 * A combination review lists each agent's own names and abbreviations among the alternate names again, so a search for one agent finds the review
