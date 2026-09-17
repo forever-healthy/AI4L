@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.28 — 2026-09-17
+
+* The motivation no longer states or hints at how results turned out; a headline finding says what was studied, not what it showed
+
+
 ### v1.3.27 — 2026-09-13
 
 * The short goal is taken from the wording of the goal itself and never a synonym, so the same topic always yields the same filename and address

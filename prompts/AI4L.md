@@ -1,4 +1,4 @@
-![Version 1.3.27](https://img.shields.io/badge/Version-1.3.27-green.svg)
+![Version 1.3.28](https://img.shields.io/badge/Version-1.3.28-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -1208,33 +1208,34 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 30.5 The section is a concise, accessible introduction
 * 30.6 The purpose and focus of the document are clearly explained
 * 30.7 The motivation does NOT jump to conclusions or preempt the analysis results
-* 30.8 The motivation does NOT characterize any position on the intervention as the accepted, mainstream, or settled view — it presents the debate neutrally
+* 30.8 The motivation does NOT state or imply the direction of any result (e.g., "matched", "outperformed", "reduced", "caused fewer side effects", "linked to better…"), with or without numbers
+* 30.9 The motivation does NOT characterize any position on the intervention as the accepted, mainstream, or settled view — it presents the debate neutrally
 
-* 30.9 Where relevant, the motivation connects the intervention to the health and longevity lens of the target audience (see 1.12)
+* 30.10 Where relevant, the motivation connects the intervention to the health and longevity lens of the target audience (see 1.12)
 
-* 30.10 The motivation consists of three paragraphs
-* 30.11 First paragraph explains in plain language what the intervention is and why it is of interest
-* 30.12 Second paragraph gives additional context — e.g., historical use, prevalence, or a single headline finding that motivates the review
-* 30.13 The final paragraph is a crisp statement of what this review examines and why
-* 30.14 The final paragraph does not use evaluative or advisory language — it states what the review
+* 30.11 The motivation consists of three paragraphs
+* 30.12 First paragraph explains in plain language what the intervention is and why it is of interest
+* 30.13 Second paragraph gives additional context — e.g., historical use, prevalence, or a single headline finding that motivates the review — stated as what was studied or why it drew interest, never as its outcome
+* 30.14 The final paragraph is a crisp statement of what this review examines and why
+* 30.15 The final paragraph does not use evaluative or advisory language — it states what the review
   examines, not what anyone should do
 
-* 30.15 The motivation is 150–200 words
+* 30.16 The motivation is 150–200 words
 
-* 30.16 DOES NOT use acronyms that would require glossary expansion or technical classifications that require specialist knowledge, uses plain-language terms instead
+* 30.17 DOES NOT use acronyms that would require glossary expansion or technical classifications that require specialist knowledge, uses plain-language terms instead
 
 `For the motivation section, the test is not whether a word looks technical, but whether a non-specialist would use it unprompted and know its exact meaning — this also catches ordinary-looking clinical-register words (e.g., "adjunct" → "add-on", "hormetic" → "brief beneficial stress", "potentiate" → "strengthen", "modality" →  "type/method").`
 
-* 30.17 DOES NOT parenthetically define standard terms (e.g., "CRP (C-reactive protein, a general marker of systemic inflammation)")
-* 30.18 Parenthetical alternate names are acceptable when introducing the intervention. E.g., "Niacin (vitamin B3)"
-* 30.19 DOES NOT cite specific trials (names, years, sample sizes, p-values)
-* 30.20 DOES NOT cite effect sizes, relative risks, or statistical results
-* 30.21 DOES NOT contain exhaustive mechanism-of-action descriptions; a single sentence on the primary mechanism is sufficient
-* 30.22 DOES NOT list every health domain the intervention touches, mentions the most notable 2–3 at most
-* 30.23 DOES NOT mention specific influencers, podcasters, or biohackers (e.g., "Peter Attia recommends…")
+* 30.18 DOES NOT parenthetically define standard terms (e.g., "CRP (C-reactive protein, a general marker of systemic inflammation)")
+* 30.19 Parenthetical alternate names are acceptable when introducing the intervention. E.g., "Niacin (vitamin B3)"
+* 30.20 DOES NOT cite specific trials (names, years, sample sizes, p-values)
+* 30.21 DOES NOT cite effect sizes, relative risks, or statistical results
+* 30.22 DOES NOT contain exhaustive mechanism-of-action descriptions; a single sentence on the primary mechanism is sufficient
+* 30.23 DOES NOT list every health domain the intervention touches, mentions the most notable 2–3 at most
+* 30.24 DOES NOT mention specific influencers, podcasters, or biohackers (e.g., "Peter Attia recommends…")
 
-* 30.24 The motivation section ends with a line stating "**\[Benefits]\(#expected-benefits) - \[Risks]\(#potential-risks--side-effects) - \[Protocol]\(#therapeutic-protocol) - \[Conclusion]\(#conclusion)**"
-* 30.25 The ending line is preceded by a blank line
+* 30.25 The motivation section ends with a line stating "**\[Benefits]\(#expected-benefits) - \[Risks]\(#potential-risks--side-effects) - \[Protocol]\(#therapeutic-protocol) - \[Conclusion]\(#conclusion)**"
+* 30.26 The ending line is preceded by a blank line
 
 ## 31. End of Document
 
