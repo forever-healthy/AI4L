@@ -1,4 +1,4 @@
-![Version 1.3.28](https://img.shields.io/badge/Version-1.3.28-green.svg)
+![Version 1.3.29](https://img.shields.io/badge/Version-1.3.29-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Using CLI Environments
@@ -20,9 +20,9 @@ Particularly for security reasons in regard to malicious mcp code, prompt inject
 * Sandboxing of the CLI itself using Docker SBX
 
 
-## Claude Code, OpenCode, Codex, Grok Build
+## Claude Code, OpenCode, Codex, Grok Build, Muse Code
 
-We tested four environments for ER creation and auditing, as well as model evaluation. The repository provides the configuration for all of them.
+We tested five environments for ER creation and auditing, as well as model evaluation. The repository provides the configuration for all of them.
 
 * **Claude Code** - Opus 
 
@@ -31,6 +31,8 @@ We tested four environments for ER creation and auditing, as well as model evalu
 * **OpenCode** - Gemini (or any other model that can use MCP servers)
 
 * **Grok Build** - Grok
+
+* **Muse Code** - Muse Spark 1.3
 
 
 ## Installing AI4L
@@ -61,12 +63,12 @@ git clone https://github.com/forever-healthy/AI4L
 * `CLAUDE.md`    - project global instructions, also read by OpenCode, Codex & Grok Build
 
 * `.claude/`     - related to Claude Code, including agents & skills (also used by Grok Build), and settings
-* `.mcp.json`    - configuration for the local MCP servers (used by Claude Code)
+* `.mcp.json`    - configuration for the local MCP servers (used by Claude Code & Muse Code)
 
 * `.opencode/`   - related to OpenCode, including agents, skills, and settings
 
-* `.codex/`      - related to OpenAI Codex, including agents, skills, and settings
-* `AGENTS.md`    - project global instructions for Codex
+* `.codex/`      - related to OpenAI Codex, including agents, skills, and settings (agents also used by Muse Code)
+* `AGENTS.md`    - project global instructions for Codex & Muse Code
 
 * `.grok/`       - related to Grok Build, including settings & /rules/rules.md on how to call agents
 
@@ -97,13 +99,20 @@ sbx run opencode
 sbx run codex
 ```
 
-Grok Build is currently not supported in the Docker SBX, but it can be run in shell mode:
+Grok Build and Muse Code are currently not supported in the Docker SBX, but they can be run in shell mode:
 
 ```bash
 cd .../AI4L
 sbx run shell
 curl -fsSL https://x.ai/cli/install.sh | bash
 grok
+```
+
+```bash
+cd .../AI4L
+sbx run shell
+curl -fsSL https://dev.meta.ai/install.sh | bash
+muse
 ```
 
 > [!IMPORTANT]
@@ -116,7 +125,7 @@ We are using five local MCP servers with tools that significantly improve the qu
 
 The MCPs are configured in:
 
-* Claude Code: [.mcp.json](../.mcp.json)
+* Claude Code & Muse Code: [.mcp.json](../.mcp.json)
 * OpenCode: [.opencode/opencode.json](../.opencode/opencode.json) 
 * Codex: [.codex/config.toml](../.codex/config.toml)
 * Grok Build: [.grok/config.toml](../.grok/config.toml)
@@ -200,7 +209,7 @@ We are currently using `Opus` / `Claude Code` for all creation/audit/fixing agen
 
 You can use this simple prompt to create your first ER and iteratively audit it with the /er skill:
 
-Claude Code / OpenCode / Grok Build
+Claude Code / OpenCode / Grok Build / Muse Code
 
 ```bash
 /er full Tadalafil

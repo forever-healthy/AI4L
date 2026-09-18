@@ -1,6 +1,11 @@
 # AI4L - Change Log
 
 
+### v1.3.29 — 2026-09-18
+
+* Muse Code is documented as a tested environment, running Muse Spark 1.3 with the Codex agents and instructions
+
+
 ### v1.3.28 — 2026-09-17
 
 * The motivation no longer states or hints at how results turned out; a headline finding says what was studied, not what it showed
