@@ -1,6 +1,12 @@
 # AI4L - Change Log
 
 
+### v2.0.0 — 2026-09-25
+
+* Combination treatments: two or more interventions given together are reviewed as one intervention, now proven in production on evipedia — see the prompt examples
+* Examples now link to the live reviews and audits on evipedia, which stay current with the prompt; the outdated examples folder is removed
+
+
 ### v1.3.29 — 2026-09-18
 
 * Muse Code is documented as a tested environment, running Muse Spark 1.3 with the Codex agents and instructions

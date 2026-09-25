@@ -1,4 +1,4 @@
-![Version 1.3.29](https://img.shields.io/badge/Version-1.3.29-green.svg)
+![Version 2.0.0](https://img.shields.io/badge/Version-2.0.0-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Using a Web-Based Chat UI
@@ -26,6 +26,13 @@ that can pass an audit as described in AI4L.md
 
 ``` text
 Create an ER for Low-Level Light Therapy for Skin Rejuvenation
+that can pass an audit as described in AI4L.md
+```
+
+Real-world protocols sometimes combine interventions — PDE5 inhibitors with statins to treat cancer, a statin with ezetimibe to lower LDL. AI4L can review such a combination as one intervention:
+
+``` text
+Create an ER for Combining PDE5 Inhibitors & Statins to Treat Cancer
 that can pass an audit as described in AI4L.md
 ```
 

@@ -1,4 +1,4 @@
-![Version 1.3.29](https://img.shields.io/badge/Version-1.3.29-green.svg)
+![Version 2.0.0](https://img.shields.io/badge/Version-2.0.0-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Using CLI Environments
@@ -20,19 +20,19 @@ Particularly for security reasons in regard to malicious mcp code, prompt inject
 * Sandboxing of the CLI itself using Docker SBX
 
 
-## Claude Code, OpenCode, Codex, Grok Build, Muse Code
+## Claude Code, Grok Build, Codex, Muse Code, OpenCode
 
 We tested five environments for ER creation and auditing, as well as model evaluation. The repository provides the configuration for all of them.
 
 * **Claude Code** - Opus 
 
-* **OpenAI Codex** - GPT
-
-* **OpenCode** - Gemini (or any other model that can use MCP servers)
-
 * **Grok Build** - Grok
 
+* **OpenAI Codex** - GPT
+
 * **Muse Code** - Muse Spark 1.3
+
+* **OpenCode** - Gemini (or any other model that can use MCP servers)
 
 
 ## Installing AI4L
@@ -55,22 +55,21 @@ git clone https://github.com/forever-healthy/AI4L
 * `prompts/`   - prompt files used by the agents and skills, including the main AI4L.md prompt
 * `creation/`  - created ERs & QA audits, tmp files & trash
 * `docs/`      - documentation files, including this one
-* `examples/`  - example ERs and audits created with the CLI environments
 
 
 ## Configuration Files
 
-* `CLAUDE.md`    - project global instructions, also read by OpenCode, Codex & Grok Build
+* `CLAUDE.md`    - project global instructions, also read by Grok Build, Codex & OpenCode
 
 * `.claude/`     - related to Claude Code, including agents & skills (also used by Grok Build), and settings
 * `.mcp.json`    - configuration for the local MCP servers (used by Claude Code & Muse Code)
 
-* `.opencode/`   - related to OpenCode, including agents, skills, and settings
+* `.grok/`       - related to Grok Build, including settings & /rules/rules.md on how to call agents
 
 * `.codex/`      - related to OpenAI Codex, including agents, skills, and settings (agents also used by Muse Code)
 * `AGENTS.md`    - project global instructions for Codex & Muse Code
 
-* `.grok/`       - related to Grok Build, including settings & /rules/rules.md on how to call agents
+* `.opencode/`   - related to OpenCode, including agents, skills, and settings
 
 
 ## Docker Sandbox for the AI CLI Environments
@@ -95,8 +94,8 @@ Claude Code, Codex, and OpenCode can be run in the Docker SBX with the following
 ```bash
 cd .../AI4L
 sbx run claude
-sbx run opencode
 sbx run codex
+sbx run opencode
 ```
 
 Grok Build and Muse Code are currently not supported in the Docker SBX, but they can be run in shell mode:
@@ -126,9 +125,9 @@ We are using five local MCP servers with tools that significantly improve the qu
 The MCPs are configured in:
 
 * Claude Code & Muse Code: [.mcp.json](../.mcp.json)
-* OpenCode: [.opencode/opencode.json](../.opencode/opencode.json) 
-* Codex: [.codex/config.toml](../.codex/config.toml)
 * Grok Build: [.grok/config.toml](../.grok/config.toml)
+* Codex: [.codex/config.toml](../.codex/config.toml)
+* OpenCode: [.opencode/opencode.json](../.opencode/opencode.json) 
 
 They are automatically loaded at startup and then run in isolated Docker containers to protect against malicious code.
 
@@ -209,7 +208,7 @@ We are currently using `Opus` / `Claude Code` for all creation/audit/fixing agen
 
 You can use this simple prompt to create your first ER and iteratively audit it with the /er skill:
 
-Claude Code / OpenCode / Grok Build / Muse Code
+Claude Code / Grok Build / Muse Code / OpenCode
 
 ```bash
 /er full Tadalafil
@@ -221,7 +220,13 @@ Codex
 $er full Tadalafil
 ```
 
-It will create an [ER for Tadalafil (Cialis)](../examples/tadalafil_2026-0421-2331_Opus_ER.md), then audit it, then fix the findings, then audit it again, and so on until it gets a 100% pass rate or reaches the maximum number of audits defined.
+It will create an [ER for Tadalafil (Cialis)](https://evipedia.ai/tadalafil_er), then audit it, then fix the findings, then audit it again, and so on until it gets a 100% pass rate or reaches the maximum number of audits defined.
+
+Real-world protocols sometimes combine interventions — PDE5 inhibitors with statins to treat cancer, a statin with ezetimibe to lower LDL. AI4L can review such a combination as one intervention:
+
+```bash
+/er full Combining PDE5 Inhibitors & Statins to Treat Cancer
+```
 
 
 ## Using the /er Skill ($er for Codex)

@@ -1,4 +1,4 @@
-![Version 1.3.29](https://img.shields.io/badge/Version-1.3.29-green.svg)
+![Version 2.0.0](https://img.shields.io/badge/Version-2.0.0-green.svg)
 ![License MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
@@ -6,7 +6,7 @@
 
 **AI4L** - Enabling anyone to use AI to generate high-quality, evidence-based reviews of health & longevity interventions
 
-[Getting Started](#getting-started) - [Examples](examples/) - [Feedback & Discussions](https://github.com/forever-healthy/AI4L/discussions) - [Contributing](CONTRIBUTING.md)
+[Getting Started](#getting-started) - [Examples](docs/Examples.md) - [Feedback & Discussions](https://github.com/forever-healthy/AI4L/discussions) - [Contributing](CONTRIBUTING.md)
 
 _AI4L's purpose is to support informed discussion and not to provide medical advice, diagnosis, or treatment. See [Limitations](docs/Limitations.md)_
 
@@ -90,11 +90,9 @@ We apply strict role separation — the creator and each loop's auditor are inde
 
 Audit quality is improved by a multi-step audit process that minimizes auditor hallucinations and requires auditors to perform rigorous external verification, including actively fetching URLs, retrieving metadata, and verifying citations against live sources.
 
-Combined with a zero-tolerance pass/fail approach, the process is repeated until we reach 100% pass across all QA criteria. In testing, reviews typically reach 100% pass only after multiple audit-fix cycles (see: [examples](examples/)).
+Combined with a zero-tolerance pass/fail approach, the process is repeated until we reach 100% pass across all QA criteria. In testing, reviews typically reach 100% pass only after multiple audit-fix cycles (see: [examples](docs/Examples.md)).
 
 We refer to this approach as "Audit-Driven Prompting".
-
-
 
 
 ## Getting Started
@@ -113,7 +111,7 @@ There are two general modes of using AI4L, each with its own advantages:
 
 ## What to expect from AI4L
 
-Here are some [samples of evidence reviews and audits](examples/) created with AI4L.
+Here are some [examples of evidence reviews and audits](docs/Examples.md) created with AI4L.
 
 > [!IMPORTANT]
 > We found tremendous variability in the quality of reviews, audits, and fixes across models. [Discussion of individual model performance](https://github.com/forever-healthy/AI4L/discussions/categories/models).

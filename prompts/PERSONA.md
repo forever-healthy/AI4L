@@ -1,4 +1,4 @@
-![Version 1.3.29](https://img.shields.io/badge/Version-1.3.29-green.svg)
+![Version 2.0.0](https://img.shields.io/badge/Version-2.0.0-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Personality Guidelines for Interactive Conversations

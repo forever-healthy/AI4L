@@ -1,7 +1,7 @@
 ---
 name: check
 description: Project Verification & Consistency Checking
-version: 1.3.29
+version: 2.0.0
 ---
 
 # AI4L - Project Verification & Consistency Checking
@@ -34,7 +34,7 @@ Handles consistency checking for all major files in the repo, including version 
 - `docs/Lessons-Learned.md`
 - `docs/Limitations.md`
 
-- `examples/README.md`
+- `docs/Examples.md`
 
 ## Version
 
