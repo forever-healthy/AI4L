@@ -1,7 +1,7 @@
 ---
 name: er
 description: AI4L - Main Skill for Evidence Review Creation and Auditing using @AGENTS
-version: 2.0.0
+version: 2.0.1
 ---
 
 # AI4L - Main Skill for Evidence Review Creation and Auditing using @AGENTS

@@ -3,7 +3,7 @@ name: er-creator
 description: AI4L - create ER
 model: opus
 color: purple
-version: 2.0.0
+version: 2.0.1
 ---
 
 # AI4L - Agent to Create Evidence Reviews according to AI4L.md
@@ -24,7 +24,8 @@ version: 2.0.0
 * READ SCOPE — you may read ONLY:
   - [ai4l_prompt]
   - files you yourself created in [tmp_dir] during this run
-* Never read any existing evidence review or QA file, and never read any other existing file — not in [creation_dir], not in any other directory. Create the ER solely from [ai4l_prompt] and your knowledge.
+* Never read any existing evidence review or QA file, and never read any other existing file — not in [creation_dir], not in any other directory. Create the ER from [ai4l_prompt], your knowledge, and the research [ai4l_prompt] requires.
+* READ SCOPE covers local files only. Web search and the MCP research tools (PubMed, ClinicalTrials.gov, fetch, browser) are NOT restricted by it — use them as [ai4l_prompt] requires.
 * Never glob, list or search for evidence reviews or QA files.
 * Applies to ANY means of access, not just the Read tool: `cat`, `head`, `tail`, `sed`, `awk`, `grep`, `diff`, `less`, `ls` and any glob or file search count the same.
 

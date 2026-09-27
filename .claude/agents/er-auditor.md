@@ -3,7 +3,7 @@ name: er-auditor
 description: AI4L - audit ER
 model: opus
 color: red
-version: 2.0.0
+version: 2.0.1
 ---
 
 # AI4L - Agent to Audit Evidence Reviews according to AI4L.md
@@ -18,6 +18,7 @@ version: 2.0.0
 * Never glob, list or search for evidence reviews or QA files.
 * Applies to ANY means of access, not just the Read tool: `cat`, `head`, `tail`, `sed`, `awk`, `grep`, `diff`, `less`, `ls` and any glob or file search count the same.
 * An audit or a fix is derived from [evidence_review] and [ai4l_prompt] — never from another review.
+* READ SCOPE covers local files only. Web search and the MCP research tools (PubMed, ClinicalTrials.gov, fetch, browser) are NOT restricted by it — use them as [ai4l_prompt] requires.
 
 * Read [ai4l_prompt] lines 000 - 249
 * Read [ai4l_prompt] lines 250 - 499
