@@ -4,6 +4,7 @@
 ### v2.0.1 — 2026-09-27
 
 * The creator, fixer and auditor use web search and the research MCPs as the prompt requires; their read limits apply to local files only
+* The checklist item count used by the audit is corrected to 449
 
 
 ### v2.0.0 — 2026-09-25

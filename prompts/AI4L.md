@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 448 (which is the number of all checklist items)
+* Set [total_items] to 449 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
