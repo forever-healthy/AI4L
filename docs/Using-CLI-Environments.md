@@ -64,16 +64,16 @@ git clone https://github.com/forever-healthy/AI4L
 * `AGENTS.md`    - project global instructions for all environments (read directly by Codex, OpenCode, Grok Build, Muse Code & Antigravity)
 * `CLAUDE.md`    - one-line `@AGENTS.md` import for Claude Code
 
-* `.claude/`     - related to Claude Code, including agents & skills (also used by Grok Build), and settings
+* `.claude/`     - related to Claude Code, including agents, skills, and settings. The skills are the single source for all environments: Grok Build reads them directly, `.opencode/skills` and `.codex/skills` link here, and Antigravity registers them via `.agents/skills.json`
 * `.mcp.json`    - configuration for the local MCP servers (used by Claude Code & Muse Code)
 
 * `.grok/`       - related to Grok Build, including settings & /rules/rules.md on how to call agents
 
-* `.codex/`      - related to OpenAI Codex, including agents, skills, and settings (skills also used by Muse Code)
+* `.codex/`      - related to OpenAI Codex, including settings; agents and skills link to `.opencode/` (skills also used by Muse Code)
 
 * `.opencode/`   - related to OpenCode, including agents, skills, and settings
 
-* `.agents/`     - related to Google Antigravity (agents inside the `ai4l` plugin, the MCP servers, and the permission template) and Muse Code (agents)
+* `.agents/`     - related to Google Antigravity (agents inside the `ai4l` plugin, the MCP servers, the skill registration `skills.json`, and the permission template) and Muse Code (agents)
 
 
 ## Docker Sandbox for the AI CLI Environments
@@ -195,7 +195,7 @@ They are automatically loaded at startup and then run in isolated Docker contain
 There is no need to install Docker Desktop separately, as the Docker SBX will handle the containers for the MCP servers.
 
 
-### Local Browser
+### Local Browser (`d-browser`)
 
 [playwright/mcp](https://github.com/microsoft/playwright-mcp)
 
@@ -204,7 +204,7 @@ There is no need to install Docker Desktop separately, as the Docker SBX will ha
 * Used by the auditor via `browser_navigate` + `browser_snapshot` to verify URL targets match cited content
 
 
-### Local URL Fetch (fallback)
+### Local URL Fetch (`d-fetch`, fallback)
 
 [mcp-server-fetch](https://github.com/modelcontextprotocol/servers/tree/main/src/fetch)
 
@@ -219,7 +219,7 @@ There is no need to install Docker Desktop separately, as the Docker SBX will ha
 * The prompt names only the tier, never the provider or a specific tool, so a provider can be swapped here without editing the prompt — which would otherwise bump the prompt version
 * `d-proxy-1` currently runs [@brightdata/mcp](https://github.com/brightdata/brightdata-mcp), whose free Web Unlocker tier retrieves pages that would otherwise return a bot wall or CAPTCHA. Requires a `BRIGHTDATA_API_TOKEN` — get a free account and API token at [brightdata.com](https://brightdata.com) and save it in `.env`
 * `d-proxy-2` is unconfigured by default. Add a second provider when one tier refuses a whole class of sites by policy rather than by bot detection; a different failure surface is the point
-* Optional: if a tier is unconfigured or its token is missing, the auditor still tries it, fails, and honestly marks the URL as unverified rather than silently skipping it
+* Optional: if a tier is unconfigured or its token is missing, the auditor skips it, and a URL that no remaining tier could load is marked unverified with a comment saying what happened
 
 
 ### Clinical Trials MCP Server
@@ -296,7 +296,7 @@ We have included our /er skill, which allows for easy creation and auditing of e
 
 We have implemented the following /er commands in the skill:
 
-* **/er create** \[ \<intervention> \[ for\|to\|as\|\:  \<goal> ] ] - Create evidence review for \<intervention> to achieve \<goal>. The default goal is "for Health & Longevity". Results are saved in [creation_dir] with filenames constructed as defined in ER.md
+* **/er create** \<intervention> \[ for\|to\|as\|\:  \<goal> ] - Create evidence review for \<intervention> to achieve \<goal>. The default goal is "for Health & Longevity". Results are saved in [creation_dir] with filenames constructed as defined in ER.md
 
 * **/er audit** \[ \<filename> | \<intervention> ] - Audit a specific ER, the latest ER for \<intervention>, or the latest ER if nothing is specified. Can also be used to audit ERs generated with other environments/models and saved in [creation_dir].
 
@@ -306,7 +306,7 @@ We have implemented the following /er commands in the skill:
 
 * **/er combine** \[ \<filename> | \<intervention> ] - Merge all timestamped audits of an ER into one _ER_QA.md file (newest audit first), and move the originals to the trash. Runs automatically at the end of /er iterate
 
-* **/er full** \[ \<intervention> ] -  Create ER for \<intervention> → Loop (audit → fix)
+* **/er full** \<intervention> \[ for\|to\|as\|\:  \<goal> ] -  Create ER for \<intervention> → Loop (audit → fix)
 
 * **/er compare** \[ \<intervention> ] - Compare all ERs for \<intervention>, or use the latest \<intervention> worked on, if none specified. Allows comparison of ERs across different models for the same intervention, taking their latest audits into account.
 

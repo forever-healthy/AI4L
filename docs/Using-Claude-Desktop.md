@@ -18,7 +18,7 @@ We strongly recommend using **Claude Opus**
 
 * Download and expand [AI4L-main.zip](https://github.com/forever-healthy/AI4L/archive/refs/heads/main.zip). It contains the full project, including ER.md, PERSONA.md & AGENTS.md with instructions for the workspace
 
-* Activate connectors for Clinical Trials, PubMed, and bioRxiv. Use: `Customize > Connectors`
+* Leave the built-in Clinical Trials and PubMed connectors off: they need credentials and make requests from Anthropic's data center, which target websites often block. The local MCP servers below replace them — see [Install the MCP Servers](#install-the-mcp-servers)
 
 
 ## Working with AI4L
@@ -55,44 +55,47 @@ For interactive conversations about generated ERs, prompts, or health & longevit
 It tells the model to behave, in conversation, the same way evidence reviews are generated from ER.md: same audience, tone, evidence standards, and analytical habits — without the document structure or audit checklist of an evidence review.
 
 
-### Optional: Install Playwright MCP for URL validation
+### Install the MCP Servers
 
-* [playwright/mcp](https://github.com/microsoft/playwright-mcp)
+ER.md names the four local MCP servers the auditor uses for literature lookup and URL verification, and records them under these exact names in the `Verified By` column of an audit:
 
-Runs a headless browser locally for URL verification. Useful for URL validation, since provider-based, server-side fetching is often blocked by websites, and many sites require JavaScript rendering.
+* `d-browser` — [playwright/mcp](https://github.com/microsoft/playwright-mcp): runs a headless browser locally for URL verification. Provider-based, server-side fetching is often blocked by websites, and many sites require JavaScript rendering
+* `d-fetch` — [mcp-server-fetch](https://github.com/modelcontextprotocol/servers/tree/main/src/fetch): a lightweight HTTP fetcher used as a fallback when the browser is blocked or unavailable. Faster for simple URLs without bot detection
+* `d-pubmed` — [pubmed-mcp-server](https://github.com/cyanheads/pubmed-mcp-server): searches PubMed and fetches article metadata and full text via NCBI's E-utilities
+* `d-clinicaltrialsgov` — [clinicaltrialsgov-mcp-server](https://github.com/cyanheads/clinicaltrialsgov-mcp-server): looks up trial records and results on ClinicalTrials.gov
 
-MCPs are installed by modifying `claude_desktop_config.json`.
+They run with `npx` (Node 24 or later) and `uvx`, no Docker needed. MCPs are installed by modifying `claude_desktop_config.json`.
 
 Use: `Settings > Developer > Edit Config`
 
 ```
   "mcpServers": {
-    "Playwright": {
+    "d-browser": {
       "command": "npx",
       "args": ["@playwright/mcp@latest", "--headless"]
+    },
+    "d-fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch", "--ignore-robots-txt", "--user-agent=Chrome/145.0.7632.160"]
+    },
+    "d-pubmed": {
+      "command": "npx",
+      "args": ["-y", "@cyanheads/pubmed-mcp-server"],
+      "env": { "MCP_TRANSPORT_TYPE": "stdio", "NCBI_API_KEY": "", "NCBI_ADMIN_EMAIL": "" }
+    },
+    "d-clinicaltrialsgov": {
+      "command": "npx",
+      "args": ["-y", "clinicaltrialsgov-mcp-server"],
+      "env": { "MCP_TRANSPORT_TYPE": "stdio" }
     }
   }
 ```
 
+* To increase PubMed rate limits: get a [free account with NCBI](https://account.ncbi.nlm.nih.gov/signup/) > get a free API key, and enter `NCBI_API_KEY` & `NCBI_ADMIN_EMAIL` above. Both may stay empty
+
 > [!IMPORTANT]
-> Make sure to allow **network egress** and add all domains access for the MCP to work properly:
+> Make sure to allow **network egress** and add all domains access for the MCPs to work properly:
 **Settings** > Capabilities > Code Execution > Allow Network egress: on & Domain Allowlist: All Domains
 
 > [!IMPORTANT]
-> Make sure to set **tool permission** to always allow: **Settings** > Connectors > Playwright > Configure > Tool permissions > Always allow
-
-
-### Optional: Install Fetch MCP as a fallback
-
-* [Fetch URL](https://github.com/modelcontextprotocol/servers/tree/main/src/fetch)
-
-A lightweight HTTP fetcher used as a fallback when Playwright is blocked or unavailable. Faster for simple URLs without bot detection.
-
-```
-  "mcpServers": {
-    "Fetch URL": {
-      "command": "uvx",
-      "args": ["mcp-server-fetch", "--ignore-robots-txt", "--user-agent=Chrome/145.0.7632.160"]
-    }
-  }
-```
+> Make sure to set the **tool permission** of each of the four servers to always allow: **Settings** > Connectors > d-browser (and the other three) > Configure > Tool permissions > Always allow

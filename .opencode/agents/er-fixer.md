@@ -53,7 +53,7 @@ mode: subagent
   * Report `FIXER: ER fixed: [evidence_review]`
   * Report `FIXER: Documenting the fixes in a markdown file...`
   
-  * Create a [temporary_file] `[audit_filename]_fixes.md` with the following content:
+  * Create a [temporary_file] in [tmp_dir], named like [audit_filename] with `.md` replaced by `_fixes.md`, with the following content:
 
   * Start with `## Fixes [audit_date reformatted as '%m/%d/%Y %H:%M']`
 
@@ -69,9 +69,9 @@ mode: subagent
 
     - Bold covers only the item number(s) and the {short label} , followed by a colon
 
-    - If one fix covers multiple items, combine: `**6.1 / 6.10 — {short label}:**`
+    - If one fix covers multiple items, combine: `**4.1 / 4.4 — {short label}:**`
 
-    - Example: `3. **7.5 — PMC link format:** Replaced PMC link for Johnston et al. 2006 with s format.` (here `3` is the list position, `7.5` is the issue reference — they are different)
+    - Example: `3. **5.5 — PMC link format:** Replaced PMC link for Johnston et al. 2006 with s format.` (here `3` is the list position, `5.5` is the issue reference — they are different)
 
   **URL Changes**
     

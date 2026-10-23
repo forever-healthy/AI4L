@@ -87,6 +87,7 @@ version: 2.0.2
 
 * @er-combiner: `[target_er]`
 * Wait until the agent finishes and returns the result
+* Set [new_qa_filename] to the filename the agent returns in its `QA file:` line
 
 * Report `QA file: [new_qa_filename]`
 
@@ -110,7 +111,7 @@ Loop while [iteration] < [max_audits] and [consecutive_passes] < [needed_passes]
   * If the [pass_rate] is 100%, increment [consecutive_passes]; otherwise reset to 0
   * Increment [iteration]
 
-  * Report: "Iteration [iteration]: Pass rate = [pass_rate]% ([consecutive_passes]/[needed_passes] consecutive passes needed)"
+  * Report: "Iteration [iteration]: Pass rate = [pass_rate] ([consecutive_passes]/[needed_passes] consecutive passes needed)"
 }
 
 * @er-combiner: `[target_er]`
@@ -125,7 +126,7 @@ If [consecutive_passes] >= [needed_passes] {
 * Return: `iterations: [iteration]`
 
 
-## COMMAND: full {er}
+## COMMAND: full {topic}
 
 `A create and multi-pass audit workflow.`
 

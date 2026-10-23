@@ -245,10 +245,10 @@ To avoid hallucinations and calculation errors, break down the audit process int
 * Issue entry format: Use a numbered list
 * Each entry starts with the checklist item number and a short label (3-6 words) in bold, followed by a colon, then the description in normal weight.
 * Format:  "1. **{item#} — {short label}:** {What is wrong and where, with specific line numbers or quotes. 1-2 sentences max.}"
-* If one issue covers multiple checklist items, combine the numbers: "**6.1 / 6.10 — {short label}:**"
+* If one issue covers multiple checklist items, combine the numbers: "**4.1 / 4.4 — {short label}:**"
 
-* Example: "1. **7.5 — PMC link instead of PubMed:** The Johnston et al. 2006 paper in Recommended Reading uses a PMC link instead of the required PubMed format."
-* Example: "2. **6.1 / 6.10 — RCT not expanded at first use:** "RCT" first appears at line 106 without expansion; it is only expanded later at line 183."
+* Example: "1. **5.5 — PMC link instead of PubMed:** The Johnston et al. 2006 paper in Recommended Reading uses a PMC link instead of the required PubMed format."
+* Example: "2. **4.1 / 4.4 — RCT not expanded at first use:** "RCT" first appears at line 106 without expansion; it is only expanded later at line 183."
 
 * Always end the whole document with two blank lines
 
@@ -423,7 +423,7 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 3.15 Every word count in this document excludes HTML comments.
 
-`HTML comments record provenance for the auditor, not content for the reader. The search statements that Sections 9–12, 16, 18, 20 and 30 require inside HTML comments would by themselves exceed the word limits those sections set.`
+`HTML comments record provenance for the auditor, not content for the reader. The statements that Sections 9–12, 16, 18, 20 and 30 require inside HTML comments would by themselves exceed the word limits those sections set.`
 
 
 

@@ -49,7 +49,7 @@
 * Sections 16 and 18 are reordered so that every rule follows what it uses: items and grading scale first, then grade checks, completeness, contrary evidence, layout, magnitude and sources. No item was added or removed; references to 16.x/18.x in earlier releases use the old numbering
 
 
-#### Support for Google Antigravity, Gemini 4 & OpenCode 2 - Updates for Muse Code & Codex
+#### Support for Google Antigravity, Gemini 4 & OpenCode 2 - Updates for Claude Desktop, Muse Code & Codex
 
 * New environment: Google Antigravity (`agy`), with the agents and MCP servers configured as the `ai4l` plugin in `.agents/plugins/ai4l/` and the skills registered in `.agents/skills.json`. Its permissions live only in the global settings, so merge the provided template once — see [Using CLI Environments](docs/Using-CLI-Environments.md#antigravity-setup)
 
@@ -60,6 +60,8 @@
 * Muse Code (`muse`) now runs the agents as its own typed subagents from `.agents/agents/`, tested with Muse Wonder 1.0 and Muse Wonder Full 1.0. Muse keeps no project-level permissions, so start interactive sessions with `muse --approval-mode never` — see [Using CLI Environments](docs/Using-CLI-Environments.md#muse-code-setup)
 
 * Codex (`codex`) now spawns the agents with an underscore task name (`er-creator` → `er_creator`), the only form it accepts, and no longer asks for approval on every MCP tool call, as each MCP server sets `default_tools_approval_mode = "approve"`
+
+* Claude Desktop now runs the four local MCP servers (`d-browser`, `d-fetch`, `d-pubmed`, `d-clinicaltrialsgov`) via `npx` and `uvx`, no Docker needed, under the names ER.md records in `Verified By`; the built-in Clinical Trials and PubMed connectors stay off, as in the CLIs — see [Using Claude Desktop](docs/Using-Claude-Desktop.md#install-the-mcp-servers)
 
 
 #### Other Changes
