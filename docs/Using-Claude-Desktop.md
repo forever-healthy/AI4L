@@ -3,7 +3,7 @@
 
 # Using Claude Desktop
 
-[**Claude Desktop**](https://code.claude.com/docs/en/desktop-quickstart) is an easy-to-use, local environment for non-coding applications.
+[**Claude Desktop**](https://claude.com/download) is an easy-to-use, local environment for non-coding applications.
 
 Compared to a pure Chat-UI, Claude Desktop offers:
 
@@ -18,17 +18,19 @@ We strongly recommend using **Claude Opus**
 
 * Download and expand [AI4L-main.zip](https://github.com/forever-healthy/AI4L/archive/refs/heads/main.zip). It contains the full project, including ER.md, PERSONA.md & AGENTS.md with instructions for the workspace
 
-* Leave the built-in Clinical Trials and PubMed connectors off: they need credentials and make requests from Anthropic's data center, which target websites often block. The local MCP servers below replace them — see [Install the MCP Servers](#install-the-mcp-servers)
+* Leave the built-in Clinical Trials and PubMed connectors (`Settings > Connectors`) off: they need credentials and make requests from Anthropic's data center, which target websites often block. The local MCP servers below replace them — see [Install the MCP Servers](#install-the-mcp-servers)
 
 
 ## Working with AI4L
 
 * Create a new session
-* Set the session folder to `AI4L-main`
+* Set the session's working folder to the decompressed `AI4L-main` folder. Prompts, instructions, and the `creation/` output folder are all resolved relative to it
 
 Use the same prompts as for the [basic Chat UI](Using-Chat-UI.md)
 
-Results will be filed in `/creation/`
+Results will be filed in `creation/`
+
+Advanced: the `/er` skill from `.claude/skills/er` can be uploaded under `Settings > Skills > Add +` (press `⌘ Shift .` to show dot folders in the macOS file dialog), but it is designed for [Claude Code](Using-CLI-Environments.md)
 
 
 ## Helpful Tools
@@ -64,7 +66,35 @@ ER.md names six local MCP servers for literature lookup and URL verification and
 * `d-pubmed` — [pubmed-mcp-server](https://github.com/cyanheads/pubmed-mcp-server): searches PubMed and fetches article metadata and full text via NCBI's E-utilities
 * `d-clinicaltrialsgov` — [clinicaltrialsgov-mcp-server](https://github.com/cyanheads/clinicaltrialsgov-mcp-server): looks up trial records and results on ClinicalTrials.gov
 
-They run with `npx` (Node 24 or later) and `uvx`, no Docker needed. MCPs are installed by modifying `claude_desktop_config.json`.
+They run with `npx` (part of [Node.js](https://nodejs.org), 24 or later) and `uvx` (part of [uv](https://docs.astral.sh/uv/getting-started/installation/)), no Docker needed. Install both once, then restart Claude Desktop so it picks them up:
+
+* macOS: 
+
+```
+brew install node uv
+```
+
+* Windows:
+
+```
+winget install OpenJS.NodeJS.LTS astral-sh.uv
+```
+
+* Linux: 
+
+Node.js from your distribution or [nodesource](https://github.com/nodesource/distributions)
+
+uv via
+
+```
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Check with `npx --version` and `uvx --version` in a fresh terminal. 
+
+A server that fails with `Failed to spawn process: No such file or directory` means its command is missing or not on the PATH Claude Desktop sees.
+
+MCPs are installed by modifying `claude_desktop_config.json`.
 
 Use: `Settings > Developer > Edit Config`
 
@@ -92,10 +122,3 @@ Use: `Settings > Developer > Edit Config`
 ```
 
 * To increase PubMed rate limits: get a [free account with NCBI](https://account.ncbi.nlm.nih.gov/signup/) > get a free API key, and enter `NCBI_API_KEY` & `NCBI_ADMIN_EMAIL` above. Both may stay empty
-
-> [!IMPORTANT]
-> Make sure to allow **network egress** and add all domains access for the MCPs to work properly:
-**Settings** > Capabilities > Code Execution > Allow Network egress: on & Domain Allowlist: All Domains
-
-> [!IMPORTANT]
-> Make sure to set the **tool permission** of each of the four servers to always allow: **Settings** > Connectors > d-browser (and the other three) > Configure > Tool permissions > Always allow

@@ -102,7 +102,7 @@ There are two general modes of using AI4L, each with its own advantages:
 **Basic Mode**: best for quick exploration and testing
 
 * [Using a Web-Based Chat UI](docs/Using-Chat-UI.md)
-* [Using Claude Desktop](docs/Using-Claude-Desktop.md)
+* [Using Claude Desktop](docs/Using-Claude-Desktop.md) — needs [Node.js](https://nodejs.org) and [uv](https://docs.astral.sh/uv/) installed locally for the MCP servers
 
 **Workflow Mode**: best for repeatability, automated workflows, and higher audit quality
 
