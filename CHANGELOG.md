@@ -7,7 +7,7 @@
 
 * AI4L can now create evidence reviews for two or more interventions given together. Following the pattern `Combining A, B & C [for goal]`.
 
-* The checklist now checks combinations too: whether a benefit of the agents given together has been tested (16.42), where co-administration effects belong (20.15), and that the conclusion addresses the agents together (29.4)
+* The checklist now checks combinations too: whether a benefit of the agents given together has been tested (16.42), where co-administration effects belong (20.15), and whether the conclusion addresses the agents together (29.4)
 
 * Already live in production on [evipedia.ai](https://evipedia.ai/)
 
@@ -30,7 +30,7 @@
 
 * The ER prompt was reviewed against several leading frontier models (Opus 5.5, GPT-6, Grok 4.7, Gemini 4 Argon & Muse Wonder Full) on about 100 evidence reviews of the same topics, and refined where the comparison showed systematic strenghts/weaknesses
 
-* Research results: contrary trials and reviews are searched for, cited in the item, flagged ⚠️ Conflicted and weighed; evidence from a different dose, form, route or compound is graded as indirect; High now needs more than one independent research group; retracted papers are excluded and errata are applied
+* Research results: contrary trials and reviews are searched for, cited in the item, flagged ⚠️ Conflicted and weighed; evidence from a different dose, form, route, or compound is graded as indirect; High now needs more than one independent research group; retracted papers are excluded, and errata are applied
 
 * Weighing contrary evidence: a systematic review or meta-analysis outranks single trials, a larger trial a smaller one, and several consistent trials a single one; evidence outweighed by stronger contrary evidence is graded Low; a trial too small to detect the effect is noted, not weighed
 
@@ -42,7 +42,7 @@
 
 * Sources: regulatory and legal facts carry a link to a source that states them (a news report, labeled as such, may stand in until the regulator publishes the fact), and no cited source is overstated or stretched to a comparison it did not make; where a paper's abstract and full text disagree, the review follows the full text and notes the discrepancy
 
-* Completeness is judged on what matters: an omitted benefit fails the audit only if it would be graded High, is an approved indication, is found by a systematic review or meta-analysis, or bears directly on a specific goal; an omitted risk fails if it would be graded Medium or High, is on the label, or is serious. An item that already cites contrary evidence fails only for contrary evidence that would change its grade; other finds are noted without failing, so audits can reach 100%
+* Completeness is judged on what matters: an omitted benefit fails the audit only if it would be graded High, is an approved indication, is found by a systematic review or meta-analysis, or bears directly on a specific goal; an omitted risk fails if it would be graded Medium or High, is on the label, or is serious. An item that already cites contrary evidence fails only for contrary evidence that would change its grade; other findings are noted without failing, so audits can reach 100%
 
 * Checklist consolidated: contradictions between items resolved (1.4, 1.9/1.17, 2.8/2.10/29.5, 20.10/20.11, 28.6), four duplicate items merged (484 → 480), hints apply to authors as well; agents read ER.md and the review to their end
 
@@ -70,11 +70,11 @@
 
 * Examples now link to the live reviews and audits on evipedia, which stay current with the prompt; the outdated examples folder is removed
 
-* The creator, fixer and auditor use web search and the research MCPs as the prompt requires; their read limits apply to local files only
+* The creator, fixer, and auditor use web search and the research MCPs as the prompt requires; their read limits apply to local files only
 
-* Model names: the creator and auditor take their model name and version from their system prompt instead of guessing it, without product, effort or pricing names (e.g., `Opus 5.5` / `Opus`, `Gemini 4 Argon` / `Gemini-Argon`); variants now also differ in the filename. A model whose system prompt names no version is recorded by its bare name (e.g., `Grok` for Grok Build subagents), one that names no model at all as `Unknown`
+* Model names: the creator and auditor take their model name and version from their system prompt instead of guessing it, without product, effort, or pricing names (e.g., `Opus 5.5` / `Opus`, `Gemini 4 Argon` / `Gemini-Argon`); variants now also differ in the filename. A model whose system prompt names no version is recorded by its bare name (e.g., `Grok` for Grok Build subagents); one that names no model at all is recorded as `Unknown`
 
-* Obstacle Protocol: a run stops only when a sub-agent itself cannot continue (it crashes, hits a hard limit, or a required agent, tool or file is missing); a failed call such as an unreachable website, a 403, a bot wall or a timeout is recorded and retried or passed to the next retrieval tier, never a reason to stop
+* Obstacle Protocol: a run stops only when a sub-agent itself cannot continue (it crashes, hits a hard limit, or a required agent, tool, or file is missing); a failed call such as an unreachable website, a 403, a bot wall, or a timeout is recorded and retried or passed to the next retrieval tier, never a reason to stop
 
 * Frontmatter: `initial_topic` and `topic` are always wrapped in double quotes (6.2–6.5, 6.34); other values are quoted only where YAML requires it
 
@@ -126,7 +126,7 @@
 
 ### v1.3.21 — 2026-08-27
 
-* All four ER agents now state an explicit read scope, so an agent reads only the review it was given, that review's QA files and the prompt — by any means of access, shell commands and globs included
+* All four ER agents now state an explicit read scope, so an agent reads only the review it was given, that review's QA files and the prompt — by any means of access, shell commands, and globs included
 
 
 ### v1.3.20 — 2026-08-25
