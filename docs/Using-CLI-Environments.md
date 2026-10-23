@@ -1,4 +1,4 @@
-![Version 2.0.1](https://img.shields.io/badge/Version-2.0.1-green.svg)
+![Version 2.0.2](https://img.shields.io/badge/Version-2.0.2-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Using CLI Environments
@@ -20,19 +20,21 @@ Particularly for security reasons in regard to malicious mcp code, prompt inject
 * Sandboxing of the CLI itself using Docker SBX
 
 
-## Claude Code, Grok Build, Codex, Muse Code, OpenCode
+## Tested Environments
 
-We tested five environments for ER creation and auditing, as well as model evaluation. The repository provides the configuration for all of them.
+We tested six environments for ER creation and auditing, as well as model evaluation. The repository provides the configuration for all of them.
 
-* **Claude Code** - Opus 
+* **Claude Code** - Opus, Fable
 
 * **Grok Build** - Grok
 
 * **OpenAI Codex** - GPT
 
-* **Muse Code** - Muse Spark 1.3
+* **Muse Code** - Muse Wonder, Muse Wonder Full
 
-* **OpenCode** - Gemini (or any other model that can use MCP servers)
+* **Google Antigravity** - Gemini
+
+* **OpenCode** - any other model that can use MCP servers
 
 
 ## Installing AI4L
@@ -47,29 +49,31 @@ git clone https://github.com/forever-healthy/AI4L
 
 
 > [!TIP]
-> On macOS, use `CMD-SHIFT-.` to show hidden files and access `.claude`, `.opencode`, or `.mcp.json`
+> On macOS, use `CMD-SHIFT-.` to show hidden files and access `.claude`, `.opencode`, `.agents`, or `.mcp.json`
 
 
 ## Project Structure
 
-* `prompts/`   - prompt files used by the agents and skills, including the main AI4L.md prompt
+* `prompts/`   - prompt files used by the agents and skills, including the ER prompt (ER.md)
 * `creation/`  - created ERs & QA audits, tmp files & trash
 * `docs/`      - documentation files, including this one
 
 
 ## Configuration Files
 
-* `CLAUDE.md`    - project global instructions, also read by Grok Build, Codex & OpenCode
+* `AGENTS.md`    - project global instructions for all environments (read directly by Codex, OpenCode, Grok Build, Muse Code & Antigravity)
+* `CLAUDE.md`    - one-line `@AGENTS.md` import for Claude Code
 
 * `.claude/`     - related to Claude Code, including agents & skills (also used by Grok Build), and settings
 * `.mcp.json`    - configuration for the local MCP servers (used by Claude Code & Muse Code)
 
 * `.grok/`       - related to Grok Build, including settings & /rules/rules.md on how to call agents
 
-* `.codex/`      - related to OpenAI Codex, including agents, skills, and settings (agents also used by Muse Code)
-* `AGENTS.md`    - project global instructions for Codex & Muse Code
+* `.codex/`      - related to OpenAI Codex, including agents, skills, and settings (skills also used by Muse Code)
 
 * `.opencode/`   - related to OpenCode, including agents, skills, and settings
+
+* `.agents/`     - related to Google Antigravity (agents inside the `ai4l` plugin, the MCP servers, and the permission template) and Muse Code (agents)
 
 
 ## Docker Sandbox for the AI CLI Environments
@@ -98,7 +102,7 @@ sbx run codex
 sbx run opencode
 ```
 
-Grok Build and Muse Code are currently not supported in the Docker SBX, but they can be run in shell mode:
+Grok Build, Muse Code, and Antigravity are currently not supported in the Docker SBX, but they can be run in shell mode:
 
 ```bash
 cd .../AI4L
@@ -111,11 +115,67 @@ grok
 cd .../AI4L
 sbx run shell
 curl -fsSL https://dev.meta.ai/install.sh | bash
-muse
+muse --approval-mode never
+```
+
+```bash
+cd .../AI4L
+sbx run shell
+curl -fsSL https://antigravity.google/cli/install.sh | bash
+agy
 ```
 
 > [!IMPORTANT]
 > **We strongly recommend running the CLIs only within the sandbox!!**
+
+
+## OpenCode Setup
+
+* AI4L requires OpenCode 2 (`opencode --version`). Install or upgrade with `curl -fsSL https://opencode.ai/v2/install | bash`
+
+* Logins from OpenCode 1 carry over. If `opencode auth list` shows none, run `opencode auth login`
+
+* Web search is set to OpenCode's keyless hosted provider (`websearch.provider: random` in `.opencode/opencode.json`). Without a provider, OpenCode 2 cancels every web search
+
+* A bare `opencode` command starts a shared background service that keeps running after you quit the TUI
+
+
+## Muse Code Setup
+
+Muse Code reads the agents from `.agents/agents/` and the MCP servers from `.mcp.json`; nothing else needs to be configured. Muse has no project-level permission file, so start an interactive session with
+
+```bash
+muse --approval-mode never
+```
+
+to turn the tool prompts off while its sandbox stays on (`--yolo` would also disable the sandbox).
+
+
+## Antigravity Setup
+
+
+### Permissions
+
+Antigravity reads permissions only from the global `~/.gemini/antigravity-cli/settings.json`; there is no project-level permission file. Without allow rules, it asks for approval every few seconds, so merge the provided template once, from the AI4L folder:
+
+```bash
+f=~/.gemini/antigravity-cli/settings.json; [ -f "$f" ] || echo '{}' > "$f"
+jq -s '.[0] * {permissions: {allow: (((.[0].permissions.allow // []) + .[1].permissions.allow) | unique)}}' \
+  "$f" .agents/antigravity-permissions.json > "$f.new" && mv "$f.new" "$f"
+```
+
+Then restart `agy`.
+
+* In the sandbox, run the command inside `sbx run shell` — the settings live in the sandbox, not on your machine — and again after `sbx rm`
+
+* The template allows all tools of the AI4L MCP servers and all shell commands (`command(*)`) — the same trust level as the Claude Code settings. Per-command rules do not work in practice: Antigravity requires an exact match for any command line containing `$(…)` or a heredoc, which the agents use constantly
+
+* This is one more reason to run Antigravity only in the sandbox
+
+
+### MCP Server Names
+
+Antigravity prefixes the MCP servers with the plugin name: `d-pubmed` becomes `ai4l_d-pubmed`. The prompts use the plain names, which the models map without problems.
 
 
 ## MCP Servers
@@ -128,6 +188,7 @@ The MCPs are configured in:
 * Grok Build: [.grok/config.toml](../.grok/config.toml)
 * Codex: [.codex/config.toml](../.codex/config.toml)
 * OpenCode: [.opencode/opencode.json](../.opencode/opencode.json) 
+* Antigravity: [.agents/plugins/ai4l/mcp_config.json](../.agents/plugins/ai4l/mcp_config.json)
 
 They are automatically loaded at startup and then run in isolated Docker containers to protect against malicious code.
 
@@ -182,7 +243,7 @@ There is no need to install Docker Desktop separately, as the Docker SBX will ha
 Claude Code includes built-in MCP servers for PubMed & Clinical Trials. However, they need credentials and make requests from Anthropic's Data Center, which are often blocked by target websites. We recommend disabling them and using the local versions instead.
 
 ```
-/mcp > `claude.ai Clinical Trials` & `claude.ai Clinical PubMed` > `disabled`
+/mcp > `claude.ai Clinical Trials` & `claude.ai PubMed` > `disabled`
 ```
 
 
@@ -208,7 +269,7 @@ We are currently using `Opus` / `Claude Code` for all creation/audit/fixing agen
 
 You can use this simple prompt to create your first ER and iteratively audit it with the /er skill:
 
-Claude Code / Grok Build / Muse Code / OpenCode
+Claude Code / Grok Build / Muse Code / OpenCode / Antigravity
 
 ```bash
 /er full Tadalafil
@@ -233,19 +294,21 @@ Real-world protocols sometimes combine interventions — PDE5 inhibitors with st
 
 We have included our /er skill, which allows for easy creation and auditing of evidence reviews. The skill is automatically loaded by the CLIs on startup.
 
-We have implemented the following /er commands (not case sensitive) in the skill:
+We have implemented the following /er commands in the skill:
 
-* **/er create** \[ \<intervention> \[ for\|to\|as\|\:  \<goal> ] ] - Create evidence review for \<intervention> to achieve \<goal>. The default goal is "for Health & Longevity". Results are saved in [creation_dir] with filenames constructed as defined in AI4L.md
+* **/er create** \[ \<intervention> \[ for\|to\|as\|\:  \<goal> ] ] - Create evidence review for \<intervention> to achieve \<goal>. The default goal is "for Health & Longevity". Results are saved in [creation_dir] with filenames constructed as defined in ER.md
 
-* **/er audit** \[ \<filename> | \<intervention> | all ] - Review a specific ER, all unaudited ERs, or the latest ER if nothing is specified. Can also be used to create audits for all ERs generated with other environments/models and saved in [creation_dir].
+* **/er audit** \[ \<filename> | \<intervention> ] - Audit a specific ER, the latest ER for \<intervention>, or the latest ER if nothing is specified. Can also be used to audit ERs generated with other environments/models and saved in [creation_dir].
 
-* **/er fix** \[ \<filename>  | \<intervention> ] - Review a specific ER, or the latest ER if nothing is specified, and fix the findings.
+* **/er fix** \[ \<filename> | \<intervention> ] - Audit a specific ER, the latest ER for \<intervention>, or the latest ER if nothing is specified, and fix the findings.
 
-* **/er iterate** \[ \<filename> | \<intervention> ] - Loop (audit → fix) until an audit shows 100% pass rate (up to [max_audits])
+* **/er iterate** \[ \<filename> | \<intervention> ] - Loop (audit → fix) on a specific ER, the latest ER for \<intervention>, or the latest ER if nothing is specified, until an audit shows 100% pass rate (up to [max_audits])
+
+* **/er combine** \[ \<filename> | \<intervention> ] - Merge all timestamped audits of an ER into one _ER_QA.md file (newest audit first), and move the originals to the trash. Runs automatically at the end of /er iterate
 
 * **/er full** \[ \<intervention> ] -  Create ER for \<intervention> → Loop (audit → fix)
 
-* **/er compare** \[ \<intervention> ] - Compare all ERs for \<intervention>, or use the latest \<intervention> worked on, if none specified. Allows comparison of ERs across different models for the same intervention. Very helpful when combined with the "/er audit all" command to gain a comprehensive understanding of the models' relative performance.
+* **/er compare** \[ \<intervention> ] - Compare all ERs for \<intervention>, or use the latest \<intervention> worked on, if none specified. Allows comparison of ERs across different models for the same intervention, taking their latest audits into account.
 
 
 ## Helpful Tools

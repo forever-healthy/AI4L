@@ -1,4 +1,4 @@
-![Version 2.0.1](https://img.shields.io/badge/Version-2.0.1-green.svg)
+![Version 2.0.2](https://img.shields.io/badge/Version-2.0.2-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Using Claude Desktop
@@ -7,7 +7,7 @@
 
 Compared to a pure Chat-UI, Claude Desktop offers:
 
-* Automatic loading of session instructions from CLAUDE.md
+* Automatic loading of session instructions from AGENTS.md (via CLAUDE.md)
 * Direct saving of files to the local filesystem
 * Uncomplicated auditing of reviews in a new, clean session, without the risk of session bias
 * Interactive conversations based on PERSONA.md
@@ -16,7 +16,7 @@ We strongly recommend using **Claude Opus**
 
 ## Setup
 
-* Download and expand [AI4L-main.zip](https://github.com/forever-healthy/AI4L/archive/refs/heads/main.zip). It contains the full project, including AI4L.md, PERSONA.md & CLAUDE.md with instructions for the workspace
+* Download and expand [AI4L-main.zip](https://github.com/forever-healthy/AI4L/archive/refs/heads/main.zip). It contains the full project, including ER.md, PERSONA.md & AGENTS.md with instructions for the workspace
 
 * Activate connectors for Clinical Trials, PubMed, and bioRxiv. Use: `Customize > Connectors`
 
@@ -50,9 +50,9 @@ The prompt will generate markdown files for the evidence review and the audit, w
 
 ### Interactive Conversations
 
-For interactive conversations about generated ERs, prompts, or health & longevity in general, use PERSONA.md as the system prompt. Claude Desktop loads it automatically via CLAUDE.md.
+For interactive conversations about generated ERs, prompts, or health & longevity in general, use PERSONA.md as the system prompt. Claude Desktop loads it automatically via AGENTS.md.
 
-It tells the model to behave, in conversation, the same way evidence reviews are generated from AI4L.md: same audience, tone, evidence standards, and analytical habits — without the document structure or audit checklist of an evidence review.
+It tells the model to behave, in conversation, the same way evidence reviews are generated from ER.md: same audience, tone, evidence standards, and analytical habits — without the document structure or audit checklist of an evidence review.
 
 
 ### Optional: Install Playwright MCP for URL validation

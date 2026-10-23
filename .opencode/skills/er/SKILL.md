@@ -1,7 +1,7 @@
 ---
 name: er
 description: AI4L - Main Skill for Evidence Review Creation and Auditing using @AGENTS
-version: 2.0.1
+version: 2.0.2
 ---
 
 # AI4L - Main Skill for Evidence Review Creation and Auditing using @AGENTS
@@ -18,6 +18,14 @@ version: 2.0.1
 
 
 * Full lines formatted as `line` comments must be ignored when processing commands.
+
+
+## Resolving the target ER
+
+* If no [args] are given, set [target_er] to the newest _ER.md file in [creation_dir]
+* Otherwise, if [args] names an existing _ER.md file in [creation_dir] (with or without the directory), set [target_er] to that file
+* Otherwise treat [args] as an intervention: list the _ER.md files in [creation_dir] whose filename starts with [args] converted the way 6.25 of [er_prompt] converts short_topic (lowercase, spaces and dashes to underscores, other characters removed), and set [target_er] to the newest of them by the date in the filename
+* If nothing matches, report `No ER found for: [args]` and exit
 
 
 ## COMMAND: create {topic}
@@ -43,11 +51,7 @@ version: 2.0.1
 
 `Audit an ER using the @er-auditor agent.`
 
-* If no [args] are given {
-  * Set [target_er] to the newest ER in [creation_dir]
-} else {
-  * Set [target_er] to [args]
-}
+* Resolve [target_er] from [args] (see "Resolving the target ER")
 
 * Report: `audit: [target_er]`
 
@@ -62,11 +66,7 @@ version: 2.0.1
 
 `Audit and fix an ER using the @er-fixer agent.`
 
-* If no [args] are given {
-  * Set [target_er] to the newest ER in [creation_dir]
-} else {
-  * Set [target_er] to [args]
-}
+* Resolve [target_er] from [args] (see "Resolving the target ER")
 
 * Report: `fix: [target_er]`
 
@@ -79,13 +79,9 @@ version: 2.0.1
 
 ## COMMAND: combine {er}
 
-`Create a final QA file from all audits`
+`Create a final _ER_QA.md file from all audits`
 
-* If no [args] are given {
-  * Set [target_er] to the newest ER in [creation_dir]
-} else {
-  * Set [target_er] to [args]
-}
+* Resolve [target_er] from [args] (see "Resolving the target ER")
 
 * Report: `combine: [target_er]`
 
@@ -98,11 +94,7 @@ version: 2.0.1
 
 `Loops audit/fix cycles up to [max_audits] times until [needed_passes] show 100% pass rate.`
 
-* If no [args] are given {
-  * Set [target_er] to the newest ER in [creation_dir]
-} else {
-  * Set [target_er] to [args]
-}
+* Resolve [target_er] from [args] (see "Resolving the target ER")
 
 * Report: `iterate: [target_er]`
 
@@ -123,7 +115,7 @@ Loop while [iteration] < [max_audits] and [consecutive_passes] < [needed_passes]
 
 * @er-combiner: `[target_er]`
 
-If [iteration] < [max_audits] {
+If [consecutive_passes] >= [needed_passes] {
   * Return: `status: success`
 } else {
   * Return: `status: failed`
@@ -138,7 +130,7 @@ If [iteration] < [max_audits] {
 `A create and multi-pass audit workflow.`
 
 * Execute the "create" command
-* Execute the "iterate" command
+* Execute the "iterate" command with [filename] returned by "create" as [args]
 
 ## COMMAND: compare {intervention}
 
@@ -155,6 +147,6 @@ If [iteration] < [max_audits] {
 * Compare all ERs in [creation_dir] with a similar [intervention] in their frontmatter
   * Compare the quality of the content
   * Be detailed
-  * Take into account the latest "QA.md" for each.
+  * Take into account the latest "_ER_QA.md" for each.
 
 * Present a clear recommendation of which ER is strongest and why.

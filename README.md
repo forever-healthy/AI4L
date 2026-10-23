@@ -1,4 +1,4 @@
-![Version 2.0.1](https://img.shields.io/badge/Version-2.0.1-green.svg)
+![Version 2.0.2](https://img.shields.io/badge/Version-2.0.2-green.svg)
 ![License MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
@@ -78,7 +78,7 @@ To avoid this, we logically move our prompt to the very end of our product lifec
 
 ## Audit-Driven Prompting
 
-The prompt "only" describes a very thorough, 400+ item QA audit process for an evidence review for a given topic, including all the hints and instructions one would also give to a human QA auditor. It does not, in any way, directly instruct an AI how to create a review.
+The ER prompt ([ER.md](prompts/ER.md)) "only" describes a very thorough, 400+ item QA audit process for an evidence review for a given topic, including all the hints and instructions one would also give to a human QA auditor. It does not, in any way, directly instruct an AI how to create a review.
 
 We use this "QA" prompt and task the AI with generating a review on a given topic that can pass an audit as described in the prompt. Leading frontier models understand this indirection and will try to generate a review that can pass the QA audit.
 
@@ -121,4 +121,4 @@ Here are some [examples of evidence reviews and audits](docs/Examples.md) create
 
 * [Limitations of AI4L](docs/Limitations.md) - What AI4L cannot do, and what to be cautious about
 * [Lessons Learned](docs/Lessons-Learned.md)- Our general findings working with models
-* [Contributing to AI4L](CONTRIBUTING.md) - How to improve the AI4L prompt
+* [Contributing to AI4L](CONTRIBUTING.md) - How to improve the ER prompt

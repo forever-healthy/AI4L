@@ -1,10 +1,10 @@
-![Version 2.0.1](https://img.shields.io/badge/Version-2.0.1-green.svg)
+![Version 2.0.2](https://img.shields.io/badge/Version-2.0.2-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 
 # Example Evidence Reviews and QA Audits
 
-[evipedia.ai](https://evipedia.ai) is based on AI4L — every evidence review published there is created and audited with the AI4L prompt. It is the place to see AI4L at work.
+[evipedia.ai](https://evipedia.ai) is based on AI4L — every evidence review published there is created and audited with the ER prompt ([ER.md](../prompts/ER.md)). It is the place to see AI4L at work.
 
 Reviews on evipedia are regenerated as the prompt evolves, so they reflect the current version of AI4L rather than the version that happened to be current when an example was saved.
 

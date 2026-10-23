@@ -1,16 +1,82 @@
 # AI4L - Change Log
 
 
-### v2.0.1 — 2026-09-27
+### v2.0.2 — 2026-10-23
+
+#### Support for Combination Treatments
+
+* AI4L can now create evidence reviews for two or more interventions given together. Following the pattern `Combining A, B & C [for goal]`.
+
+* The checklist now checks combinations too: whether a benefit of the agents given together has been tested (16.42), where co-administration effects belong (20.15), and that the conclusion addresses the agents together (29.4)
+
+* Already live in production on [evipedia.ai](https://evipedia.ai/)
+
+* [Combining Dasatinib & Quercetin as a Senolytic Therapy](https://evipedia.ai/dasatinib_quercetin_senolytic)
+
+* [Combining Statins & Ezetimibe to Lower LDL](https://evipedia.ai/statins_ezetimibe_ldl)
+
+* [Combining Pravastatin & Ezetimibe to Lower LDL](https://evipedia.ai/pravastatin_ezetimibe_ldl)
+
+* [Combining PDE5 Inhibitors & Statins to Treat Cancer](https://evipedia.ai/pde5_inhibitors_statins_cancer)
+
+* [Combining Ivermectin, Mebendazole & Fenbendazole to Treat Cancer](https://evipedia.ai/ivermectin_mebendazole_fenbendazole_cancer)
+
+* [Combining Daraxonrasib, Afatinib & SD-36 to Treat Cancer](https://evipedia.ai/daraxonrasib_afatinib_sd_36_cancer)
+
+* [Combining Spirulina, Chlorella, MCP & Modified Alginate Complex for Heavy Metal Detoxification](https://evipedia.ai/spirulina_chlorella_mcp_modified_alginate_complex_detox)
+
+
+#### Improved Evidence Handling for Risks & Benefits
+
+* The ER prompt was reviewed against several leading frontier models (Opus 5.5, GPT-6, Grok 4.7, Gemini 4 Argon & Muse Wonder Full) on about 100 evidence reviews of the same topics, and refined where the comparison showed systematic strenghts/weaknesses
+
+* Research results: contrary trials and reviews are searched for, cited in the item, flagged ⚠️ Conflicted and weighed; evidence from a different dose, form, route or compound is graded as indirect; High now needs more than one independent research group; retracted papers are excluded and errata are applied
+
+* Weighing contrary evidence: a systematic review or meta-analysis outranks single trials, a larger trial a smaller one, and several consistent trials a single one; evidence outweighed by stronger contrary evidence is graded Low; a trial too small to detect the effect is noted, not weighed
+
+* Clinical trial results: effect sizes are the difference between groups with their confidence interval, uncontrolled figures are labeled, side-effect rates come with the placebo rate, and absolute figures are reported only from the source, never calculated; finished trials are no longer described as ongoing, and each ongoing trial states what its result would change
+
+* Interactions: published interaction studies are searched for first; an interaction inferred only from mechanism is marked "(theoretical)", and thresholds for populations to avoid are sourced
+
+* Reference values: an optimal functional range is given only with a named source, otherwise the standard lab range or "No established target"; each biomarker is a safety check or a marker the intervention changes; thresholds, doses and protocol parameters are cited or stated as common practice
+
+* Sources: regulatory and legal facts carry a link to a source that states them (a news report, labeled as such, may stand in until the regulator publishes the fact), and no cited source is overstated or stretched to a comparison it did not make; where a paper's abstract and full text disagree, the review follows the full text and notes the discrepancy
+
+* Completeness is judged on what matters: an omitted benefit fails the audit only if it would be graded High, is an approved indication, is found by a systematic review or meta-analysis, or bears directly on a specific goal; an omitted risk fails if it would be graded Medium or High, is on the label, or is serious. An item that already cites contrary evidence fails only for contrary evidence that would change its grade; other finds are noted without failing, so audits can reach 100%
+
+* Checklist consolidated: contradictions between items resolved (1.4, 1.9/1.17, 2.8/2.10/29.5, 20.10/20.11, 28.6), four duplicate items merged (484 → 480), hints apply to authors as well; agents read ER.md and the review to their end
+
+* Sections 16 and 18 are reordered so that every rule follows what it uses: items and grading scale first, then grade checks, completeness, contrary evidence, layout, magnitude and sources. No item was added or removed; references to 16.x/18.x in earlier releases use the old numbering
+
+
+#### Support for Google Antigravity, Gemini 4 & OpenCode 2 - Updates for Muse Code & Codex
+
+* New environment: Google Antigravity (`agy`), with the agents and MCP servers configured as the `ai4l` plugin in `.agents/plugins/ai4l/` and the skills registered in `.agents/skills.json`. Its permissions live only in the global settings, so merge the provided template once — see [Using CLI Environments](docs/Using-CLI-Environments.md#antigravity-setup)
+
+* Gemini CLI is no longer supported, as Google no longer serves it to individual accounts; `GEMINI.md` and `.gemini/` are removed. Use Antigravity for Gemini models
+
+* New environment: OpenCode 2 (`opencode`), with its own installer; the agents run as subagents and web search works out of the box — see [Using CLI Environments](docs/Using-CLI-Environments.md#opencode-setup)
+
+* Muse Code (`muse`) now runs the agents as its own typed subagents from `.agents/agents/`, tested with Muse Wonder 1.0 and Muse Wonder Full 1.0. Muse keeps no project-level permissions, so start interactive sessions with `muse --approval-mode never` — see [Using CLI Environments](docs/Using-CLI-Environments.md#muse-code-setup)
+
+* Codex (`codex`) now spawns the agents with an underscore task name (`er-creator` → `er_creator`), the only form it accepts, and no longer asks for approval on every MCP tool call, as each MCP server sets `default_tools_approval_mode = "approve"`
+
+
+#### Other Changes
+
+* The main prompt is renamed from `prompts/AI4L.md` to `prompts/ER.md`; update any local copies or links
+
+* Project instructions now live in `AGENTS.md` for all environments; `CLAUDE.md` imports it, so Codex and OpenCode now also get the shared globals and rules
+
+* Examples now link to the live reviews and audits on evipedia, which stay current with the prompt; the outdated examples folder is removed
 
 * The creator, fixer and auditor use web search and the research MCPs as the prompt requires; their read limits apply to local files only
-* The checklist item count used by the audit is corrected to 449
 
+* Model names: the creator and auditor take their model name and version from their system prompt instead of guessing it, without product, effort or pricing names (e.g., `Opus 5.5` / `Opus`, `Gemini 4 Argon` / `Gemini-Argon`); variants now also differ in the filename. A model whose system prompt names no version is recorded by its bare name (e.g., `Grok` for Grok Build subagents), one that names no model at all as `Unknown`
 
-### v2.0.0 — 2026-09-25
+* Obstacle Protocol: a run stops only when a sub-agent itself cannot continue (it crashes, hits a hard limit, or a required agent, tool or file is missing); a failed call such as an unreachable website, a 403, a bot wall or a timeout is recorded and retried or passed to the next retrieval tier, never a reason to stop
 
-* Combination treatments: two or more interventions given together are reviewed as one intervention, now proven in production on evipedia — see the prompt examples
-* Examples now link to the live reviews and audits on evipedia, which stay current with the prompt; the outdated examples folder is removed
+* Frontmatter: `initial_topic` and `topic` are always wrapped in double quotes (6.2–6.5, 6.34); other values are quoted only where YAML requires it
 
 
 ### v1.3.29 — 2026-09-18
@@ -36,12 +102,14 @@
 ### v1.3.25 — 2026-09-12
 
 * The Grokipedia, Examine and ConsumerLab sections now search through every retrieval tier before calling an article absent, and an absence is challenged only when the auditor actually retrieves the article — a site that answers inconsistently can no longer send the audit loop back and forth
+
 * Alternate names are plain names, one entry each, so every brand name and abbreviation reaches the search index
 
 
 ### v1.3.24 — 2026-09-11
 
 * Two checklist items now lead with the condition they test, so an audit marks them not-applicable instead of passing them unexamined
+
 * Dropped the item asking whether a url looked guessed — intent cannot be observed, and every link is already verified by retrieving it
 
 

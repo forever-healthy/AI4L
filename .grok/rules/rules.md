@@ -1,4 +1,4 @@
-![Version 2.0.1](https://img.shields.io/badge/Version-2.0.1-green.svg)
+![Version 2.0.2](https://img.shields.io/badge/Version-2.0.2-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Grok-Specific Instructions
@@ -26,6 +26,6 @@ Use the `spawn_subagent` tool with these exact parameters:
 
 Always wait for the subagent to complete and return its result (including filename or pass_rate) before continuing.
 
-This translation must happen transparently so that the existing `.claude/skills/er/SKILL.md` (which uses the `@er-xxx:` syntax) continues to work unmodified across all environments (Claude, ChatGPT, Gemini, etc.).
+This translation must happen transparently so that the existing `.claude/skills/er/SKILL.md` (which uses the `@er-xxx:` syntax) continues to work unmodified across all environments.
 
 This ensures the agents write directly into `creation/` as required by the AI4L skill, while still giving them full capability. (Changed from worktree isolation because it was breaking the "all results must go in creation/" rule.)

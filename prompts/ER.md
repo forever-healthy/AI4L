@@ -1,9 +1,9 @@
-![Version 2.0.1](https://img.shields.io/badge/Version-2.0.1-green.svg)
+![Version 2.0.2](https://img.shields.io/badge/Version-2.0.2-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
 
-Full lines encapsulated in `   ` are treated as comments for the auditor and are not executed or included in any resulting document. They are hints and instructions for the auditor only.
+Full lines encapsulated in `   ` are hints: they define how an item is judged and are not part of any resulting document. Authors follow them as well.
 
 `The entire Introduction, Globals & Audit Instructions block is not part of the final audit document.`
 
@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 449 (which is the number of all checklist items)
+* Set [total_items] to 480 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -26,8 +26,8 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 * Set [prompt_version] to the version stated at the start of this document
 
 * Set [audit_date] to the date of the audit with a format of "YYYY-MMDD-HHMM" (e.g., 2026-0501-1430)
-* Set [audit_ai_fullname] to the full name of the model that is running in this session, including its version, but no additional qualifiers. (e.g., Opus 4.7, Sonnet 4, Grok 4.1, Gemini 3, ChatGPT 5.5)
-* Set [audit_ai_nickname] to the name of the AI model reduced to a single word without version, etc. (e.g., Opus, Sonnet, Grok, Gemini, GPT)
+* Set [audit_ai_fullname] to the full name of the model that is running in this session, as stated in your system prompt or developer instructions: the word or words directly before the version number, leaving out the first if there is more than one (the vendor or model family), followed by the version and, if stated, the variant (e.g., Claude Opus 5.5 → Opus 5.5, gemini-3.8-flash → Gemini 3.8 Flash, acme-nova-max-2.0 → Nova Max 2.0). Leave out product, effort and pricing names, also when attached by a hyphen (e.g., Codex, Build, high, free, preview), and capitalize every word. Never use a model name or version from memory. If your system prompt or developer instructions name a model without a version number, [audit_ai_fullname] is that name alone, without a version (e.g., "a Grok Build subagent" → Grok). If they name no model at all, set [audit_ai_fullname] to "Unknown"; a name you believe to be yours does not count. (e.g., Opus X.Y, Sonnet X.Y, Grok X.Y, Gemini X.Y Flash, GPT X.Y)
+* Set [audit_ai_nickname] to [audit_ai_fullname] without the version number, with all remaining words joined by hyphens (e.g., Opus, Sonnet, Grok, Gemini-Flash, GPT). If [audit_ai_fullname] has no version number or is "Unknown", [audit_ai_nickname] equals [audit_ai_fullname]
 
 * Set [audit_filename] by performing a literal string substitution on [review_filename]. Replace "_ER.md" with "_ER_QA_[audit_date].md".
   - E.g., `Intervention_2026-0303-1455_MODEL_ER.md` becomes `Intervention_2026-0303-1455_MODEL_ER_QA_2026-0303-1455.md`
@@ -38,18 +38,6 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 ## Auditor Instructions
 
 The following rules govern how this checklist must be used when performing an audit:
-
-
-### The intervention may be a combination
-
-[intervention] is whatever the ER's topic names — a single agent, or a combination of two or more agents given together (e.g., "PDE5 Inhibitors & Statins", "Ivermectin, Mebendazole & Fenbendazole").
-
-Where the topic names a combination, the combination is the intervention. It is the unit of analysis for every section: benefits, risks, mechanism, protocol, monitoring and conclusion are about the agents given together, not about each agent separately. An ER that reviews the agents one by one and never addresses their joint use fails the sections it splits.
-
-Two consequences for the auditor:
-
-* When an item cites a trial of a single agent, check that the ER says so and names the agent (16.35 / 18.34). An effect established for one agent — benefit or risk — is delivered by the combination and keeps its grade, since taking the combination means taking that agent. What needs evidence on the two together is the claim that the combination does more, or harms more, than either agent alone.
-* Effects arising only from co-administration — a shared metabolic pathway, overlapping half-lives, additive effect on a shared target — belong to the intervention itself (14.7, 18.1), not to Key Interactions (section 20), which covers what the intervention interacts with outside itself.
 
 
 ### Start Fresh
@@ -151,7 +139,7 @@ Every item marked as failed must include a specific comment stating what is wron
 
 ### 5-Step audit process
 
-To avoid hallucinations and calculation errors, break down the audit process into 5 steps:
+To avoid hallucinations and calculation errors, break down the audit process into 5 steps. After each step that saves [audit_filename], a Chat UI offers it for download, or displays it in full if it cannot.
 
 #### 1. Table generation
 
@@ -171,8 +159,6 @@ To avoid hallucinations and calculation errors, break down the audit process int
   - STOP the audit process
 
 * Save the result as a new file named "[audit_filename]" in [creation_dir]
-* If possible, display a download link for the user to save the file; otherwise,
-  - Display the full result (with all tables included, not a partial file), so it can be copied
 
 
 #### 2. URL Verification
@@ -190,13 +176,13 @@ To avoid hallucinations and calculation errors, break down the audit process int
 
   - In `Verified By` use exactly one of these values, spelled exactly as written: `d-clinicaltrialsgov`, `d-pubmed`, `d-browser`, `d-fetch`, `d-proxy-1`, `d-proxy-2`, or `none`. NEVER invent a variant spelling, a tool name not in this list, or a combination of them.
 
-  - For PubMed links, use `d-pubmed` (`pubmed_fetch_articles`) first. If the PMID resolves and the returned title matches the ER's claim, mark `Loaded` 🟢 and `Verified By` `d-pubmed`. Only if the PMID does not resolve, fall back to the chain below.
+  - For PubMed links, use `d-pubmed` (`pubmed_fetch_articles`) first. If the PMID resolves, mark `Loaded` 🟢 and `Verified By` `d-pubmed`; the returned title decides `Match`. Only if the PMID does not resolve, fall back to the chain below.
 
-  - For ClinicalTrials.gov links, use `d-clinicaltrialsgov` (`clinicaltrials_get_study_record`) first. If the NCT ID resolves and the study title matches the ER's claim, mark `Loaded` 🟢 and `Verified By` `d-clinicaltrialsgov`. Only if the NCT ID does not resolve, fall back to the chain below.
+  - For ClinicalTrials.gov links, use `d-clinicaltrialsgov` (`clinicaltrials_get_study_record`) first. If the NCT ID resolves, mark `Loaded` 🟢 and `Verified By` `d-clinicaltrialsgov`; the study title decides `Match`. Only if the NCT ID does not resolve, fall back to the chain below.
 
   - Try to retrieve the url using `d-browser`. If `d-browser` fails, try `d-fetch`. If `d-fetch` also fails, then, if available, try `d-proxy-1`, and if that also fails, `d-proxy-2`. These are bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers. An archive or cache is NOT a retrieval tier and can never satisfy this item.
 
-  - Loading has failed unless you are holding the genuine target page. A transport error, an error page (404, 500, …), or a bot-detection interstitial (CAPTCHA, "Security Checkpoint", "Verify your browser") are all failures.
+  - Loading has failed unless you are holding the genuine target page. A transport error, an error page (404, 403, 500, …), or a bot-detection interstitial (CAPTCHA, "Security Checkpoint", "Verify your browser") are all failures.
 
   - If every tier fails, mark `Loaded` 🔴, `Verified By` `none`, and `Match` 🔴. Always comment on what happened.
 
@@ -224,8 +210,6 @@ To avoid hallucinations and calculation errors, break down the audit process int
 * DO NOT count items or calculate the pass rate
 
 * Save the result by overwriting "[audit_filename]" in [creation_dir]
-* If possible, display a download link for the user to save the file; otherwise,
-  - Display the full result (with all tables included, not a partial file), so it can be copied
 
 
 #### 4. Counting
@@ -247,9 +231,7 @@ To avoid hallucinations and calculation errors, break down the audit process int
   - Report the fact and the reason
   - STOP the audit process
 
-* Save the result by overwriting "[audit_filename]";
-* If possible, display a download link for the user to save the file; otherwise,
-  - Display the full result (with all tables included, not a partial file), so it can be copied
+* Save the result by overwriting "[audit_filename]" in [creation_dir]
 
 
 #### 5. Documentation
@@ -287,11 +269,6 @@ rewrite the downstream field. Rewriting [intervention] to match a corrupted down
 corrupts the input chain and is never a valid fix.
 
 
-### Hints for the auditor
-
-If necessary, hints for the auditor in the actual checklist are formatted `like this` and must not be part of the resulting document.
-
-
 ### End of process description
 
 The actual audit form starts below this line
@@ -312,7 +289,7 @@ audit_duration: "[Actual time the audit took in HH:MM format]"
 
 # Audit: [review_canonical_topic]
 
-Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https://github.com/forever-healthy/AI4L) / [audit_ai_fullname]
+Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https://github.com/forever-healthy/AI4L) / [audit_ai_fullname]
 
 [Iterations](#iterations)
 
@@ -352,7 +329,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 1.3 The document does not jump to conclusions prematurely; it builds its case through evidence
 
-* 1.4 The tone of the document is simultaneously expert, accessible, objective, and data-driven, but also empowering and encouraging
+* 1.4 The tone of the document is expert, accessible, objective and data-driven
 
 * 1.5 The document reads as a trusted, knowledgeable guide rather than a prescriptive doctor
 
@@ -362,9 +339,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 1.8 The document never addresses "the reader" directly — it presents evidence, not guidance
 
-* 1.9 Content is written in plain language, avoiding unnecessary medical jargon
-
-`A term is "unnecessary" when a plain-language word would carry the same precision; where a specialist term is the only precise option it is kept and explained at first use. Entry and summary surfaces hold to a stricter plain-language bar — see (Motivation) and (Conclusion).`
+* 1.9 Wording is plain where a plain word is equally precise; otherwise the clinical term is used and explained at first use. Colloquial or consumer-grade terms are never used (e.g., "oral medication" not "pill(s)"; "injection" not "shot"; "adverse event" not "bad reaction"), on every surface including Motivation and Conclusion. Direct quotes are exempt.
 
 * 1.10 Information is presented in a concise and very compact manner
 
@@ -372,15 +347,11 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 1.12 The target audience is health- and longevity-oriented adults who are risk-aware, proactive, and actively seeking to optimize health or apply the intervention under review.
 
-* 1.13 The target audience is willing to employ lifestyle and behavioral changes as well as follow protocols that may be inconvenient, costly, or require effort.
+* 1.13 The target audience is willing to make lifestyle and behavioral changes and to follow protocols that are inconvenient, costly, or demanding. The document is not written for the general population, who are unwilling to make such changes or follow such protocols.
 
-* 1.14 The document is NOT written for the general population, who are unwilling to employ lifestyle and behavioral changes or follow protocols that may be inconvenient, costly, or require effort.
+* 1.14 Framing, takeaways, and risk/benefit weighting throughout the document reflect this audience, including where an intervention's signal for the average person differs from its signal for this audience.
 
-* 1.15 Framing, takeaways, and risk/benefit weighting throughout the document reflect this audience, including where an intervention's signal for the average person differs from its signal for this audience.
-
-* 1.16 The document's own voice frames usage in **longevity** terms, not "anti-aging" (e.g., "anti-aging clinics", "anti-aging community", "anti-aging medicine"). Proper names that contain "anti-aging" (e.g., "American Academy of Anti-Aging Medicine") are quoted verbatim.
-
-* 1.17 The document's own voice uses formal clinical and scientific terminology, not colloquial or consumer-grade language (e.g., "oral medication" not "pill(s)"; "oral" / "administered orally" not "taken by mouth" / "given by mouth"; "injection" not "shot"; "adverse event" not "bad reaction"). This holds on EVERY surface, including Motivation and Conclusion — the stricter plain-language bar there (see 1.9) does not license lay phrasing for route of administration. Direct quotes from sources are exempt.
+* 1.15 The document's own voice frames usage in **longevity** terms, not "anti-aging" (e.g., "anti-aging clinics", "anti-aging community", "anti-aging medicine"). Proper names that contain "anti-aging" (e.g., "American Academy of Anti-Aging Medicine") are quoted verbatim.
 
 
 ## 2. Handling of Scientific Evidence
@@ -399,15 +370,25 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 2.7 The document does not adopt any professional establishment's consensus position as the default truth. Mainstream and dissenting positions are both presented as claims supported (or not) by evidence.
 
-* 2.8 When the body of available evidence is produced primarily by parties with a direct financial interest in the intervention's adoption or rejection (e.g., professional associations whose members perform the procedure, pharmaceutical manufacturers, device makers), this conflict of interest is identified and named at first citation and again in the Conclusion.
+* 2.8 When the body of available evidence is produced primarily by parties with a direct financial interest in the intervention's adoption or rejection (e.g., professional associations whose members perform the procedure, pharmaceutical manufacturers, device makers), this conflict of interest is identified and named at first citation.
 
 * 2.9 When competing interventions differ substantially in cost, the ER identifies whether institutional payers (insurers, national health systems) have a systematic financial incentive to favor one over the other, and notes this as a potential source of structural bias in guideline formation and research funding.
 
-* 2.10 When a professional or advocacy organization is cited as a primary source of evidence or guidelines, the ER notes whether that organization's membership derives direct revenue from the conclusions it endorses — immediately adjacent to where the organization's position or advocacy is stated (not merely at its introduction or first mention), and again in the Conclusion. This applies symmetrically to all cited parties on all sides of the debate.
+* 2.10 When a professional or advocacy organization is cited as a primary source of evidence or guidelines, the ER notes whether that organization's membership derives direct revenue from the conclusions it endorses — immediately adjacent to where the organization's position or advocacy is stated (not merely at its introduction or first mention). This applies symmetrically to all cited parties on all sides of the debate.
 
 * 2.11 Content is framed for the target audience (see 1.12), not as population-level outcomes.
 
 * 2.12 A finding attributed to a specific paper, or to a body of reviews (e.g., "Cochrane reviews of X show…"), carries a link to that paper, or to one of those reviews.
+
+* 2.13 No retracted paper is used as evidence (PubMed shows a "Retraction in" notice).
+
+* 2.14 Where a cited paper has an erratum that changes a cited figure or conclusion, the ER uses the corrected version and notes the correction where the paper is cited.
+
+* 2.15 A regulatory or legal fact (e.g., a drug's schedule, an approval or warning, an advisory committee vote) carries a link to a source that states it. Advocacy sites, news reports and law-firm alerts are not such a source; they may be cited alongside one, but not in place of it. If the regulator has not yet published the fact (e.g., meeting minutes pending), a news report may stand in when the text says so (e.g., "reported by AJMC; FDA minutes not yet posted"), the regulator's own page for the event is cited alongside it, and the search comment names the regulator pages checked.
+
+* 2.16 A claim attributed to a cited source states no more than the source shows: not stronger (e.g., a trend reported as a finding) and not broader (e.g., a comparison or subgroup the study did not examine).
+
+* 2.17 Where a cited paper's abstract and full text disagree on a cited figure or conclusion (e.g., significant in the abstract, not significant in the results), the ER follows the full text and notes the discrepancy where the paper is cited.
 
 
 ## 3. General Formatting
@@ -440,7 +421,9 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 3.14 Chemical compound names and IUPAC forms: keep hyphens, numeric locants, and lowercase elements as written ("N-acetylcysteine" in body text, "N-Acetylcysteine" only if it is the canonical_name/short_topic where CMS title-case applies to the word after the prefix).
 
-* 3.15 Every word count in this document excludes HTML comments. They record provenance for the auditor, not content for the reader, and the search statements required in Sections 9–12 are on their own longer than the annotation limits those sections set.
+* 3.15 Every word count in this document excludes HTML comments.
+
+`HTML comments record provenance for the auditor, not content for the reader. The search statements that Sections 9–12, 16, 18, 20 and 30 require inside HTML comments would by themselves exceed the word limits those sections set.`
 
 
 
@@ -499,15 +482,15 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 5.10 The page at each URL contains content matching the link's annotation in the ER (the page is about the cited topic; the article/resource title matches)
 
-* 5.11 Link text that describes a specific study, trial, or finding resolves to that study — not to a reference work, monograph, database entry, or review that merely mentions it. Link text pointing to such a secondary source names it as one (e.g. "a drug monograph", "a systematic review"), never as the primary finding.
-
-* 5.12 No link points to a web archive or cache — web.archive.org, archive.today/archive.ph, or a search-engine cache. If the live URL cannot be retrieved, the link is REMOVED rather than replaced with an archived copy.
-
 `Use "d-browser" or, if it fails, "d-fetch", or, if that also fails, then, if available, "d-proxy-1" and then "d-proxy-2" to read the page, then confirm the content matches the link's description in the ER (e.g., the page is about the cited topic, the article title matches what the ER claims). A generic landing page, paywall, bot wall, or unrelated content fails this check.`
 
 `For PubMed links, the auditor must instead use "d-pubmed" ("pubmed_fetch_articles") to retrieve the article metadata and verify the returned title matches the title claimed in the ER. A mismatch means the PMID was fabricated or assigned to the wrong paper.`
 
 `For ClinicalTrials.gov links, the auditor must instead use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") to retrieve the study record and verify the study title matches the trial claimed in the ER. A mismatch means the NCT ID was fabricated or assigned to the wrong trial.`
+
+* 5.11 Link text that describes a specific study, trial, or finding resolves to that study — not to a reference work, monograph, database entry, or review that merely mentions it. Link text pointing to such a secondary source names it as one (e.g. "a drug monograph", "a systematic review"), never as the primary finding.
+
+* 5.12 No link points to a web archive or cache — web.archive.org, archive.today/archive.ph, or a search-engine cache. If the live URL cannot be retrieved, the link is REMOVED rather than replaced with an archived copy.
 
 
 
@@ -521,9 +504,9 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 `Topic Expansion`
 
-* 6.3 If the [initial_topic] of the evidence review is just a name of a single intervention or a list of interventions (e.g., "Metformin", "Resveratrol & NMN"), the [topic] is stated as "topic: "[initial_topic] for Health & Longevity""
+* 6.3 If the [initial_topic] of the evidence review is just a name of a single intervention or a list of interventions (e.g., "Metformin", "Resveratrol & NMN"), the [topic] is stated as 'topic: "[initial_topic] for Health & Longevity"'
 
-* 6.4 If the [initial_topic] of the evidence review is of the form "[intervention(s)] : [goal]", the [topic] is stated as "topic: "[intervention(s)] to/for/as [goal]" using a fitting preposition (e.g., "Metformin : Skin Rejuvenation" → "Metformin for Skin Rejuvenation")
+* 6.4 If the [initial_topic] of the evidence review is of the form "[intervention(s)] : [goal]", the [topic] is stated as 'topic: "[intervention(s)] to/for/as [goal]"' using a fitting preposition (e.g., "Metformin : Skin Rejuvenation" → "Metformin for Skin Rejuvenation")
 
 * 6.5 Otherwise [topic] is stated as 'topic: "[initial_topic]"'
 
@@ -575,14 +558,14 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 `AI name & Prompt`
 
-* 6.26 Version of the AI4L.md file used to create the document is stated as "prompt_version: [Version of AI4L.md]"
+* 6.26 Version of the ER.md file used to create the document is stated as "prompt_version: [Version of ER.md]"
 * 6.27 Creation date and time of the document is stated as "creation_date: [YYYY-MMDD-HHMM]" (e.g., 2026-0501-1430)
 
 * 6.28 The nickname of the AI used to create the document is stated as "creator_ai_nickname: [creator_ai_nickname]"
-* 6.29 The nickname of the AI is just a single word model name without version, etc. (e.g., Opus, Sonnet, Grok, Gemini, ChatGPT)
+* 6.29 The nickname of the AI is the full name without the version number, with all remaining words joined by hyphens (e.g., Opus, Sonnet, Grok, Gemini-Flash, GPT); when the full name has no version number or is "Unknown", the nickname equals the full name
 
 * 6.30 The full name of the AI used to create the document is stated as "creator_ai_fullname: [creator_ai_fullname]"
-* 6.31 The full name of the AI consists of the [creator_ai_nickname] and the model version number and no additional qualifier (e.g., Opus 4.6, Sonnet 3.2, Grok 4.5, Gemini 3.1, ChatGPT 5.4)
+* 6.31 The full name of the AI consists of the model name (the word or words directly before the version number, leaving out the first if there is more than one, e.g., Claude Opus 5.5 → Opus 5.5), the model version number and the variant (if any) as stated in the system prompt or developer instructions of the creating model, with every word capitalized and without product, effort or pricing names (e.g., Opus X.Y, Sonnet X.Y, Grok X.Y, Gemini X.Y Flash, GPT X.Y), the model name alone when the system prompt or developer instructions name a model without a version number (e.g., Grok), or "Unknown" when neither the system prompt nor the developer instructions of the creating model name a model
 
 * 6.32 The knowledge cutoff of the AI is stated as "knowledge_cutoff: [knowledge_cutoff]"
 
@@ -593,7 +576,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 `Cleanliness and consistency of frontmatter values`
 
-* 6.34 All frontmatter values are trimmed: no leading or trailing whitespace, no surrounding quotes unless the value contains a colon, bracket, or leading special character that requires YAML quoting.
+* 6.34 All frontmatter values are trimmed: no leading or trailing whitespace. The values of initial_topic and topic are always wrapped in double quotes; all other values carry no surrounding quotes unless the value contains a colon, bracket, or leading special character that requires YAML quoting.
 
 
 ## 7. Title
@@ -644,7 +627,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 9.3 A statement by the author about the search is placed inside an HTML comment
 
-* 9.4 Content is of eligible type: blog posts, podcast episodes, video presentations, YouTube lectures, expert commentary, and qualifying academic articles (primary research, narrative reviews, editorials — NOT systematic reviews or meta-analyses)
+* 9.4 Content is of eligible type: blog posts, podcast episodes, video presentations, YouTube lectures, expert commentary, and qualifying academic articles (primary research, narrative reviews, editorials)
 
 * 9.5 Content from the following experts is prioritized (where directly relevant content exists):
 
@@ -659,7 +642,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 `1. Web search: search for "<expert name> <intervention>" using all available web search tools (e.g., the built-in "WebSearch", or an MCP-provided search tool).`
 
-`2. On-site search: use "browser_navigate" to load the expert's platform and search for the intervention directly via the site's own search function, then "browser_snapshot" to read the results.`
+`2. On-site search: load the expert's platform and search for the intervention via the site's own search function, using the Section 5 retrieval tiers in order ("d-browser" with "browser_navigate" + "browser_snapshot"; if it fails, "d-fetch"; then "d-proxy-1", then "d-proxy-2") until one returns the site's search results.`
 
 `Only after both searches return no relevant results may the auditor confirm the "not found" claim. A brief mention within a broader episode or article still counts as relevant content if it discusses the intervention by name in a health context.`
 
@@ -673,7 +656,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 9.12 Up to 5 items are listed. Every item independently satisfies 9.2 and 9.4 and falls outside the exclusions in 9.6–9.11; neither reaching the count nor an item's presence on a priority platform is itself a justification for inclusion
 
-* 9.13 Where fewer than five qualify, fewer are listed, with a brief explanation visible to the user of why
+* 9.13 Where fewer than five qualify, fewer are listed with a brief visible note explaining why; the list is not padded with marginally relevant content
 
 * 9.14 No more than one item per expert, publication, or organization is included (no duplicates from the same source)
 
@@ -702,9 +685,7 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 9.26 If content from one or more of the priority experts could not be found, a brief note, visible to the user, at the end of the section, explains why
 
-* 9.27 If fewer than 5 high-quality sources could be found, a brief note, visible to the user, explains this, and the list is not padded with marginally relevant content
-
-* 9.28 Each annotation is at most 35 words
+* 9.27 Each annotation is at most 35 words
 
 
 ## 10. Grokipedia
@@ -860,66 +841,70 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 ## 16. Expected Benefits
 
-* 16.1 All major known benefits of the intervention are addressed (no significant omissions)
+* 16.1 Each item is a distinct outcome. The same outcome is not restated at a different granularity, split by population or endpoint, or repeated under another evidence level; where two items share a mechanism and an endpoint, they are merged.
+* 16.2 Content is framed for the target audience (see 1.12), not as population-level outcomes.
 
-* 16.2 Each item is a distinct outcome. The same outcome is not restated at a different granularity, split by population or endpoint, or repeated under another evidence level; where two items share a mechanism and an endpoint, they are merged.
+* 16.3 Each item is assigned a "Level of Evidence" grade
+* 16.4 Only the following four levels are used exactly: High, Medium, Low, Speculative
+* 16.5 No hybrid or intermediate levels are used (e.g., no "Low-Medium" or "Medium-High")
 
-* 16.3 Content is framed for the target audience (see 1.12), not as population-level outcomes.
+* 16.6 The evidence level reflects the class of evidence behind the item. High: a human clinical endpoint (symptoms, events, function) or a clinical surrogate validated against outcomes in people (e.g., blood pressure, LDL, HbA1c, bone mineral density, eGFR, a named validated scale), shown in trials from more than one independent research group, and the annotation names those groups (e.g., by lead author). Medium: the same class of outcome in a single trial, in trials from one research group, or in consistent observational data from studies with a comparison group. Low: human data that are uncontrolled (e.g., case series, case reports), indirect, or outweighed by contrary evidence. Speculative: no human outcome data — in-vitro assays, animal work, and unvalidated biomarkers (e.g., MIC or zone assays, MDA, SOD, total antioxidant capacity) cap here regardless of how consistent they are.
 
-* 16.4 A dedicated search for the intervention's complete benefit profile was performed using clinical and expert sources before writing this section. A statement by the author about the search is placed inside an HTML comment at the start of the section.
+`Who was studied belongs in the annotation, not in the grade. A replicated human HbA1c or blood-pressure finding in a disease population may be High; an MIC, MDA, SOD, or "total antioxidant capacity" finding is Speculative.`
 
-`The auditor should perform an in-depth search using all available search tools (e.g., the built-in "WebSearch", "pubmed_search_articles", or an MCP-provided search tool) to cross-check and verify that the list of benefits presented in this section is complete, and no benefits have been left unaddressed.`
+* 16.7 Indirect evidence is graded at most Low, and the annotation names the mismatch. Evidence is indirect when what was studied differs from the intervention in dose (e.g., full-dose trials for a microdose), form (e.g., whole food or extract for a purified compound), route, or compound (e.g., a parent compound, an analogue, or the body's own levels of the substance), or when the intervention was tested only together with another treatment.
+* 16.8 If the intervention is a combination, each item states whether the cited evidence tested the combination or only one of its agents, naming the agent. A benefit established for one agent is delivered by the combination and keeps the grade its evidence supports; this is not indirect evidence under 16.7 on that ground alone. A claim that the combination achieves more than either agent alone rests on evidence testing the two together and is graded on that evidence.
 
-* 16.5 Each item is assigned a "Level of Evidence" grade
-* 16.6 Only the following four levels are used exactly: High, Medium, Low, Speculative
-* 16.7 No hybrid or intermediate levels are used (e.g., no "Low-Medium" or "Medium-High")
+* 16.9 Each item's evidence grade is appropriate, given the cited studies and data
+* 16.10 No items are overstated relative to their evidence level
+* 16.11 No items are understated relative to their evidence level
 
-* 16.8 Items are grouped by evidence level
-* 16.9 The groups are presented in the order: High, Medium, Low, Speculative
-* 16.10 The group High is presented as "### High 🟩 🟩 🟩"
-* 16.11 The group Medium is presented as "### Medium 🟩 🟩"
-* 16.12 The group Low is presented as "### Low 🟩"
-* 16.13 The group Speculative is presented as "### Speculative 🟨"
+* 16.12 A dedicated search for the intervention's benefit profile was performed using clinical and expert sources before writing this section. The search also covered studies of any design that found no effect or the opposite effect. A statement by the author about the search is placed inside an HTML comment at the start of the section.
 
-* 16.14 The actual item titles are presented in H4
-* 16.15 The actual item levels are not shown on a per-item basis
+* 16.13 All major known benefits of the intervention are addressed (no significant omissions)
 
-* 16.16 Each item includes an annotation paragraph between the H4 title and the Magnitude line
+`The auditor should perform an in-depth search using all available search tools (e.g., the built-in "WebSearch", "pubmed_search_articles", or an MCP-provided search tool) for benefits the section leaves out. A benefit is major if its evidence would be graded High, it is an approved indication, a systematic review or meta-analysis of human studies finds it, or, for a [goal] other than Health & Longevity, it bears directly on [goal] with evidence graded Low or higher. A fail names the missing benefit and its evidence. Other omitted benefits are listed in the Comment column, not in `## Issues`, without failing the item.`
 
-* 16.17 The annotation is 2–5 sentences and at most 90 words for High and Medium, 50 for Low, 35 for Speculative, covering: what the benefit is, the proposed mechanism (if relevant), the evidence basis (e.g., "meta-analysis of 20 RCTs", "large observational cohort"), and any contextual nuance (limitations, population specifics, conflicting findings)
+* 16.14 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
+* 16.15 Conflicted evidence is explained in the annotation text. The annotation's last sentence states the net reading of the conflict in one sentence.
+* 16.16 If a randomized trial or a higher-tier review (e.g., Cochrane) measured the same benefit for the same intervention and found no effect or the opposite effect, at least one of them is cited in the item with its result, the item carries the ⚠️ Conflicted flag (16.14), and the item is graded on the stronger evidence. If the contrary evidence is stronger, the item is graded at most Low.
 
-* 16.18 The annotation is preceded and followed by a blank line
-* 16.19 Speculative items also include an annotation; if no controlled studies exist, it notes the basis is mechanistic or anecdotal only
+`The auditor should search for randomized trials and higher-tier reviews of each benefit that found no effect or the opposite effect. Contrary evidence counts only if it tested the benefit as the item claims it: the same outcome, in a population the item's claim covers. A trial too small to detect the effect at the size or rate the item reports is listed in the Comment column, not weighed. Strength: a systematic review or meta-analysis outranks single trials; among trials, the larger; several consistent trials outrank one of the same size. If the item already cites contrary evidence and carries the ⚠️ Conflicted flag, a further contrary trial fails the item only if it would change the item's grade. A fail names the paper and what adding it changes. Other contrary trials are listed in the Comment column, not in `## Issues`, without failing the item.`
 
-* 16.20 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
-* 16.21 Conflicted evidence is explained in the annotation text. The annotation's last sentence states the net reading of the conflict in one sentence.
-
-* 16.22 If a benefit does not bear on [goal], it carries a "⭕️ Not Central to [goal]" flag directly after the item name in the title (not in the annotation), and the annotation states what it does bear on
-
-* 16.23 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports:
-  a. an actual outcome as a figure — effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure;
-  b. the direction plus the conditions under which it holds (e.g., "prevalence rises steeply above 2 mg/L"), together with a statement that the literature report no outcome figure.
-* 16.24 If the literature supports neither, the line begins exactly "**Magnitude:** Not quantified in available studies." and continues with one sentence stating why the literature gives none (e.g., no controlled trial has measured this outcome; only case reports exist)
-* 16.25 Items classified as "Speculative" do NOT include a magnitude line
-* 16.26 The magnitude line is preceded by a blank line
-
-* 16.27 Each item's evidence grade is appropriate, given the cited studies and data
-* 16.28 Each item is verifiable by the sources cited or by independent lookup
-* 16.29 Magnitude values are plausible and consistent with known clinical data
-* 16.30 No items are overstated relative to their evidence level
-* 16.31 No items are understated relative to their evidence level
-
-* 16.32 Each item (except Speculative) cites at least one PubMed link in the item
-
-* 16.33 The evidence level reflects the class of evidence behind the item. High: a human clinical endpoint (symptoms, events, function) or a clinical surrogate validated against outcomes in people (e.g., blood pressure, LDL, HbA1c, bone mineral density, eGFR, a named validated scale), shown in more than one trial. Medium: the same class of outcome in a single trial or in consistent observational data. Low: human data that are uncontrolled, indirect, or conflicting. Speculative: no human outcome data — in-vitro assays, animal work, and unvalidated biomarkers (e.g., MIC or zone assays, MDA, SOD, total antioxidant capacity) cap here regardless of how consistent they are.
-
-`Who was studied belongs in the annotation (16.17), not in the grade. A replicated human HbA1c or blood-pressure finding in a disease population may be High; an MIC, MDA, SOD, or "total antioxidant capacity" finding is Speculative.`
-
-* 16.34 All four evidence-level headings (High, Medium, Low, Speculative) are present, in that order. A level with no items still carries the heading. An empty High or Medium is followed by one sentence naming the class of evidence that falls short; an empty Low or Speculative carries the heading alone. That sentence is not an H4 item and has no Magnitude line.
+* 16.17 Items are grouped by evidence level
+* 16.18 The groups are presented in the order: High, Medium, Low, Speculative
+* 16.19 The group High is presented as "### High 🟩 🟩 🟩"
+* 16.20 The group Medium is presented as "### Medium 🟩 🟩"
+* 16.21 The group Low is presented as "### Low 🟩"
+* 16.22 The group Speculative is presented as "### Speculative 🟨"
+* 16.23 All four evidence-level headings (High, Medium, Low, Speculative) are present, in that order. A level with no items still carries the heading. An empty High or Medium is followed by one sentence naming the class of evidence that falls short; an empty Low or Speculative carries the heading alone. That sentence is not an H4 item and has no Magnitude line.
 
 `Example: "No benefit reaches High: the human trials are small uncontrolled series, and the antimicrobial data are in-vitro MIC assays." A missing heading is a fail even when the skip is justified. A because-line that only says evidence is limited, without naming the evidence class, is a fail.`
 
-* 16.35 If the intervention is a combination, each item states whether the cited evidence tested the combination or only one of its agents, naming the agent. A benefit established for one agent is delivered by the combination and keeps the grade its evidence supports. A claim that the combination achieves more than either agent alone rests on evidence testing the two together and is graded on that evidence.
+* 16.24 The actual item titles are presented in H4
+* 16.25 The actual item levels are not shown on a per-item basis
+* 16.26 If a benefit does not bear on [goal], it carries a "⭕️ Not Central to [goal]" flag directly after the item name in the title (not in the annotation), and the annotation states what it does bear on
+
+* 16.27 Each item includes an annotation paragraph between the H4 title and the Magnitude line
+* 16.28 The annotation is 2–5 sentences and at most 90 words for High and Medium, 50 for Low, 35 for Speculative, covering: what the benefit is, the proposed mechanism (if relevant), the evidence basis (e.g., "meta-analysis of 20 RCTs", "large observational cohort"), and any contextual nuance (limitations, population specifics, conflicting findings)
+* 16.29 The annotation is preceded and followed by a blank line
+* 16.30 Speculative items also include an annotation; if no controlled studies exist, it notes the basis is mechanistic or anecdotal only
+
+* 16.31 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports: an actual outcome as a figure (effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure); otherwise the direction plus the conditions under which it holds (e.g., "prevalence rises steeply above 2 mg/L"), together with a statement that the literature reports no outcome figure.
+* 16.32 If the literature supports neither, the line begins exactly "**Magnitude:** Not quantified in available studies." and continues with one sentence stating why the literature gives none (e.g., no controlled trial has measured this outcome; only case reports exist)
+* 16.33 When the cited source is a controlled study, the Magnitude figure is the difference between the intervention and comparison groups (e.g., "5.0 points more than placebo"), with its 95% CI where the source reports one.
+* 16.34 A figure from a study without a comparison group is labeled "no control group".
+* 16.35 When a controlled study reports only the change within each group, both groups' figures are given and the line says "not compared between groups".
+* 16.36 A relative figure is accompanied by absolute figures (e.g., event rates in both groups, events per 1,000, NNT) only when the source reports them; otherwise none are given. Absolute figures are never calculated.
+* 16.37 Items classified as "Speculative" do NOT include a magnitude line
+* 16.38 The magnitude line is preceded by a blank line
+
+* 16.39 Magnitude values are plausible and consistent with known clinical data
+
+* 16.40 Each item is verifiable by the sources cited or by independent lookup
+* 16.41 Each item (except Speculative) cites at least one PubMed link in the item
+
+* 16.42 If the intervention is a combination, the section states whether any benefit of the agents given together has been tested, and if none has, says so
 
 
 ## 17. Benefit-Modifying Factors
@@ -938,63 +923,68 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 ## 18. Potential Risks & Side Effects
 
-* 18.1 All major known risks and side effects of the intervention are addressed (no significant omissions). For a combination, this includes risks arising only from co-administration
-* 18.2 Each item is a distinct outcome. The same outcome is not restated at a different granularity, split by population or endpoint, or repeated under another evidence level; where two items share a mechanism and an endpoint, they are merged.
+* 18.1 Each item is a distinct outcome. The same outcome is not restated at a different granularity, split by population or endpoint, or repeated under another evidence level; where two items share a mechanism and an endpoint, they are merged.
+* 18.2 Content is framed for the target audience (see 1.12), not as population-level outcomes.
 
-* 18.3 Content is framed for the target audience (see 1.12), not as population-level outcomes.
+* 18.3 Each item is assigned a "Level of Evidence" grade
+* 18.4 Only the following four levels are used exactly: High, Medium, Low, Speculative
+* 18.5 No hybrid or intermediate levels are used (e.g., no "Low-Medium" or "Medium-High")
 
-* 18.4 A dedicated search for the intervention's complete side effect profile was performed using a drug reference source (e.g., prescribing information, drugs.com, Mayo Clinic) before writing this section. A statement by the author about the search is placed inside an HTML comment at the start of the section.
+* 18.6 The evidence level reflects the class of evidence behind the item. High: a human clinical endpoint (symptoms, events, function, documented adverse events) or a clinical surrogate validated against outcomes in people (e.g., blood pressure, LDL, HbA1c, bone mineral density, eGFR, a named validated scale), shown in trials from more than one independent research group, and the annotation names those groups (e.g., by lead author). Medium: the same class of outcome in a single trial, in trials from one research group, or in consistent observational data from studies with a comparison group. Low: human data that are uncontrolled (e.g., case series, case reports), indirect, or outweighed by contrary evidence. Speculative: no human outcome data — in-vitro cytotoxicity, animal work, and unvalidated biomarkers cap here regardless of how consistent they are.
 
-`The auditor should perform an in-depth search using all available search tools (e.g., the built-in "WebSearch", "pubmed_search_articles", or an MCP-provided search tool) to cross-check and verify that the list of risks and side effects presented in this section is complete, and no risks or side effects have been left unaddressed.`
+`Who was studied belongs in the annotation, not in the grade. A replicated human adverse-event finding in a disease population may be High; an in-vitro cytotoxicity or unvalidated biomarker shift is Speculative.`
 
-* 18.5 Each item is assigned a "Level of Evidence" grade
-* 18.6 Only the following four levels are used exactly: High, Medium, Low, Speculative
-* 18.7 No hybrid or intermediate levels are used (e.g., no "Low-Medium" or "Medium-High")
+* 18.7 Indirect evidence is graded at most Low, and the annotation names the mismatch. Evidence is indirect when what was studied differs from the intervention in dose (e.g., full-dose trials for a microdose), form (e.g., whole food or extract for a purified compound), route, or compound (e.g., a parent compound, an analogue, or the body's own levels of the substance), or when the intervention was tested only together with another treatment. Exception: a harm shown for the same compound at a higher dose, or for the same delivery vehicle (e.g., an AAV vector) with a different payload, may be graded up to Medium if the annotation states the gap.
+* 18.8 If the intervention is a combination, each item states whether the cited evidence tested the combination or only one of its agents, naming the agent. A risk established for one agent is carried by the combination and keeps the grade its evidence supports; this is not indirect evidence under 18.7 on that ground alone. A claim that the combination is riskier than either agent alone rests on evidence testing the two together and is graded on that evidence.
 
-* 18.8 Items are grouped by evidence level
-* 18.9 The groups are presented in the order: High, Medium, Low, Speculative
-* 18.10 The group High is presented as "### High 🟥 🟥 🟥"
-* 18.11 The group Medium is presented as "### Medium 🟥 🟥"
-* 18.12 The group Low is presented as "### Low 🟥"
-* 18.13 The group Speculative is presented as "### Speculative 🟨"
+* 18.9 Each item's evidence grade is appropriate given the cited studies and data
+* 18.10 No items are overstated relative to their evidence level
+* 18.11 No items are understated relative to their evidence level
 
-* 18.14 The actual item titles are presented in H4
-* 18.15 The actual item levels are not shown on a per-item basis
+* 18.12 A dedicated search for the intervention's side effect profile was performed using a drug reference source (e.g., prescribing information, drugs.com, Mayo Clinic) before writing this section. The search also covered studies of any design that found no excess risk or a lower risk. A statement by the author about the search is placed inside an HTML comment at the start of the section.
 
-* 18.16 Each item includes an annotation paragraph between the H4 title and the Magnitude line
+* 18.13 All major known risks and side effects of the intervention are addressed (no significant omissions). For a combination, this includes risks arising only from co-administration
 
-* 18.17 The annotation is 2–5 sentences and at most 90 words for High and Medium, 50 for Low, 35 for Speculative, covering: what the risk is, the proposed mechanism (if known), the evidence basis (e.g., "clinical trials", "FDA information", "post-marketing reports"), and any contextual nuance (severity, reversibility, at-risk populations, comparison to other agents in the class)
+`The auditor should perform an in-depth search using all available search tools (e.g., the built-in "WebSearch", "pubmed_search_articles", or an MCP-provided search tool) for risks and side effects the section leaves out. A risk is major if its evidence would be graded Medium or High, it is stated in the prescribing information or label, or it is serious (death, hospitalization, or lasting harm) with human evidence, case reports included. A fail names the missing risk and its evidence. Other omitted risks are listed in the Comment column, not in `## Issues`, without failing the item.`
 
-* 18.18 The annotation is preceded and followed by a blank line
-* 18.19 Speculative items also include an annotation; if no controlled data exist, it notes the basis is mechanistic or from isolated reports
+* 18.14 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
+* 18.15 Conflicted evidence is explained in the annotation text. The annotation's last sentence states the net reading of the conflict in one sentence.
+* 18.16 If a randomized trial or a higher-tier review (e.g., Cochrane) measured the same risk for the same intervention and found no excess risk or a lower risk, at least one of them is cited in the item with its result, the item carries the ⚠️ Conflicted flag (18.14), and the item is graded on the stronger evidence. If the contrary evidence is stronger, the item is graded at most Low.
 
-* 18.20 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
-* 18.21 Conflicted evidence is explained in the annotation text. The annotation's last sentence states the net reading of the conflict in one sentence.
+`The auditor should search for randomized trials and higher-tier reviews of each risk that found no excess risk or a lower risk. Contrary evidence counts only if it tested the risk as the item claims it: the same outcome, in a population the item's claim covers. A trial too small to detect the effect at the size or rate the item reports is listed in the Comment column, not weighed. Strength: a systematic review or meta-analysis outranks single trials; among trials, the larger; several consistent trials outrank one of the same size. If the item already cites contrary evidence and carries the ⚠️ Conflicted flag, a further contrary trial fails the item only if it would change the item's grade. A fail names the paper and what adding it changes. Other contrary trials are listed in the Comment column, not in `## Issues`, without failing the item.`
 
-* 18.22 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports:
-  a. an actual outcome as a figure — effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure;
-  b. the direction plus the conditions under which it holds (e.g., "prevalence rises steeply above 2 mg/L"), together with a statement that the literature report no outcome figure.
-* 18.23 If the literature supports neither, the line begins exactly "**Magnitude:** Not quantified in available studies." and continues with one sentence stating why the literature gives none (e.g., no controlled trial has measured this outcome; only case reports exist)
-* 18.24 Items classified as "Speculative" do NOT include a magnitude line
-* 18.25 The magnitude line is preceded by a blank line
-
-* 18.26 Each item's evidence grade is appropriate given the cited studies and data
-* 18.27 Each item is verifiable by the sources cited or by independent lookup
-* 18.28 Magnitude values are plausible and consistent with known clinical data
-* 18.29 No items are overstated relative to their evidence level
-* 18.30 No items are understated relative to their evidence level
-
-* 18.31 Each item (except Speculative) cites at least one PubMed link in the item
-
-* 18.32 The evidence level reflects the class of evidence behind the item. High: a human clinical endpoint (symptoms, events, function, documented adverse events) or a clinical surrogate validated against outcomes in people (e.g., blood pressure, LDL, HbA1c, bone mineral density, eGFR, a named validated scale), shown in more than one trial. Medium: the same class of outcome in a single trial or in consistent observational data. Low: human data that are uncontrolled, indirect, or conflicting. Speculative: no human outcome data — in-vitro cytotoxicity, animal work, and unvalidated biomarkers cap here regardless of how consistent they are.
-
-`Who was studied belongs in the annotation (18.17), not in the grade. A replicated human adverse-event finding in a disease population may be High; an in-vitro cytotoxicity or unvalidated biomarker shift is Speculative.`
-
-* 18.33 All four evidence-level headings (High, Medium, Low, Speculative) are present, in that order. A level with no items still carries the heading. An empty High or Medium is followed by one sentence naming the class of evidence that falls short; an empty Low or Speculative carries the heading alone. That sentence is not an H4 item and has no Magnitude line.
+* 18.17 Items are grouped by evidence level
+* 18.18 The groups are presented in the order: High, Medium, Low, Speculative
+* 18.19 The group High is presented as "### High 🟥 🟥 🟥"
+* 18.20 The group Medium is presented as "### Medium 🟥 🟥"
+* 18.21 The group Low is presented as "### Low 🟥"
+* 18.22 The group Speculative is presented as "### Speculative 🟨"
+* 18.23 All four evidence-level headings (High, Medium, Low, Speculative) are present, in that order. A level with no items still carries the heading. An empty High or Medium is followed by one sentence naming the class of evidence that falls short; an empty Low or Speculative carries the heading alone. That sentence is not an H4 item and has no Magnitude line.
 
 `A missing heading is a fail even when the skip is justified. A because-line that only says evidence is limited, without naming the evidence class, is a fail.`
 
-* 18.34 If the intervention is a combination, each item states whether the cited evidence tested the combination or only one of its agents, naming the agent. A risk established for one agent is carried by the combination and keeps the grade its evidence supports. A claim that the combination is riskier than either agent alone rests on evidence testing the two together and is graded on that evidence.
+* 18.24 The actual item titles are presented in H4
+* 18.25 The actual item levels are not shown on a per-item basis
+
+* 18.26 Each item includes an annotation paragraph between the H4 title and the Magnitude line
+* 18.27 The annotation is 2–5 sentences and at most 90 words for High and Medium, 50 for Low, 35 for Speculative, covering: what the risk is, the proposed mechanism (if known), the evidence basis (e.g., "clinical trials", "FDA information", "post-marketing reports"), and any contextual nuance (severity, reversibility, at-risk populations, comparison to other agents in the class)
+* 18.28 The annotation is preceded and followed by a blank line
+* 18.29 Speculative items also include an annotation; if no controlled data exist, it notes the basis is mechanistic or from isolated reports
+
+* 18.30 Each item (except Speculative) includes a "**Magnitude:** " line giving the first of the following that the literature supports: an actual outcome as a figure (effect size, absolute or relative risk, prevalence, score change, or change per unit of exposure); otherwise the direction plus the conditions under which it holds (e.g., "prevalence rises steeply above 2 mg/L"), together with a statement that the literature reports no outcome figure.
+* 18.31 If the literature supports neither, the line begins exactly "**Magnitude:** Not quantified in available studies." and continues with one sentence stating why the literature gives none (e.g., no controlled trial has measured this outcome; only case reports exist)
+* 18.32 When the cited source is a controlled study, the Magnitude figure is the difference between the intervention and comparison groups (e.g., "5.0 points more than placebo"), with its 95% CI where the source reports one.
+* 18.33 A figure from a study without a comparison group is labeled "no control group".
+* 18.34 When a controlled study reports only the change within each group, both groups' figures are given and the line says "not compared between groups".
+* 18.35 A relative figure is accompanied by absolute figures (e.g., event rates in both groups, events per 1,000, NNH) only when the source reports them; otherwise none are given. Absolute figures are never calculated.
+* 18.36 An adverse-event rate is given together with the rate in the placebo or comparison group. If the source has no comparison group, the line says so.
+* 18.37 Items classified as "Speculative" do NOT include a magnitude line
+* 18.38 The magnitude line is preceded by a blank line
+
+* 18.39 Magnitude values are plausible and consistent with known clinical data
+
+* 18.40 Each item is verifiable by the sources cited or by independent lookup
+* 18.41 Each item (except Speculative) cites at least one PubMed link in the item
 
 
 ## 19. Risk-Modifying Factors
@@ -1008,32 +998,42 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 
 * 19.7 If none of the above is relevant to the intervention, it is briefly stated
 
-* 19.8 Each factor is at most 40 words
+* 19.8 Each factor is at most 45 words
 
 
 ## 20. Key Interactions & Contraindications
 
-* 20.1 Common prescription drug interactions are listed
+* 20.1 A dedicated search for published human interaction and pharmacokinetic studies of the intervention was performed before writing this section. A statement by the author about the search is placed inside an HTML comment at the start of the section.
 
-* 20.2 Over-the-counter medication interactions are listed
+`The auditor should perform an independent search (e.g., "pubmed_search_articles" for the intervention with "drug interaction" OR "pharmacokinetics") to verify that no relevant interaction study is overlooked.`
 
-* 20.3 Supplement interactions are listed
+* 20.2 Common prescription drug interactions are listed
 
-* 20.4 Supplements known to have additive effects with the intervention are included (e.g., supplements that also lower blood pressure when evaluating an antihypertensive)
+* 20.3 Over-the-counter medication interactions are listed
 
-* 20.5 Other intervention interactions are discussed where applicable
+* 20.4 Supplement interactions are listed
 
-* 20.6 Populations who should avoid this intervention are listed under the exact bolded label "**Populations who should avoid [intervention]:**", followed by a bulleted list. If there are none, the same label is present with the single item "None identified". The label is never omitted, renamed, or merged into another list.
+* 20.5 Supplements known to have additive effects with the intervention are included (e.g., supplements that also lower blood pressure when evaluating an antihypertensive)
 
-* 20.7 For drug or supplement interventions: when listing a drug class, include representative named drugs in parentheses (e.g., "CYP3A4 inhibitors (ketoconazole, ritonavir, grapefruit juice)")
+* 20.6 Other intervention interactions are discussed where applicable
 
-* 20.8 Each interaction states a severity (e.g., absolute contraindication, caution, monitor) and the clinical consequence (e.g., severe hypotension, increased bleeding risk)
+* 20.7 Populations who should avoid this intervention are listed under the exact bolded label "**Populations who should avoid [intervention]:**", followed by a bulleted list. If there are none, the same label is present with the single item "None identified". The label is never omitted, renamed, or merged into another list.
 
-* 20.9 If a mitigating action is known (dose reduction, timing separation, monitoring schedule), it is stated
+* 20.8 For drug or supplement interventions: when listing a drug class, include representative named drugs in parentheses (e.g., "CYP3A4 inhibitors (ketoconazole, ritonavir, grapefruit juice)")
 
-* 20.10 Populations to avoid include specific thresholds or classifications where applicable (e.g., "recent MI (<90 days)", "Child-Pugh Class C", "NYHA Class IV") — not only general categories
+* 20.9 Each interaction states a severity (e.g., absolute contraindication, caution, monitor) and the clinical consequence (e.g., severe hypotension, increased bleeding risk)
 
-* 20.11 Each interaction is at most 45 words
+* 20.10 Each interaction rests on a product label, a regulator, or a human interaction or pharmacokinetic study, cited; a study that found no interaction is reported as such. Only such an interaction may be called a contraindication; one inferred from mechanism alone is marked "(theoretical)" (e.g., "Avoid (theoretical)").
+
+* 20.11 If a mitigating action is known (dose reduction, timing separation, monitoring schedule), it is stated
+
+* 20.12 Populations to avoid include specific thresholds or classifications where a source gives them (e.g., "recent MI (<90 days)", "Child-Pugh Class C", "NYHA Class IV") — not only general categories
+
+* 20.13 Each threshold for a population to avoid comes from a source (e.g., the product label, a guideline, or a trial's exclusion criteria), and that source is cited. Where no source gives one, the general category is named without a number.
+
+* 20.14 Each interaction is at most 45 words
+
+* 20.15 If the intervention is a combination, effects arising only from co-administration of its agents belong under 14.7 and 18.13, not here. This section covers interactions with substances and conditions outside the intervention
 
 
 ## 21. Risk Mitigation Strategies
@@ -1043,29 +1043,33 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 21.3 The strategies are actionable by the target audience (see 1.12)
 * 21.4 Each strategy is presented as a bulleted item beginning with a short bold label, followed by descriptive explanation (e.g., "**Low starting dose with slow titration:** protocols typically begin at 2.5 mg daily, increasing to 5 mg after 1–2 weeks if tolerated")
 * 21.5 Strategies include specific parameters where applicable: doses, frequencies, thresholds, timeframes, or quantitative targets (e.g., "dose escalation of 250–500 mg every 1–2 weeks", "annual eGFR monitoring")
-* 21.6 Each strategy explicitly states the risk or consequence it mitigates (by naming the risk or describing what the strategy prevents)
+* 21.6 A threshold — a measured value at which use is supposed to be stopped, paused, or reduced, or medical advice is to be sought (e.g., "stop if ALT exceeds 3× the upper limit of normal") — is cited where a source gives it.
+* 21.7 The section states once, at its start, that parameters without a citation reflect common practice (e.g., "Doses and timings below follow common practice unless cited.").
+* 21.8 Each strategy explicitly states the risk or consequence it mitigates (by naming the risk or describing what the strategy prevents)
 
-* 21.7 Each strategy is at most 40 words
+* 21.9 Each strategy is at most 40 words
 
 
 ## 22. Therapeutic Protocol
 
 * 22.1 A standard protocol is described as used by leading practitioners. For a combination, the protocol is one regimen: the dose of each agent, their ratio, and their timing relative to each other
-* 22.2 Where competing therapeutic approaches exist (e.g., conventional vs. integrative), the main alternatives are presented without framing one as the default
-* 22.3 Where possible, the expert or clinic that popularized each approach is cited
-* 22.4 Best time of day for the intervention is discussed
+* 22.2 Where competing therapeutic approaches exist (e.g., conventional vs. integrative), the main alternatives are presented without framing one as the default. Where sources differ on a parameter (e.g., dose), each value is given with its source.
+* 22.3 Each dose is cited to its source (e.g., a clinical guideline, a trial regimen, the product label, or a named practitioner).
+* 22.4 The section states once, at its start, that other parameters without a citation (e.g., timing, cycling, titration steps) reflect common practice.
+* 22.5 Where possible, the expert or clinic that popularized each approach is cited
+* 22.6 Best time of day for the intervention is discussed
 
-* 22.5 For supplements/medications: the expected half-life of the compound in the human body is discussed
-* 22.6 For supplements/medications: whether to take as a single dose or split doses is discussed
+* 22.7 For supplements/medications: the expected half-life of the compound in the human body is discussed
+* 22.8 For supplements/medications: whether to take as a single dose or split doses is discussed
 
-* 22.7 Genetic polymorphisms that may influence protocol or dose choice are discussed (e.g., APOE4, MTHFR, COMT, pharmacogenetically relevant variants)
-* 22.8 Known sex-based differences in response, dosing, or efficacy are discussed
-* 22.9 Age-related considerations are discussed (including for those at the older end of the target range)
-* 22.10 Baseline biomarker levels are discussed as a factor influencing response
-* 22.11 Pre-existing health conditions that may influence response are discussed
-* 22.12 Each protocol item is presented as a bulleted item with a short bold label followed by descriptive explanation
+* 22.9 Genetic polymorphisms that may influence protocol or dose choice are discussed (e.g., APOE4, MTHFR, COMT, pharmacogenetically relevant variants)
+* 22.10 Known sex-based differences in response, dosing, or efficacy are discussed
+* 22.11 Age-related considerations are discussed (including for those at the older end of the target range)
+* 22.12 Baseline biomarker levels are discussed as a factor influencing response
+* 22.13 Pre-existing health conditions that may influence response are discussed
+* 22.14 Each protocol item is presented as a bulleted item with a short bold label followed by descriptive explanation
 
-* 22.13 Each item is at most 40 words
+* 22.15 Each item is at most 40 words
 
 
 ## 23. Discontinuation & Cycling
@@ -1118,21 +1122,24 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 27.1 Baseline labs and tests are specified (what to do before starting). For a combination, any test required by a single agent is included
 * 27.2 Ongoing labs and tests are specified with monitoring frequency. For a combination, any test required by a single agent is included
 * 27.3 Lab tests are presented in a table with the following columns: Biomarker, Optimal Functional Range, Why Measure It?, Context/Notes
-* 27.4 Optimal ranges reflect functional medicine practitioner guidance (not just conventional reference ranges)
-* 27.5 Where the conventional reference range differs meaningfully from the optimal functional range, it is included in the Context/Notes column
-* 27.6 Each Optimal Functional Range cell states a value or range. Where no established target exists, the cell says so and gives what to track instead (e.g., change from the individual's own baseline).
+* 27.4 An optimal functional range is given only when a source can be named (e.g., a guideline, a trial, or a named practitioner); the source is named in the cell and cited in the Context/Notes column.
+* 27.5 Where the cell gives an optimal functional range, the conventional reference range is included in the Context/Notes column.
+* 27.6 Where no sourced optimal functional range exists, the cell gives the conventional reference range, marked "(standard reference range)". Guideline or treatment targets, diagnostic or screening cutoffs, risk categories and questionnaire score bands are not conventional reference ranges: give them under 27.4 with their source, or treat the biomarker as having no established target.
+* 27.7 Where neither exists, the cell says "No established target" followed by what to track instead (e.g., change from the individual's own baseline).
 
-* 27.7 The "Why Measure It?" column provides extremely concise explanations
-* 27.8 The Context/Notes column covers relevant details such as fasting requirements, best paired tests, and time-of-day considerations
-* 27.9 Qualitative markers are discussed (e.g., sleep quality, energy levels, cognitive clarity)
+* 27.8 The "Why Measure It?" column provides extremely concise explanations
+* 27.9 Each biomarker is either a safety check (a result that stops or changes use) or a marker the intervention is expected to change; Why Measure It? says which.
+* 27.10 Biomarkers that are neither are omitted (e.g., general health or longevity panels, or markers the ER itself says the intervention does not affect).
+* 27.11 The Context/Notes column covers relevant details such as fasting requirements, best paired tests, and time-of-day considerations
+* 27.12 Qualitative markers are discussed (e.g., sleep quality, energy levels, cognitive clarity)
 
-* 27.10 Baseline testing is introduced with a descriptive statement outside the biomarker table (not only implied by the table's contents)
-* 27.11 Ongoing monitoring is introduced with a cadence statement specifying timepoints (e.g., "at 1 week, 4 weeks, then every 3–6 months" or "every 6–12 months")
-* 27.12 Qualitative markers are presented as a bulleted list
+* 27.13 Baseline testing is introduced with a descriptive statement outside the biomarker table (not only implied by the table's contents)
+* 27.14 Ongoing monitoring is introduced with a cadence statement specifying timepoints (e.g., "at 1 week, 4 weeks, then every 3–6 months" or "every 6–12 months")
+* 27.15 Qualitative markers are presented as a bulleted list
 
-* 27.13 If the section is not applicable to the intervention, this is briefly noted
+* 27.16 If the section is not applicable to the intervention, this is briefly noted
 
-* 27.14 The baseline and ongoing narrative outside the biomarker table is 100–150 words
+* 27.17 The baseline and ongoing narrative outside the biomarker table is 100–150 words
 
 
 ## 28. Emerging Research
@@ -1145,23 +1152,26 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 28.4 Areas of future research that could change current understanding are noted
 * 28.5 Emerging research is presented from all relevant directions — studies that could strengthen and studies that could weaken the case for the intervention are both included
 
-* 28.6 All cited publications include a hyperlink (PubMed, DOI, or publisher URL)
+* 28.6 All cited publications include a hyperlink: PubMed; if not in PubMed, the DOI; if it has none, the publisher page
 * 28.7 Every NCT ID, PMID, and DOI mentioned in the section is an active hyperlink, not plain text
 * 28.8 Any other referenced source with a known URL is linked
 * 28.9 Ongoing trials are presented with a descriptive title or aim, the NCT ID as a hyperlink (or a note if no NCT ID exists), and key details such as participant count, phase, or primary endpoint where available
-* 28.10 Future research areas reference specific studies or meta-analyses by author/year with a hyperlink where relevant published evidence exists
-* 28.11 Emerging Research entries are presented as bulleted items beginning with a short bold label
+* 28.10 Each ongoing trial states what a positive and a null result would change in the conclusion.
+* 28.11 A trial whose registered completion date has passed is not described as ongoing; its status is stated (e.g., "completed 2025, no results posted").
+* 28.12 If such a trial has published or posted results, they are reported; results that bear on a benefit or risk are also cited in that item (16.16 / 18.16).
+* 28.13 Future research areas reference specific studies or meta-analyses by author/year with a hyperlink where relevant published evidence exists
+* 28.14 Emerging Research entries are presented as bulleted items beginning with a short bold label
 
-* 28.12 Each link is verified per Section 5 (Loading, Content, Semantics)
-* 28.13 For PubMed links: the PubMed-retrieved title matches the title in the ER
+* 28.15 Each link is verified per Section 5 (Loading, Content, Semantics)
+* 28.16 For PubMed links: the PubMed-retrieved title matches the title in the ER
 
 `Use "d-pubmed" ("pubmed_fetch_articles") to retrieve the article metadata for the PMID and check that the returned title matches the title given in the ER.`
 
-* 28.14 For clinicaltrials.gov links: the NCT ID resolves to a trial related to the intervention
-
-* 28.15 Each item is at most 55 words
+* 28.17 For clinicaltrials.gov links: the NCT ID resolves to a trial related to the intervention
 
 `Use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") to retrieve the study record for the NCT ID and check that the study title, condition, and intervention relate to the ER's claim.`
+
+* 28.18 Each item is at most 55 words
 
 
 ## 29. Conclusion
@@ -1169,34 +1179,35 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 * 29.1 The conclusion is a cohesive summary of the document as a whole
 * 29.2 It is framed for the target audience (see 1.12)
 * 29.3 It reflects what the intervention is, the main benefits, the main risks and considerations
-* 29.4 It reflects on the overall quality of the evidence base (including any conflicts of interest per 2.8–2.10)
+* 29.4 If the intervention is a combination, the conclusion addresses the agents given together, not each agent separately
+* 29.5 It reflects on the overall quality of the evidence base and names any conflict of interest identified in the document
 
-* 29.5 It is 150–250 words
-* 29.6 It is consistent with the evidence levels assigned in the Benefits and Risks sections
-* 29.7 Where evidence is uncertain, the conclusion conveys that uncertainty
+* 29.6 It is 150–250 words
+* 29.7 It is consistent with the evidence levels assigned in the Benefits and Risks sections
+* 29.8 Where evidence is uncertain, the conclusion conveys that uncertainty
 
-* 29.8 It DOES NOT introduce new evidence or claims not previously discussed
-* 29.9 It DOES NOT use acronyms that would require glossary expansion or technical classifications that require specialist knowledge, uses plain-language terms instead
+* 29.9 It DOES NOT introduce new evidence or claims not previously discussed
+* 29.10 It DOES NOT use acronyms that would require glossary expansion or technical classifications that require specialist knowledge, uses plain-language terms instead
 
 `For the conclusion section, the test is not whether a word looks technical, but whether a non-specialist would use it unprompted and know its exact meaning — this also catches ordinary-looking clinical-register words (e.g., "adjunct" → "add-on", "hormetic" → "brief beneficial stress", "potentiate" → "strengthen", "modality" →  "type/method").`
 
-* 29.10 It DOES NOT cite specific trials (names, years, sample sizes, p-values)
-* 29.11 It DOES NOT cite effect sizes, relative risks, or statistical results
+* 29.11 It DOES NOT cite specific trials (names, years, sample sizes, p-values)
+* 29.12 It DOES NOT cite effect sizes, relative risks, or statistical results
 
-* 29.12 It DOES NOT use prescriptive or advisory language — it summarizes evidence, not what anyone should do
-* 29.13 It DOES NOT address the reader directly
+* 29.13 It DOES NOT use prescriptive or advisory language — it summarizes evidence, not what anyone should do
+* 29.14 It DOES NOT address the reader directly
 
-* 29.14 It DOES NOT force a pro-vs-con structure or equal treatment of competing positions
-* 29.15 It DOES NOT state what further evidence is needed or what should be done
-* 29.16 It DOES NOT frame its takeaway around an average-risk or general population
-* 29.17 It DOES NOT close on generic cautions that apply to a population the reader is not part of
-* 29.18 It DOES NOT characterize any position on the intervention as the accepted, mainstream, or settled view
-* 29.19 It DOES NOT frame one position as the default and the other as requiring extra justification
+* 29.15 It DOES NOT force a pro-vs-con structure or equal treatment of competing positions
+* 29.16 It DOES NOT state what further evidence is needed or what should be done
+* 29.17 It DOES NOT frame its takeaway around an average-risk or general population
+* 29.18 It DOES NOT close on generic cautions that apply to a population the reader is not part of
+* 29.19 It DOES NOT characterize any position on the intervention as the accepted, mainstream, or settled view
+* 29.20 It DOES NOT frame one position as the default and the other as requiring extra justification
 
-* 29.20 The conclusion section ends with a line stating "**\[Top]\(#top) - \[Benefits]\(#expected-benefits) - \[Risks]\(#potential-risks--side-effects) - \[Protocol]\(#therapeutic-protocol)**"
-* 29.21 The ending line is preceded by a blank line
+* 29.21 The conclusion section ends with a line stating "**\[Top]\(#top) - \[Benefits]\(#expected-benefits) - \[Risks]\(#potential-risks--side-effects) - \[Protocol]\(#therapeutic-protocol)**"
+* 29.22 The ending line is preceded by a blank line
 
-`The checklist items for the motivation section are the last items in the checklist, but the motivation section itself is the first section of the document. This is due to the motivation section should be written last, after all other sections are completed, to ensure it accurately reflects the full scope of the review.`
+`The checklist items for the motivation section come after all other content sections, although the motivation section itself is the first section of the document. The motivation is written last, after all other sections are completed, so that it accurately reflects the full scope of the review.`
 
 ## 30. Motivation
 
@@ -1246,8 +1257,8 @@ Audit conducted on [audit_date reformatted as %d/%m/%Y %H:%M] using [AI4L](https
 <section id="iterations" markdown="1"></section>
 
 `DO NOT add any extra text to the heading of the Issues section.`
-`The heading must be exactly as given below, in the form of "Issues '%d/%m/%Y %H:%M'`
+`The heading must be exactly as given below, in the form of "Issues '%m/%d/%Y %H:%M'`
 
-## Issues [audit_date reformatted as '%d/%m/%Y %H:%M']
+## Issues [audit_date reformatted as '%m/%d/%Y %H:%M']
 
 `List any issues identified during the audit here. Format described in the "Documentation" section.`

@@ -1,7 +1,7 @@
 ---
 name: check
 description: Project Verification & Consistency Checking
-version: 2.0.1
+version: 2.0.2
 ---
 
 # AI4L - Project Verification & Consistency Checking
@@ -23,7 +23,7 @@ Handles consistency checking for all major files in the repo, including version 
 - `README.md`
 - `CONTRIBUTING.md`
 
-- `prompts/AI4L.md`
+- `prompts/ER.md`
 - `prompts/PERSONA.md`
 
 - `.grok/rules/rules.md`
@@ -47,7 +47,9 @@ Handles consistency checking for all major files in the repo, including version 
 ## Consistency Checking
 
 * Check all target files for consistency and completeness
-* Check the numbering of all items and the item count in AI4L.md
+* Check the numbering of all items and the item count in ER.md
+* Also check numbered step lists (`1.`, `2.`, `3.` …) in ER.md, not just `x.y` items
+* Test each sequence for gaps and duplicates explicitly — a gap paired with a duplicate passes a count/min/max test
 
 # Reporting
 

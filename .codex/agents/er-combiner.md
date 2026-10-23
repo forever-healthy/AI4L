@@ -1,15 +1,16 @@
 ---
 name: er-combiner
-description: AI4L - combine all QA files of an ER using bash (lossless)
+description: AI4L - combine all _ER_QA.md files of an ER using bash (lossless)
+mode: subagent
 ---
 
-# AI4L - Bash Agent to Combine all QA files of an ER into a single file
+# AI4L - Bash Agent to Combine all _ER_QA.md files of an ER into a single file
 
-* Set [er_filename] to $ARGUMENTS
+* Set [er_filename] to the Evidence Review defined in your instructions
 
-* READ SCOPE — you may read ONLY the QA files belonging to [er_filename], via the script below. Never read another evidence review or another review's QA files, and never glob or search for them beyond the script's own pattern.
+* READ SCOPE — you may read ONLY the _ER_QA.md files belonging to [er_filename], via the script below. Never read another evidence review or another review's _ER_QA.md files, and never glob or search for them beyond the script's own pattern.
 
-* Report `COMBINER: Work on QA files for [er_filename]`
+* Report `COMBINER: Work on _ER_QA.md files for [er_filename]`
 
 Run this bash script (substituting [er_filename], [creation_dir], and [trash_dir] for their actual values):
 
@@ -24,19 +25,19 @@ TRASH_DIR="[trash_dir]"
 # Derive base name by stripping the .md extension (keeps the _ER suffix)
 base="${ER_FILE%.md}"
 
-# Find all timestamped QA files, sorted descending by name (date suffix is lexicographically sortable)
+# Find all timestamped _ER_QA.md files, sorted descending by name (date suffix is lexicographically sortable)
 mapfile -t qa_files < <(ls -r "${CREATION_DIR%/}/${base}_QA_"*.md 2>/dev/null || true)
 
 count=${#qa_files[@]}
 if [[ $count -eq 0 ]]; then
-  echo "Error: no timestamped QA files found for $ER_FILE"
+  echo "Error: no timestamped _ER_QA.md files found for $ER_FILE"
   exit 1
 fi
 
-echo "Found $count QA file(s):"
+echo "Found $count _ER_QA.md file(s):"
 for f in "${qa_files[@]}"; do echo "  $f"; done
 
-# Sum audit_duration (HH:MM) across all QA files
+# Sum audit_duration (HH:MM) across all _ER_QA.md files
 total_min=0
 for f in "${qa_files[@]}"; do
   d=$(awk '/^audit_duration:/{sub(/^audit_duration:[[:space:]]*/,""); gsub(/[[:space:]"]/,""); print; exit}' "$f")
@@ -53,7 +54,7 @@ latest="${qa_files[0]}"
 new_filename="${base}_QA.md"
 new_filepath="${CREATION_DIR%/}/${new_filename}"
 
-# Copy the latest QA file verbatim as the base
+# Copy the latest _ER_QA.md file verbatim as the base
 cp "$latest" "$new_filepath"
 echo "Base: $latest -> $new_filepath"
 
@@ -93,7 +94,7 @@ for ((i=1; i<count; i++)); do
   echo "" >> "$new_filepath"
 done
 
-# Move all timestamped QA files to trash
+# Move all timestamped _ER_QA.md files to trash
 mkdir -p "$TRASH_DIR"
 for qa_file in "${qa_files[@]}"; do
   mv "$qa_file" "$TRASH_DIR/"
@@ -110,4 +111,4 @@ echo "pass_rate: $pass_rate"
 * Run the script
 * Return the last 4 lines of output as the result
 
-* Report `COMBINER: Done with [topic]`
+* Report `COMBINER: Done with [er_filename]`

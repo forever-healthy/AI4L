@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp(ai4l_d-browser/*)",
+      "mcp(ai4l_d-clinicaltrialsgov/*)",
+      "mcp(ai4l_d-fetch/*)",
+      "mcp(ai4l_d-proxy-1/*)",
+      "mcp(ai4l_d-pubmed/*)",
+      "command(*)",
+      "write_file(creation/)"
+    ]
+  }
+}

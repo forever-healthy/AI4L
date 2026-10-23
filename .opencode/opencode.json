@@ -1,5 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "websearch": {
+    "provider": "random"
+  },
   "mcp": {
     "d-clinicaltrialsgov": {
       "type": "local",
@@ -8,6 +11,7 @@
         "run",
         "--rm",
         "-i",
+        "--network=host",
         "-e",
         "MCP_TRANSPORT_TYPE=stdio",
         "-e",
@@ -23,6 +27,7 @@
         "run",
         "--rm",
         "-i",
+        "--network=host",
         "-e",
         "MCP_TRANSPORT_TYPE=stdio",
         "-e",

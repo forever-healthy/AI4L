@@ -1,4 +1,4 @@
-![Version 2.0.1](https://img.shields.io/badge/Version-2.0.1-green.svg)
+![Version 2.0.2](https://img.shields.io/badge/Version-2.0.2-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # How to Contribute to AI4L
@@ -9,19 +9,19 @@ Your [feedback & discussions](https://github.com/forever-healthy/AI4L/discussion
 
 Just reach out to us via GitHub discussions, and we will be happy to chat about your ideas, suggestions, or questions.
 
-Below, you will find a brief guide to evolving the AI4L prompt and customizing it for your needs.
+Below, you will find a brief guide to evolving the ER prompt ([ER.md](prompts/ER.md)) and customizing it for your needs.
 
 
 ## Customizing the Expert List
 
-The list of experts prioritized for the "Recommended Reading" section can be modified by changing [AI4L.md (9.5)](prompts/AI4L.md#9-recommended-reading)
+The list of experts prioritized for the "Recommended Reading" section can be modified by changing [ER.md (9.5)](prompts/ER.md#9-recommended-reading)
 
 
-## Developing AI4L.md
+## Developing ER.md
 
 * Use a [CLI Environment](docs/Using-CLI-Environments.md)
 
-* Agents & skills are located in the `.claude` / `.opencode` folder
+* Agents & skills are located in `.claude/`; the copies for the other environments (`.opencode/`, `.codex/`, `.agents/`) are generated from it
 
 * After modifying files, use "/check" to check all AI4L files for inconsistencies or errors. The skill should be auto-loaded by the CLI.
 
@@ -34,9 +34,9 @@ The list of experts prioritized for the "Recommended Reading" section can be mod
 
   * Use `/er audit` to audit the review
 
-  * Inspect the resulting QA.md for any errors, inconsistencies, or misbehavior of the auditing AI.
+  * Inspect the resulting _ER_QA.md for any errors, inconsistencies, or misbehavior of the auditing AI.
 
-  * Fix issues by improving the audit instruction at the beginning of "AI4L.md" and throughout the document as `inline comments for the auditor`.
+  * Fix issues by improving the audit instruction at the beginning of "ER.md" and throughout the document as `inline comments for the auditor`.
 
   * This can be done interactively, in dialogue with the AI itself, by asking it how to improve the prompt to avoid a particular mistake or misunderstanding in the future.
 
