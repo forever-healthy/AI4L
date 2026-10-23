@@ -7,9 +7,7 @@
 
 * AI4L can now create evidence reviews for two or more interventions given together. Following the pattern `Combining A, B & C [for goal]`.
 
-* The checklist now checks combinations too: whether a benefit of the agents given together has been tested (16.42), where co-administration effects belong (20.15), and whether the conclusion addresses the agents together (29.4)
-
-* Already live in production on [evipedia.ai](https://evipedia.ai/)
+Already live in production on [evipedia.ai](https://evipedia.ai/)
 
 * [Combining Dasatinib & Quercetin as a Senolytic Therapy](https://evipedia.ai/dasatinib_quercetin_senolytic)
 
@@ -28,7 +26,7 @@
 
 #### Improved Evidence Handling for Risks & Benefits
 
-* The ER prompt was reviewed against several leading frontier models (Opus 5.5, GPT-6, Grok 4.7, Gemini 4 Argon & Muse Wonder Full) on about 100 evidence reviews of the same topics, and refined where the comparison showed systematic strenghts/weaknesses
+The ER prompt was reviewed against multiple leading frontier models (Opus 5.5, GPT-6, Grok 4.7, Gemini 4 Argon & Muse Wonder Full) on about 100 evidence reviews of the same topics, and refined where the comparison showed systematic strenghts/weaknesses
 
 * Research results: contrary trials and reviews are searched for, cited in the item, flagged ⚠️ Conflicted and weighed; evidence from a different dose, form, route, or compound is graded as indirect; High now needs more than one independent research group; retracted papers are excluded, and errata are applied
 
@@ -38,30 +36,40 @@
 
 * Interactions: published interaction studies are searched for first; an interaction inferred only from mechanism is marked "(theoretical)", and thresholds for populations to avoid are sourced
 
-* Reference values: an optimal functional range is given only with a named source, otherwise the standard lab range or "No established target"; each biomarker is a safety check or a marker the intervention changes; thresholds, doses and protocol parameters are cited or stated as common practice
+* Reference values: an optimal functional range is given only with a named source; otherwise, the standard lab range or "No established target"; each biomarker is a safety check or a marker the intervention changes; thresholds, doses, and protocol parameters are cited or stated as common practice
 
 * Sources: regulatory and legal facts carry a link to a source that states them (a news report, labeled as such, may stand in until the regulator publishes the fact), and no cited source is overstated or stretched to a comparison it did not make; where a paper's abstract and full text disagree, the review follows the full text and notes the discrepancy
 
-* Completeness is judged on what matters: an omitted benefit fails the audit only if it would be graded High, is an approved indication, is found by a systematic review or meta-analysis, or bears directly on a specific goal; an omitted risk fails if it would be graded Medium or High, is on the label, or is serious. An item that already cites contrary evidence fails only for contrary evidence that would change its grade; other findings are noted without failing, so audits can reach 100%
+* Completeness: an omitted benefit fails the audit only if it would be graded High, is an approved indication, is found by a systematic review or meta-analysis, or bears directly on a specific goal; an omitted risk fails if it would be graded Medium or High, is on the label, or is serious. An item that already cites contrary evidence fails only for contrary evidence that would change its grade; other findings are noted without failing, so audits can reach 100%
 
-* Checklist consolidated: contradictions between items resolved (1.4, 1.9/1.17, 2.8/2.10/29.5, 20.10/20.11, 28.6), four duplicate items merged (484 → 480), hints apply to authors as well; agents read ER.md and the review to their end
+* Checklist consolidated: contradictions between items resolved (1.4, 1.9/1.17, 2.8/2.10/29.5, 20.10/20.11, 28.6), several duplicate items merged, hints now apply to authors as well
 
-* Sections 16 and 18 are reordered so that every rule follows what it uses: items and grading scale first, then grade checks, completeness, contrary evidence, layout, magnitude and sources. No item was added or removed; references to 16.x/18.x in earlier releases use the old numbering
+* Sections 16 (Benefits) and 18 (Risks) reordered: items and grading scale first, then grade checks, completeness, contrary evidence, layout, magnitude, and sources.
 
 
-#### Support for Google Antigravity, Gemini 4 & OpenCode 2 - Updates for Claude Desktop, Muse Code & Codex
+#### New Models successfully tested
 
-* New environment: Google Antigravity (`agy`), with the agents and MCP servers configured as the `ai4l` plugin in `.agents/plugins/ai4l/` and the skills registered in `.agents/skills.json`. Its permissions live only in the global settings, so merge the provided template once — see [Using CLI Environments](docs/Using-CLI-Environments.md#antigravity-setup)
+* Google Gemini 4 Aragon - using Antigravity
 
-* Gemini CLI is no longer supported, as Google no longer serves it to individual accounts; `GEMINI.md` and `.gemini/` are removed. Use Antigravity for Gemini models
+* Meta Muse Wonder Full - using Muse Code
 
-* New environment: OpenCode 2 (`opencode`), with its own installer; the agents run as subagents and web search works out of the box — see [Using CLI Environments](docs/Using-CLI-Environments.md#opencode-setup)
 
-* Muse Code (`muse`) now runs the agents as its own typed subagents from `.agents/agents/`, tested with Muse Wonder 1.0 and Muse Wonder Full 1.0. Muse keeps no project-level permissions, so start interactive sessions with `muse --approval-mode never` — see [Using CLI Environments](docs/Using-CLI-Environments.md#muse-code-setup)
+#### New Environments Supported
 
-* Codex (`codex`) now spawns the agents with an underscore task name (`er-creator` → `er_creator`), the only form it accepts, and no longer asks for approval on every MCP tool call, as each MCP server sets `default_tools_approval_mode = "approve"`
+* **Google Antigravity:** (`agy`), with the agents and MCP servers configured as the `ai4l` plugin in `.agents/plugins/ai4l/` and the skills registered in `.agents/skills.json`. Its permissions live only in the global settings, so merge the provided template once — see [Using CLI Environments](docs/Using-CLI-Environments.md#antigravity-setup)
 
-* Claude Desktop now runs the four local MCP servers (`d-browser`, `d-fetch`, `d-pubmed`, `d-clinicaltrialsgov`) via `npx` and `uvx`, no Docker needed, under the names ER.md records in `Verified By`; the built-in Clinical Trials and PubMed connectors stay off, as in the CLIs — see [Using Claude Desktop](docs/Using-Claude-Desktop.md#install-the-mcp-servers)
+* **OpenCode 2:** (`opencode`), with its own installer; the agents run as subagents and web search works out of the box — see [Using CLI Environments](docs/Using-CLI-Environments.md#opencode-setup)
+
+
+#### Updated Environments
+
+* **Muse Code** now runs the agents as its own typed subagents from `.agents/agents/`. Muse keeps no project-level permissions, so start interactive sessions with `muse --approval-mode never` — see [Using CLI Environments](docs/Using-CLI-Environments.md#muse-code-setup)
+
+* **Codex** now spawns the agents with an underscore task name (`er-creator` → `er_creator`), the only form it accepts, and no longer asks for approval on every MCP tool call, as each MCP server sets `default_tools_approval_mode = "approve"`
+
+* **Claude Desktop** now runs the four local MCP servers (`d-browser`, `d-fetch`, `d-pubmed`, `d-clinicaltrialsgov`) via `npx` and `uvx`, no Docker needed, under the names ER.md records in `Verified By`; the built-in Clinical Trials and PubMed connectors stay off, as in the CLIs — see [Using Claude Desktop](docs/Using-Claude-Desktop.md#install-the-mcp-servers)
+
+* **Gemini CLI** is no longer supported, as Google no longer serves it to individual accounts; `GEMINI.md` and `.gemini/` are removed. Use Antigravity for Gemini models
 
 
 #### Other Changes

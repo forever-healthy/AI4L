@@ -57,7 +57,7 @@ It tells the model to behave, in conversation, the same way evidence reviews are
 
 ### Install the MCP Servers
 
-ER.md names the four local MCP servers the auditor uses for literature lookup and URL verification, and records them under these exact names in the `Verified By` column of an audit:
+ER.md names six local MCP servers for literature lookup and URL verification and records them under these exact names in the `Verified By` column of an audit. The two optional proxy tiers (`d-proxy-1`, `d-proxy-2`) are skipped when not configured, so Claude Desktop needs only these four:
 
 * `d-browser` — [playwright/mcp](https://github.com/microsoft/playwright-mcp): runs a headless browser locally for URL verification. Provider-based, server-side fetching is often blocked by websites, and many sites require JavaScript rendering
 * `d-fetch` — [mcp-server-fetch](https://github.com/modelcontextprotocol/servers/tree/main/src/fetch): a lightweight HTTP fetcher used as a fallback when the browser is blocked or unavailable. Faster for simple URLs without bot detection

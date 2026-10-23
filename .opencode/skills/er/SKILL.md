@@ -115,6 +115,10 @@ Loop while [iteration] < [max_audits] and [consecutive_passes] < [needed_passes]
 }
 
 * @er-combiner: `[target_er]`
+* Wait until the agent finishes and returns the result
+* Set [new_qa_filename] to the filename the agent returns in its `QA file:` line
+
+* Report `QA file: [new_qa_filename]`
 
 If [consecutive_passes] >= [needed_passes] {
   * Return: `status: success`
@@ -129,6 +133,11 @@ If [consecutive_passes] >= [needed_passes] {
 ## COMMAND: full {topic}
 
 `A create and multi-pass audit workflow.`
+
+* If no [args] are given {
+  * Report: `usage: /er full {topic}`
+  * exit
+}
 
 * Execute the "create" command
 * Execute the "iterate" command with [filename] returned by "create" as [args]

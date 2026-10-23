@@ -73,7 +73,7 @@ version: 2.0.2
 
     - If one fix covers multiple items, combine: `**4.1 / 4.4 — {short label}:**`
 
-    - Example: `3. **5.5 — PMC link format:** Replaced PMC link for Johnston et al. 2006 with s format.` (here `3` is the list position, `5.5` is the issue reference — they are different)
+    - Example: `3. **5.5 — PMC link format:** Replaced PMC link for Johnston et al. 2006 with the PubMed format.` (here `3` is the list position, `5.5` is the issue reference — they are different)
 
   **URL Changes**
     
