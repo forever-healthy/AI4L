@@ -877,7 +877,7 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 * 16.20 The group Medium is presented as "### Medium 🟩 🟩"
 * 16.21 The group Low is presented as "### Low 🟩"
 * 16.22 The group Speculative is presented as "### Speculative 🟨"
-* 16.23 All four evidence-level headings (High, Medium, Low, Speculative) are present, in that order. A level with no items still carries the heading. An empty High or Medium is followed by one sentence naming the class of evidence that falls short; an empty Low or Speculative carries the heading alone. That sentence is not an H4 item and has no Magnitude line.
+* 16.23 All four evidence-level headings (High, Medium, Low, Speculative) are present, in that order. A level with no items still carries the heading, followed by one sentence naming the class of evidence that falls short. That sentence is not an H4 item and has no Magnitude line.
 
 `Example: "No benefit reaches High: the human trials are small uncontrolled series, and the antimicrobial data are in-vitro MIC assays." A missing heading is a fail even when the skip is justified. A because-line that only says evidence is limited, without naming the evidence class, is a fail.`
 
@@ -959,7 +959,7 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 * 18.20 The group Medium is presented as "### Medium 🟥 🟥"
 * 18.21 The group Low is presented as "### Low 🟥"
 * 18.22 The group Speculative is presented as "### Speculative 🟨"
-* 18.23 All four evidence-level headings (High, Medium, Low, Speculative) are present, in that order. A level with no items still carries the heading. An empty High or Medium is followed by one sentence naming the class of evidence that falls short; an empty Low or Speculative carries the heading alone. That sentence is not an H4 item and has no Magnitude line.
+* 18.23 All four evidence-level headings (High, Medium, Low, Speculative) are present, in that order. A level with no items still carries the heading, followed by one sentence naming the class of evidence that falls short. That sentence is not an H4 item and has no Magnitude line.
 
 `A missing heading is a fail even when the skip is justified. A because-line that only says evidence is limited, without naming the evidence class, is a fail.`
 

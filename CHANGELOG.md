@@ -46,6 +46,8 @@ The ER prompt was reviewed against multiple leading frontier models (Opus 5.5, G
 
 * Sections 16 (Benefits) and 18 (Risks) reordered: items and grading scale first, then grade checks, completeness, contrary evidence, layout, magnitude, and sources.
 
+* Empty evidence levels: every level without items, Low and Speculative included, now carries one sentence naming the class of evidence that falls short, instead of a bare heading
+
 
 #### New Models successfully tested
 
