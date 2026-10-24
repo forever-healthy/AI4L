@@ -26,7 +26,7 @@ Already live in production on [evipedia.ai](https://evipedia.ai/)
 
 #### Improved Evidence Handling
 
-The ER prompt was reviewed against multiple leading frontier models (Opus 5.5, GPT-6, Grok 4.7, Gemini 4 Argon & Muse Wonder Full) on about 100 evidence reviews of the same topics, and refined where the comparison showed systematic strenghts/weaknesses
+The ER prompt was reviewed against multiple leading frontier models (Opus 5.5, GPT-6, Grok 4.7, Gemini 4 Argon & Muse Wonder Full) on about 100 evidence reviews of the same topics, and refined where the comparison showed systematic strengths/weaknesses
 
 * Research results: contrary trials and reviews are searched for, cited in the item, flagged ⚠️ Conflicted and weighed; evidence from a different dose, form, route, or compound is graded as indirect; High now needs more than one independent research group; retracted papers are excluded, and errata are applied
 
@@ -42,7 +42,7 @@ The ER prompt was reviewed against multiple leading frontier models (Opus 5.5, G
 
 * Completeness: an omitted benefit fails the audit only if it would be graded High, is an approved indication, is found by a systematic review or meta-analysis, or bears directly on a specific goal; an omitted risk fails if it would be graded Medium or High, is on the label, or is serious. An item that already cites contrary evidence fails only for contrary evidence that would change its grade; other findings are noted without failing, so audits can reach 100%
 
-* Checklist consolidated: contradictions between items resolved (1.4, 1.9/1.17, 2.8/2.10/29.5, 20.10/20.11, 28.6), several duplicate items merged, hints now apply to authors as well
+* Checklist consolidated: several contradictions between items resolved, several duplicate items merged, hints now apply to authors as well
 
 * Sections 16 (Benefits) and 18 (Risks) reordered: items and grading scale first, then grade checks, completeness, contrary evidence, layout, magnitude, and sources.
 
@@ -51,7 +51,7 @@ The ER prompt was reviewed against multiple leading frontier models (Opus 5.5, G
 
 #### New Models successfully tested
 
-* Google Gemini 4 Aragon - using Antigravity
+* Google Gemini 4 Argon - using Antigravity
 
 * Meta Muse Wonder Full - using Muse Code
 

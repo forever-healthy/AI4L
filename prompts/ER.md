@@ -44,7 +44,7 @@ The following rules govern how this checklist must be used when performing an au
 
 * DO NOT use or take into account any prior audit's results in any way in relation to this audit. Every audit must be performed independently. The prior audit may have missed issues or made mistakes. Each iteration must be a fully independent, item-by-item audit.
 
-* DO NOT use or access any other documents besides this one and the ER in question
+* DO NOT use or access any other local files besides this one, the ER in question, the audit file you create during this audit, and files you yourself create in [tmp_dir] during this audit. This covers local files only: web search and the MCP research tools (PubMed, ClinicalTrials.gov, fetch, browser) are not restricted by it — use them as the hints require
 
 * DO NOT take any shortcuts to optimize token usage or cut processing time. The goal is thoroughness, not token optimization.
 
@@ -122,7 +122,7 @@ For "N/A", use the actual text "N/A".
 
 #### N/A definition
 
-Mark an item N/A only when the checklist item contains an explicit condition that does not apply to the document under audit. Specifically, N/A is permitted only for items phrased as "If \<condition>..." where the condition is factually not met. Examples:
+Mark an item N/A only when the checklist item contains an explicit condition that does not apply to the document under audit. Specifically, N/A is permitted only for items that state an explicit condition (If, When, Where, For \<group>...) where the condition is factually not met. Examples:
 
 * "If an article exists, a direct link is provided" → N/A when no article exists
 * "If no article exists, clearly states not found" → N/A when an article does exist
@@ -132,7 +132,7 @@ Mark an item N/A only when the checklist item contains an explicit condition tha
 N/A must never be used for items that the document failed to address, did poorly, or where the auditor is uncertain. Those are fails.
 
 
-#### Comment column
+#### Comments column
 
 Every item marked as failed must include a specific comment stating what is wrong and where in the review (line number or section name).
 
@@ -532,7 +532,7 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 `Reconstructing the topic.`
 
-* 6.15 The [canonical_topic] is stated as "canonical_topic: 'Replacing [intervention] by [canonical_name] in [topic]' (e.g., "LDN to Optimize Immune Function" → "canonical_topic: Low-Dose Naltrexone to Optimize Immune Function")
+* 6.15 The [canonical_topic] is stated as "canonical_topic: 'Replacing [intervention] by [canonical_name] in [topic]'" (e.g., "low dose naltrexone to optimize immune function" → "canonical_topic: Low-Dose Naltrexone to Optimize Immune Function")
 
 * 6.16 The [canonical_topic] is simplified in a way that prepositions and wordiness are removed where possible, but the essence is not altered (e.g., "Using a combination of Ivermectin, Mebendazole & Fenbendazole to Fight Cancer" → "Combining Ivermectin, Mebendazole & Fenbendazole to Fight Cancer"). The word "Combining" is never removed — it is essential, not wordiness.
 
@@ -863,13 +863,13 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 16.13 All major known benefits of the intervention are addressed (no significant omissions)
 
-`The auditor should perform an in-depth search using all available search tools (e.g., the built-in "WebSearch", "pubmed_search_articles", or an MCP-provided search tool) for benefits the section leaves out. A benefit is major if its evidence would be graded High, it is an approved indication, a systematic review or meta-analysis of human studies finds it, or, for a [goal] other than Health & Longevity, it bears directly on [goal] with evidence graded Low or higher. A fail names the missing benefit and its evidence. Other omitted benefits are listed in the Comment column, not in `## Issues`, without failing the item.`
+`The auditor should perform an in-depth search using all available search tools (e.g., the built-in "WebSearch", "pubmed_search_articles", or an MCP-provided search tool) for benefits the section leaves out. A benefit is major if its evidence would be graded High, it is an approved indication, a systematic review or meta-analysis of human studies finds it, or, for a [goal] other than Health & Longevity, it bears directly on [goal] with evidence graded Low or higher. A fail names the missing benefit and its evidence. Other omitted benefits are listed in the Comments column, not in `## Issues`, without failing the item.`
 
 * 16.14 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
 * 16.15 Conflicted evidence is explained in the annotation text. The annotation's last sentence states the net reading of the conflict in one sentence.
 * 16.16 If a randomized trial or a higher-tier review (e.g., Cochrane) measured the same benefit for the same intervention and found no effect or the opposite effect, at least one of them is cited in the item with its result, the item carries the ⚠️ Conflicted flag (16.14), and the item is graded on the stronger evidence. If the contrary evidence is stronger, the item is graded at most Low.
 
-`The auditor should search for randomized trials and higher-tier reviews of each benefit that found no effect or the opposite effect. Contrary evidence counts only if it tested the benefit as the item claims it: the same outcome, in a population the item's claim covers. A trial too small to detect the effect at the size or rate the item reports is listed in the Comment column, not weighed. Strength: a systematic review or meta-analysis outranks single trials; among trials, the larger; several consistent trials outrank one of the same size. If the item already cites contrary evidence and carries the ⚠️ Conflicted flag, a further contrary trial fails the item only if it would change the item's grade. A fail names the paper and what adding it changes. Other contrary trials are listed in the Comment column, not in `## Issues`, without failing the item.`
+`The auditor should search for randomized trials and higher-tier reviews of each benefit that found no effect or the opposite effect. Contrary evidence counts only if it tested the benefit as the item claims it: the same outcome, in a population the item's claim covers. A trial too small to detect the effect at the size or rate the item reports is listed in the Comments column, not weighed. Strength: a systematic review or meta-analysis outranks single trials; among trials, the larger; several consistent trials outrank one of the same size. If the item already cites contrary evidence and carries the ⚠️ Conflicted flag, a further contrary trial fails the item only if it would change the item's grade. A fail names the paper and what adding it changes. Other contrary trials are listed in the Comments column, not in `## Issues`, without failing the item.`
 
 * 16.17 Items are grouped by evidence level
 * 16.18 The groups are presented in the order: High, Medium, Low, Speculative
@@ -945,13 +945,13 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 18.13 All major known risks and side effects of the intervention are addressed (no significant omissions). For a combination, this includes risks arising only from co-administration
 
-`The auditor should perform an in-depth search using all available search tools (e.g., the built-in "WebSearch", "pubmed_search_articles", or an MCP-provided search tool) for risks and side effects the section leaves out. A risk is major if its evidence would be graded Medium or High, it is stated in the prescribing information or label, or it is serious (death, hospitalization, or lasting harm) with human evidence, case reports included. A fail names the missing risk and its evidence. Other omitted risks are listed in the Comment column, not in `## Issues`, without failing the item.`
+`The auditor should perform an in-depth search using all available search tools (e.g., the built-in "WebSearch", "pubmed_search_articles", or an MCP-provided search tool) for risks and side effects the section leaves out. A risk is major if its evidence would be graded Medium or High, it is stated in the prescribing information or label, or it is serious (death, hospitalization, or lasting harm) with human evidence, case reports included. A fail names the missing risk and its evidence. Other omitted risks are listed in the Comments column, not in `## Issues`, without failing the item.`
 
 * 18.14 Where evidence is directly conflicted, a "⚠️ Conflicted" flag appears directly after the item name in the title (not in the annotation)
 * 18.15 Conflicted evidence is explained in the annotation text. The annotation's last sentence states the net reading of the conflict in one sentence.
 * 18.16 If a randomized trial or a higher-tier review (e.g., Cochrane) measured the same risk for the same intervention and found no excess risk or a lower risk, at least one of them is cited in the item with its result, the item carries the ⚠️ Conflicted flag (18.14), and the item is graded on the stronger evidence. If the contrary evidence is stronger, the item is graded at most Low.
 
-`The auditor should search for randomized trials and higher-tier reviews of each risk that found no excess risk or a lower risk. Contrary evidence counts only if it tested the risk as the item claims it: the same outcome, in a population the item's claim covers. A trial too small to detect the effect at the size or rate the item reports is listed in the Comment column, not weighed. Strength: a systematic review or meta-analysis outranks single trials; among trials, the larger; several consistent trials outrank one of the same size. If the item already cites contrary evidence and carries the ⚠️ Conflicted flag, a further contrary trial fails the item only if it would change the item's grade. A fail names the paper and what adding it changes. Other contrary trials are listed in the Comment column, not in `## Issues`, without failing the item.`
+`The auditor should search for randomized trials and higher-tier reviews of each risk that found no excess risk or a lower risk. Contrary evidence counts only if it tested the risk as the item claims it: the same outcome, in a population the item's claim covers. A trial too small to detect the effect at the size or rate the item reports is listed in the Comments column, not weighed. Strength: a systematic review or meta-analysis outranks single trials; among trials, the larger; several consistent trials outrank one of the same size. If the item already cites contrary evidence and carries the ⚠️ Conflicted flag, a further contrary trial fails the item only if it would change the item's grade. A fail names the paper and what adding it changes. Other contrary trials are listed in the Comments column, not in `## Issues`, without failing the item.`
 
 * 18.17 Items are grouped by evidence level
 * 18.18 The groups are presented in the order: High, Medium, Low, Speculative
@@ -1025,7 +1025,7 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 `"Caution" and "Monitor" are not written as labels: every listed interaction warrants them, and the consequence together with the mitigating action (20.13) carries that information.`
 
-* 20.10 Each interaction rests on a product label, a regulator, or a human interaction or pharmacokinetic study, cited. An interaction inferred from mechanism alone is marked "(theoretical)" and is never labeled an absolute contraindication
+* 20.10 Each interaction rests on a product label, a regulator, or a human interaction or pharmacokinetic study, cited, or is inferred from mechanism alone and marked "(theoretical)"; a mechanism-only interaction is never labeled an absolute contraindication
 
 * 20.11 Where a human study tested a pairing and found no interaction, that finding is reported, cited, instead of a mechanistic concern
 
@@ -1263,7 +1263,7 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 <section id="iterations" markdown="1"></section>
 
 `DO NOT add any extra text to the heading of the Issues section.`
-`The heading must be exactly as given below, in the form of "Issues '%m/%d/%Y %H:%M'`
+`The heading must be exactly as given below: "## Issues " followed by [audit_date] reformatted as %m/%d/%Y %H:%M (e.g., "## Issues 10/24/2026 14:30")`
 
 ## Issues [audit_date reformatted as '%m/%d/%Y %H:%M']
 

@@ -7,6 +7,7 @@ args = [
     "run",
     "--rm",
     "-i",
+    "--network=host",
     "-e", "MCP_TRANSPORT_TYPE=stdio",
     "-e", "MCP_LOG_LEVEL=info",
     "ghcr.io/cyanheads/clinicaltrialsgov-mcp-server:latest"
@@ -20,6 +21,7 @@ args = [
     "run",
     "--rm",
     "-i",
+    "--network=host",
     "-e", "MCP_TRANSPORT_TYPE=stdio",
     "-e", "MCP_LOG_LEVEL=info",
     "--env-file", ".env",

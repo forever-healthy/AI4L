@@ -28,4 +28,4 @@ Always wait for the subagent to complete and return its result (including filena
 
 This translation must happen transparently so that the existing `.claude/skills/er/SKILL.md` (which uses the `@er-xxx:` syntax) continues to work unmodified across all environments.
 
-This ensures the agents write directly into `creation/` as required by the AI4L skill, while still giving them full capability. (Changed from worktree isolation because it was breaking the "all results must go in creation/" rule.)
+This ensures the agents write directly into `creation/` as required by the AI4L skill, while still giving them full capability.

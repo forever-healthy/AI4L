@@ -78,7 +78,7 @@ To avoid this, we logically move our prompt to the very end of our product lifec
 
 ## Audit-Driven Prompting
 
-The ER prompt ([ER.md](prompts/ER.md)) "only" describes a very thorough, 400+ item QA audit process for an evidence review for a given topic, including all the hints and instructions one would also give to a human QA auditor. It does not, in any way, directly instruct an AI how to create a review.
+The ER prompt ([ER.md](prompts/ER.md)) "only" describes a very thorough QA audit process for an evidence review for a given topic, including all the hints and instructions one would also give to a human QA auditor. It does not, in any way, directly instruct an AI how to create a review.
 
 We use this "QA" prompt and task the AI with generating a review on a given topic that can pass an audit as described in the prompt. Leading frontier models understand this indirection and will try to generate a review that can pass the QA audit.
 

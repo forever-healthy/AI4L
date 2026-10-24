@@ -180,7 +180,7 @@ Antigravity prefixes the MCP servers with the plugin name: `d-pubmed` becomes `a
 
 ## MCP Servers
 
-We are using five local MCP servers with tools that significantly improve the quality of review creation and audit.
+ER.md names six local MCP servers with tools that significantly improve the quality of review creation and audit; five are configured here, and `d-proxy-2` is an unconfigured placeholder (see below).
 
 The MCPs are configured in:
 

@@ -51,7 +51,7 @@ tools:
 
 * Read [evidence_review] in chunks of 250 lines, from the top to its end
 
-* Perform an QA audit on [evidence_review] by following the instructions in [er_prompt]
+* Perform a QA audit on [evidence_review] by following the instructions in [er_prompt]
 
 * Return `audit_filename: [audit_filename]`
-* Return `pass_rate: actual [pass_rate] of the audit`
+* Return `pass_rate: [pass_rate]` of the audit

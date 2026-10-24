@@ -23,7 +23,7 @@ version: 2.0.2
 ## Resolving the target ER
 
 * If no [args] are given, set [target_er] to the newest _ER.md file in [creation_dir]
-* Otherwise, if [args] names an existing _ER.md file in [creation_dir] (with or without the directory), set [target_er] to that file
+* Otherwise, if [args] names an existing _ER.md file in [creation_dir] (with or without the directory), set [target_er] to that file's bare filename, without any directory
 * Otherwise treat [args] as an intervention: list the _ER.md files in [creation_dir] whose filename starts with [args] converted the way 6.25 of [er_prompt] converts short_topic (lowercase, spaces and dashes to underscores, other characters removed), and set [target_er] to the newest of them by the date in the filename
 * If nothing matches, report `No ER found for: [args]` and exit
 
@@ -60,6 +60,7 @@ version: 2.0.2
 
 * Report: `target_er: [target_er]`
 * Report: `pass_rate: [pass_rate]`
+* Report: `audit_filename: [audit_filename]`
 
 
 ## COMMAND: fix {er}
@@ -75,6 +76,7 @@ version: 2.0.2
 
 * Report: `target_er: [target_er]`
 * Report: `pass_rate: [pass_rate]`
+* Report: `audit_filename: [audit_filename]`
 
 
 ## COMMAND: combine {er}

@@ -5,6 +5,7 @@
       "Edit(creation/**)",
       "Write(creation/**)",
       "Read(**)",
+      "Bash",
       "Bash(python3:*)",
       "Bash(ls:*)",
       "Bash(cat:*)",
@@ -15,11 +16,13 @@
       "Bash(mv:*)",
       "Bash(mkdir:*)",
       "Bash(cp:*)",
+      "Bash(printf:*)",
       "WebSearch",
       "mcp__d-clinicaltrialsgov__*",
       "mcp__d-pubmed__*",
       "mcp__d-fetch__*",
-      "mcp__d-browser__*"
+      "mcp__d-browser__*",
+      "mcp__d-proxy-1__*"
     ]
   },
   "enableAllProjectMcpServers": true,

@@ -15,7 +15,7 @@
 * "_ER.md" refers to the .md file of an ER
 * "ER.md" refers to the ER prompt ([er_prompt]), never to an ER file
 
-* "QA" stands for quality assurance audit
+* "QA" stands for quality assurance; a "QA audit" is the audit of an ER against ER.md
 * "_ER_QA.md" refers to the .md file of a QA of an ER
 
 
@@ -51,6 +51,8 @@
 ## MCP Servers
 
 When calling `d-pubmed` (`pubmed_fetch_articles`), always pass 'pmids' as a proper JSON array of strings, never as a comma-separated string or single value
+
+When verifying PubMed URLs, use `mcp__d-pubmed__pubmed_fetch_articles` first. If the PMID resolves, that is the verification; only if it does not resolve, fall back to the chain below.
 
 When verifying ClinicalTrials.gov URLs, use `mcp__d-clinicaltrialsgov__clinicaltrials_get_study_record` first. If the NCT ID resolves, that is the verification; only if it does not resolve, fall back to the chain below.
 

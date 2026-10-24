@@ -25,7 +25,10 @@ body:
       description: Which environment were you running AI4L in?
       options:
         - Claude Code (CLI)
+        - Grok Build (CLI)
         - OpenAI Codex (CLI)
+        - Muse Code (CLI)
+        - Google Antigravity (CLI)
         - OpenCode (CLI)
         - Claude Desktop
         - Web Chat UI (claude.ai, ChatGPT, etc.)

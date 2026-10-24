@@ -39,8 +39,10 @@ that can pass an audit as described in ER.md
 
 ## Prompts for Quality Assurance Audit and Self-Refinement
 
+In a new session, attach ER.md and the generated ER file, then:
+
 ``` text
-Perform an audit of the previously generated ER as described in ER.md
+Perform an audit of the attached ER as described in ER.md
 ```
 
 ``` text
