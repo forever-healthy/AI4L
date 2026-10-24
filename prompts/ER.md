@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 480 (which is the number of all checklist items)
+* Set [total_items] to 482 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -1021,19 +1021,25 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 20.8 For drug or supplement interventions: when listing a drug class, include representative named drugs in parentheses (e.g., "CYP3A4 inhibitors (ketoconazole, ritonavir, grapefruit juice)")
 
-* 20.9 Each interaction states a severity (e.g., absolute contraindication, caution, monitor) and the clinical consequence (e.g., severe hypotension, increased bleeding risk)
+* 20.9 Each interaction states the clinical consequence (e.g., severe hypotension, increased bleeding risk). A severity label is written only for an absolute contraindication or an "Avoid"
 
-* 20.10 Each interaction rests on a product label, a regulator, or a human interaction or pharmacokinetic study, cited; a study that found no interaction is reported as such. Only such an interaction may be called a contraindication; one inferred from mechanism alone is marked "(theoretical)" (e.g., "Avoid (theoretical)").
+`"Caution" and "Monitor" are not written as labels: every listed interaction warrants them, and the consequence together with the mitigating action (20.13) carries that information.`
 
-* 20.11 If a mitigating action is known (dose reduction, timing separation, monitoring schedule), it is stated
+* 20.10 Each interaction rests on a product label, a regulator, or a human interaction or pharmacokinetic study, cited. An interaction inferred from mechanism alone is marked "(theoretical)" and is never labeled an absolute contraindication
 
-* 20.12 Populations to avoid include specific thresholds or classifications where a source gives them (e.g., "recent MI (<90 days)", "Child-Pugh Class C", "NYHA Class IV") — not only general categories
+* 20.11 Where a human study tested a pairing and found no interaction, that finding is reported, cited, instead of a mechanistic concern
 
-* 20.13 Each threshold for a population to avoid comes from a source (e.g., the product label, a guideline, or a trial's exclusion criteria), and that source is cited. Where no source gives one, the general category is named without a number.
+* 20.12 When every interaction in the section is inferred from mechanism alone, this is stated once in a sentence before the list, and the per-item "(theoretical)" markers are omitted
 
-* 20.14 Each interaction is at most 45 words
+* 20.13 If a mitigating action is known (dose reduction, timing separation, monitoring schedule), it is stated
 
-* 20.15 If the intervention is a combination, effects arising only from co-administration of its agents belong under 14.7 and 18.13, not here. This section covers interactions with substances and conditions outside the intervention
+* 20.14 Populations to avoid include specific thresholds or classifications where a source gives them (e.g., "recent MI (<90 days)", "Child-Pugh Class C", "NYHA Class IV") — not only general categories
+
+* 20.15 Each threshold for a population to avoid comes from a source (e.g., the product label, a guideline, or a trial's exclusion criteria), and that source is cited. Where no source gives one, the general category is named without a number.
+
+* 20.16 Each interaction is at most 45 words
+
+* 20.17 If the intervention is a combination, effects arising only from co-administration of its agents belong under 14.7 and 18.13, not here. This section covers interactions with substances and conditions outside the intervention
 
 
 ## 21. Risk Mitigation Strategies

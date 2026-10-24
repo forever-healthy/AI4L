@@ -1,7 +1,7 @@
 # AI4L - Change Log
 
 
-### v2.0.2 — 2026-10-23
+### v2.0.2 — 2026-10-24
 
 #### Support for Combination Treatments
 
@@ -24,7 +24,7 @@ Already live in production on [evipedia.ai](https://evipedia.ai/)
 * [Combining Spirulina, Chlorella, MCP & Modified Alginate Complex for Heavy Metal Detoxification](https://evipedia.ai/spirulina_chlorella_mcp_modified_alginate_complex_detox)
 
 
-#### Improved Evidence Handling for Risks & Benefits
+#### Improved Evidence Handling
 
 The ER prompt was reviewed against multiple leading frontier models (Opus 5.5, GPT-6, Grok 4.7, Gemini 4 Argon & Muse Wonder Full) on about 100 evidence reviews of the same topics, and refined where the comparison showed systematic strenghts/weaknesses
 
@@ -34,7 +34,7 @@ The ER prompt was reviewed against multiple leading frontier models (Opus 5.5, G
 
 * Clinical trial results: effect sizes are the difference between groups with their confidence interval, uncontrolled figures are labeled, side-effect rates come with the placebo rate, and absolute figures are reported only from the source, never calculated; finished trials are no longer described as ongoing, and each ongoing trial states what its result would change
 
-* Interactions: published interaction studies are searched for first; an interaction inferred only from mechanism is marked "(theoretical)", and thresholds for populations to avoid are sourced
+* Interactions: published interaction studies are searched for first, and a study that found no interaction is reported as such; an interaction inferred only from mechanism is marked "(theoretical)", or the section says so once when that applies to all of them; "Caution" and "Monitor" labels are dropped, since every listed interaction warrants them, and a severity label remains only for an absolute contraindication or an "Avoid"; thresholds for populations to avoid are sourced
 
 * Reference values: an optimal functional range is given only with a named source; otherwise, the standard lab range or "No established target"; each biomarker is a safety check or a marker the intervention changes; thresholds, doses, and protocol parameters are cited or stated as common practice
 
