@@ -1,7 +1,7 @@
 # AI4L - Change Log
 
 
-### v2.0.2 — 2026-10-24
+### v2.0.2 — 2026-10-25
 
 #### Support for Combination Treatments
 
@@ -34,7 +34,9 @@ The ER prompt was reviewed against multiple leading frontier models (Opus 5.5, G
 
 * Clinical trial results: effect sizes are the difference between groups with their confidence interval, uncontrolled figures are labeled, side-effect rates come with the placebo rate, and absolute figures are reported only from the source, never calculated; finished trials are no longer described as ongoing, and each ongoing trial states what its result would change
 
-* Interactions: published interaction studies are searched for first, and a study that found no interaction is reported as such; an interaction inferred only from mechanism is marked "(theoretical)", or the section says so once when that applies to all of them; "Caution" and "Monitor" labels are dropped, since every listed interaction warrants them, and a severity label remains only for an absolute contraindication or an "Avoid"; thresholds for populations to avoid are sourced
+* Interactions: published interaction studies are searched for first, and a study that found no interaction is reported as such; interactions are listed in two groups under fixed labels, documented (product label, regulator, or human study) and theoretical (inferred from a named mechanism, not studied in humans), replacing per-item "(theoretical)" markers; "Caution" and "Monitor" labels are dropped, since every listed interaction warrants them, and a severity label remains only for an absolute contraindication or an "Avoid"; thresholds for populations to avoid are sourced
+
+* Citations: the link text of every cited paper names its first author and year (e.g., "Kim 2025") instead of a generic "trial" or "study", so a reader can see which and how many studies a section rests on; linking and author rules are consolidated in the Hyperlinks section, and every cited paper now carries a link anywhere in the review
 
 * Reference values: an optimal functional range is given only with a named source; otherwise, the standard lab range or "No established target"; each biomarker is a safety check or a marker the intervention changes; thresholds, doses, and protocol parameters are cited or stated as common practice
 

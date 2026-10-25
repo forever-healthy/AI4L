@@ -26,14 +26,17 @@
 
 ### Globals for Skills and @Agents
 
-* [er_prompt]    = "prompts/ER.md"
+* [er_prompt]     = "prompts/ER.md"
 
-* [creation_dir] = "creation/"
-* [tmp_dir] =      "creation/tmp/"
-* [trash_dir] =    "creation/trash/"
+* [creation_dir]  = "creation/"
+* [tmp_dir]       = "creation/tmp/"
+* [trash_dir]     = "creation/trash/"
 
-* [max_audits] = 20
+* [library_dir]   = "library/"
+
+* [max_audits]    = 20
 * [needed_passes] = 1
+
 
 
 ### Hard Rule
@@ -56,7 +59,7 @@ When verifying PubMed URLs, use `mcp__d-pubmed__pubmed_fetch_articles` first. If
 
 When verifying ClinicalTrials.gov URLs, use `mcp__d-clinicaltrialsgov__clinicaltrials_get_study_record` first. If the NCT ID resolves, that is the verification; only if it does not resolve, fall back to the chain below.
 
-When verifying URLs, use the `mcp__d-browser__*` tools (`browser_navigate` + `browser_snapshot`). If `d-browser` is blocked or unavailable, fall back to `mcp__d-fetch__fetch`. If that also fails, fall back to `d-proxy-1` and then `d-proxy-2` — bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers. Do not use the built-in `WebFetch` tool.
+When verifying URLs, use `d-browser` (`browser_navigate` + `browser_snapshot`) to load the URL. If it fails, try `d-fetch` (`fetch`). If that also fails, then, if available, try `d-proxy-1`, and if that also fails, `d-proxy-2` — bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers. Do not use the built-in `WebFetch` tool.
 
 
 ### Temporary Files

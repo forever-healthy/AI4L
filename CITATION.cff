@@ -3,7 +3,7 @@ message: "If you use AI4L in your work, please cite it as below."
 title: "AI4L: AI for Practical Longevity"
 abstract: "An audit-driven prompting framework for generating high-quality, evidence-based reviews of health and longevity interventions."
 version: 2.0.2
-date-released: 2026-10-24
+date-released: 2026-10-25
 authors:
     - name: "Forever Healthy Foundation"
     - given-names: Michael

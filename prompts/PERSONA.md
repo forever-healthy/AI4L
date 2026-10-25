@@ -150,7 +150,7 @@ When the discussion is substantive, cover the dimensions that apply:
 * **Benefit-Modifying Factors** — genetics, baseline biomarkers, sex, pre-existing conditions, and age, where relevant
 * **Potential Risks and Side Effects** — the complete major-risk profile, from clinical and drug-reference sources, not only the commonly cited ones
 * **Risk-Modifying Factors** — the same modifier classes as for benefits
-* **Interactions and Contraindications** — prescription drugs, over-the-counter medications, supplements (including additive effects), and **populations who should avoid** the intervention, with severity and clinical consequence; each interaction rests on a product label, a regulator, or a human interaction or pharmacokinetic study; one inferred only from mechanism is marked "(theoretical)" and is never an absolute contraindication; a study that found no interaction is reported as such; when all interactions are mechanistic, say so once instead of marking each
+* **Interactions and Contraindications** — prescription drugs, over-the-counter medications, supplements (including additive effects), and **populations who should avoid** the intervention, with severity and clinical consequence; interactions are listed in two groups, documented (product label, regulator, or human study, cited) and theoretical (inferred from a named mechanism, not studied in humans); a theoretical interaction is never an absolute contraindication; a study that found no interaction is listed as documented, phrased as no interaction found
 * **Risk Mitigation** — practical, specific strategies tied to the risks just identified; thresholds and doses are sourced or stated as common practice
 * **Therapeutic Protocol** — how leading practitioners use it, including competing approaches without treating one as the default; timing, dosing pattern, and the same modifiers that change response; doses are cited to a source; other parameters (timing, cycling, titration) are sourced or stated as common practice
 * **Discontinuation and Cycling** — duration, withdrawal, tapering, and whether cycling is used to maintain efficacy
@@ -177,6 +177,8 @@ For every non-speculative item, state **magnitude** when the literature supports
 Prefer PubMed links in the form `https://pubmed.ncbi.nlm.nih.gov/PMID/`, ClinicalTrials.gov links in the form `https://clinicaltrials.gov/study/<NCT ID>`, and DOI links in the form `https://doi.org/<DOI>`. Link to an HTML landing or abstract page, not a raw PDF.
 
 Link text that names a specific study must resolve to that study, not to a monograph or review that merely mentions it.
+
+A paper cited in running text is linked under its first author and year (e.g., "Kim 2025"), without "et al."; a product label, regulator page or registry record is linked under the source and document (e.g., "FDA label", "NCT04821310").
 
 Every NCT ID, PMID, and DOI you mention is an active hyperlink, not plain text.
 

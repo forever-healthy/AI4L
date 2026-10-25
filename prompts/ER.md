@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 482 (which is the number of all checklist items)
+* Set [total_items] to 476 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -180,7 +180,7 @@ To avoid hallucinations and calculation errors, break down the audit process int
 
   - For ClinicalTrials.gov links, use `d-clinicaltrialsgov` (`clinicaltrials_get_study_record`) first. If the NCT ID resolves, mark `Loaded` 🟢 and `Verified By` `d-clinicaltrialsgov`; the study title decides `Match`. Only if the NCT ID does not resolve, fall back to the chain below.
 
-  - Try to retrieve the url using `d-browser`. If `d-browser` fails, try `d-fetch`. If `d-fetch` also fails, then, if available, try `d-proxy-1`, and if that also fails, `d-proxy-2`. These are bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers. An archive or cache is NOT a retrieval tier and can never satisfy this item.
+  - Use `d-browser` to load the URL. If it fails, try `d-fetch`. If that also fails, then, if available, try `d-proxy-1`, and if that also fails, `d-proxy-2` — bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers. An archive or cache is NOT a retrieval tier and can never satisfy this item.
 
   - Loading has failed unless you are holding the genuine target page. A transport error, an error page (404, 403, 500, …), or a bot-detection interstitial (CAPTCHA, "Security Checkpoint", "Verify your browser") are all failures.
 
@@ -482,15 +482,29 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 5.10 The page at each URL contains content matching the link's annotation in the ER (the page is about the cited topic; the article/resource title matches)
 
-`Use "d-browser" or, if it fails, "d-fetch", or, if that also fails, then, if available, "d-proxy-1" and then "d-proxy-2" to read the page, then confirm the content matches the link's description in the ER (e.g., the page is about the cited topic, the article title matches what the ER claims). A generic landing page, paywall, bot wall, or unrelated content fails this check.`
+`Use "d-browser" to load the URL. If it fails, try "d-fetch". If that also fails, then, if available, try "d-proxy-1", and if that also fails, "d-proxy-2" — bot-wall-defeating retrieval tiers; use whichever page-retrieval tool that server offers. Then confirm the content matches the link's description in the ER (e.g., the page is about the cited topic, the article title matches what the ER claims). A generic landing page, paywall, bot wall, or unrelated content fails this check.`
 
 `For PubMed links, the auditor must instead use "d-pubmed" ("pubmed_fetch_articles") to retrieve the article metadata and verify the returned title matches the title claimed in the ER. A mismatch means the PMID was fabricated or assigned to the wrong paper.`
 
 `For ClinicalTrials.gov links, the auditor must instead use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") to retrieve the study record and verify the study title matches the trial claimed in the ER. A mismatch means the NCT ID was fabricated or assigned to the wrong trial.`
 
-* 5.11 Link text that describes a specific study, trial, or finding resolves to that study — not to a reference work, monograph, database entry, or review that merely mentions it. Link text pointing to such a secondary source names it as one (e.g. "a drug monograph", "a systematic review"), never as the primary finding.
+* 5.11 Link text that describes a specific study, trial, or finding resolves to that study — not to a reference work, monograph, database entry, or review that merely mentions it. Link text pointing to such a secondary source resolves to it, and the text around the link names it as one (e.g., "a systematic review ([Smith 2023](…))", "the Lexicomp monograph ([Lexicomp](…))"), never as the primary finding.
 
-* 5.12 No link points to a web archive or cache — web.archive.org, archive.today/archive.ph, or a search-engine cache. If the live URL cannot be retrieved, the link is REMOVED rather than replaced with an archived copy.
+* 5.12 Where a paper is cited in running text, its link text is the first author's last name and the publication year, without "et al." (e.g., "Kim 2025"), and nothing else
+
+* 5.13 Where a non-paper source (a product label, a regulator, a registry record, a guideline) is cited in running text, its link text names the source and the document (e.g., "FDA label", "NCT04821310")
+
+* 5.14 Where a paper is listed by its title, the title is the link text, shown in plain text, not bold, and is followed by " - <last name>, <year>"; two authors are joined by "&" (" - <last name> & <last name>, <year>"), more than two are written " - <last name> et al., <year>"
+
+`The author is an actual person's last name, not a journal name, article type descriptor, or organization name. If uncertain, the auditor looks up the actual author(s) of the linked paper.`
+
+* 5.15 No link points to a web archive or cache — web.archive.org, archive.today/archive.ph, or a search-engine cache. If the live URL cannot be retrieved, the link is REMOVED rather than replaced with an archived copy.
+
+* 5.16 Every cited publication carries a hyperlink: to PubMed; if it is not in PubMed, to its DOI; if it has none, to the publisher page
+* 5.17 Every NCT ID, PMID, and DOI mentioned in the document is an active hyperlink, not plain text
+* 5.18 Any other referenced source with a known URL is linked
+
+`To evaluate 5.16 through 5.18, read the whole document for papers, NCT IDs, PMIDs, DOIs and other sources mentioned without a link. The URL Verification table lists only existing links and cannot show a missing one.`
 
 
 
@@ -625,7 +639,7 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 9.2 A real-time search was performed for the topic for content that is directly relevant and gives a "high-level" overview of the topic: they discuss the specific topic by name, or its primary mechanism/therapeutic category, in substantial depth
 
-* 9.3 A statement by the author about the search is placed inside an HTML comment
+* 9.3 A statement by the author about the search is placed inside an HTML comment at the start of the section
 
 * 9.4 Content is of eligible type: blog posts, podcast episodes, video presentations, YouTube lectures, expert commentary, and qualifying academic articles (primary research, narrative reviews, editorials)
 
@@ -663,35 +677,28 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 * 9.15 Items are presented in a bulleted list, not a numbered list
 
 * 9.16 The title of each item is linked to the actual article
-* 9.17 The title is shown in plain text, not bold text
-* 9.18 The title is followed by a reference to the author of the item in the form of " - <author>"
-* 9.19 ONLY if no author is available, the publication is used in the form of " - <publication>"
+* 9.17 The title is followed by a reference to the author of the item in the form of " - <author>"
+* 9.18 ONLY if no author is available, the publication is used in the form of " - <publication>"
 
-* 9.20 If the item is a scientific paper, the publication year of the paper is included in the form of " - <author>, <year>"
+* 9.19 Each link is verified per Section 5
 
-* 9.21 If the item is a scientific paper, the author attribution is an actual person's name or "<last name> et al.", not a journal name, article type descriptor, or organization name
+`To evaluate 9.19: re-run Section 5 items 5.1 through 5.15 against every link in this section. 9.19 fails if any applicable Section 5 item fails for any link.`
 
-`If uncertain, the auditor must look up the actual author(s) of the linked resource.`
+* 9.20 Each item has a 1–2 sentence annotation in a new paragraph explaining its specific value
 
-* 9.22 Each link is verified per Section 5 (Loading, Content, Semantics)
+* 9.21 When an item qualifies via mechanism or therapeutic category (9.2) rather than naming the intervention, the annotation names the shared mechanism or target explicitly (e.g. "the ghrelin receptor GHSR-1a, which GHRP-2 activates").
 
-`To evaluate 9.22: re-run Section 5 items 5.1 through 5.12 against every link in this section. 9.22 fails if any applicable Section 5 item fails for any link.`
+* 9.22 The new paragraph for the annotation is separated from the title by a blank line
 
-* 9.23 Each item has a 1–2 sentence annotation in a new paragraph explaining its specific value
+* 9.23 If content from one or more of the priority experts could not be found, a brief note, visible to the user, at the end of the section, explains why
 
-* 9.24 When an item qualifies via mechanism or therapeutic category (9.2) rather than naming the intervention, the annotation names the shared mechanism or target explicitly (e.g. "the ghrelin receptor GHSR-1a, which GHRP-2 activates").
-
-* 9.25 The new paragraph for the annotation is separated from the title by a blank line
-
-* 9.26 If content from one or more of the priority experts could not be found, a brief note, visible to the user, at the end of the section, explains why
-
-* 9.27 Each annotation is at most 35 words
+* 9.24 Each annotation is at most 35 words
 
 
 ## 10. Grokipedia
 
 * 10.1 grokipedia.com was searched directly for the intervention, using the Section 5 retrieval tiers in order until one returns the site's search results
-* 10.2 A statement by the author about the search is placed inside an HTML comment, naming the retrieval tiers tried and what each returned
+* 10.2 A statement by the author about the search is placed inside an HTML comment at the start of the section, naming the retrieval tiers tried and what each returned
 
 * 10.3 If the document states that no Grokipedia article exists, an independent direct search of grokipedia.com by the auditor confirms that none exists
 
@@ -701,9 +708,9 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 * 10.4 If an article exists, a link to the Grokipedia article is provided
 * 10.5 Suffixes in the link title, such as " — <sitename>", are removed from the link title
 
-* 10.6 If an article exists, the link is verified per Section 5 (Loading, Content, Semantics) and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
+* 10.6 If an article exists, the link is verified per Section 5 and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 10.6: re-run Section 5 items 5.1 through 5.12 against the Grokipedia link. 10.6 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 10.6: re-run Section 5 items 5.1 through 5.15 against the Grokipedia link. 10.6 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 10.7 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
@@ -716,7 +723,7 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 ## 11. Examine
 
 * 11.1 examine.com was searched directly for the intervention, using the Section 5 retrieval tiers in order until one returns the site's search results
-* 11.2 A statement by the author about the search is placed inside an HTML comment, naming the retrieval tiers tried and what each returned
+* 11.2 A statement by the author about the search is placed inside an HTML comment at the start of the section, naming the retrieval tiers tried and what each returned
 
 * 11.3 If the document states that no Examine article exists, an independent direct search of examine.com by the auditor confirms that none exists
 
@@ -727,9 +734,9 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 * 11.5 The link title is the title of the Examine article
 * 11.6 Suffixes in the link title, such as " — <sitename>", are removed from the link title
 
-* 11.7 If an article exists, the link is verified per Section 5 (Loading, Content, Semantics) and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
+* 11.7 If an article exists, the link is verified per Section 5 and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 11.7: re-run Section 5 items 5.1 through 5.12 against the Examine link. 11.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 11.7: re-run Section 5 items 5.1 through 5.15 against the Examine link. 11.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 11.8 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
@@ -744,7 +751,7 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 ## 12. ConsumerLab
 
 * 12.1 consumerlab.com was searched directly for the intervention, using the Section 5 retrieval tiers in order until one returns the site's search results
-* 12.2 A statement by the author about the search is placed inside an HTML comment, naming the retrieval tiers tried and what each returned
+* 12.2 A statement by the author about the search is placed inside an HTML comment at the start of the section, naming the retrieval tiers tried and what each returned
 
 * 12.3 If the document states that no ConsumerLab article exists, an independent direct search of consumerlab.com by the auditor confirms that none exists
 
@@ -755,9 +762,9 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 * 12.5 The link title is the title of the ConsumerLab article
 * 12.6 Suffixes in the link title, such as " — <sitename>", are removed from the link title
 
-* 12.7 If an article exists, the link is verified per Section 5 (Loading, Content, Semantics) and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
+* 12.7 If an article exists, the link is verified per Section 5 and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 12.7: re-run Section 5 items 5.1 through 5.12 against the ConsumerLab link. 12.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 12.7: re-run Section 5 items 5.1 through 5.15 against the ConsumerLab link. 12.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 12.8 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
@@ -787,30 +794,20 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 13.10 The title of each paper is linked to the paper's PubMed abstract page using the format "https://pubmed.ncbi.nlm.nih.gov/PMID/"
 
-* 13.11 No links point to publisher websites (e.g., ahajournals.org, sciencedirect.com, wiley.com)
+* 13.11 Each link is verified per Section 5
 
-* 13.12 Each link is verified per Section 5 (Loading, Content, Semantics)
-
-* 13.13 The PubMed-retrieved title matches the title in the ER
+* 13.12 The PubMed-retrieved title matches the title in the ER
 
 `The auditor must retrieve the metadata for every PubMed link in this section (e.g., by fetching the PMID or using a PubMed lookup tool) and verify that the title returned by PubMed matches the title stated in the ER. A mismatch means the PMID was fabricated or assigned to the wrong paper.`
 
-* 13.14 The title is shown in plain text, not bold text
-* 13.15 The title is followed by a reference to the author(s) and the publication year of the paper
-* 13.16 For single-author works "- <last name>, <year>" is used
-* 13.17 For dual-author works "- <last name> & <last name>, <year>" is used
-* 13.18 For works with more than two authors "- <last name> et al., <year>" is used
+* 13.13 Each result has a 1–2 sentence annotation explaining its specific value (in a new paragraph)
+* 13.14 The new paragraph for the annotation is separated from the title by a blank line
 
-`The auditor must verify that each author attribution is an actual person's name, not a journal name, article type descriptor, or organization name. If uncertain, the auditor must look up the actual author(s) of the linked resource.`
+* 13.15 If no results exist, a statement follows the exact format: "No systematic reviews or meta-analyses for \<intervention> were found on PubMed as of \<current date>."
 
-* 13.19 Each result has a 1–2 sentence annotation explaining its specific value (in a new paragraph)
-* 13.20 The new paragraph for the annotation is separated from the title by a blank line
+* 13.16 Each annotation is at most 25 words
 
-* 13.21 If no results exist, a statement follows the exact format: "No systematic reviews or meta-analyses for \<intervention> were found on PubMed as of \<current date>."
-
-* 13.22 Each annotation is at most 25 words
-
-* 13.23 If the intervention is a combination and no systematic review or meta-analysis covers the combination, reviews of a single agent may be listed only if the annotation states that the paper is about that agent alone
+* 13.17 If the intervention is a combination and no systematic review or meta-analysis covers the combination, reviews of a single agent may be listed only if the annotation states that the paper is about that agent alone
 
 ## 14. Mechanism of Action
 
@@ -1023,23 +1020,27 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 20.9 Each interaction states the clinical consequence (e.g., severe hypotension, increased bleeding risk). A severity label is written only for an absolute contraindication or an "Avoid"
 
-`"Caution" and "Monitor" are not written as labels: every listed interaction warrants them, and the consequence together with the mitigating action (20.13) carries that information.`
+`"Caution" and "Monitor" are not written as labels: every listed interaction warrants them, and the consequence together with the mitigating action (20.14) carries that information.`
 
-* 20.10 Each interaction rests on a product label, a regulator, or a human interaction or pharmacokinetic study, cited, or is inferred from mechanism alone and marked "(theoretical)"; a mechanism-only interaction is never labeled an absolute contraindication
+* 20.10 Interactions are listed in two groups under the exact bolded labels "**Documented interactions:**" and "**Theoretical interactions (inferred from mechanism, not studied in humans):**", in that order, each followed by a bulleted list and placed before the label of 20.7. If a group has no items, its label is present with the single item "None identified". The labels are never omitted, renamed, or merged into another list.
 
-* 20.11 Where a human study tested a pairing and found no interaction, that finding is reported, cited, instead of a mechanistic concern
+* 20.11 Each interaction under the documented label rests on a product label, a regulator, or a human interaction or pharmacokinetic study, cited. No item carries a "(theoretical)" marker
 
-* 20.12 When every interaction in the section is inferred from mechanism alone, this is stated once in a sentence before the list, and the per-item "(theoretical)" markers are omitted
+* 20.12 Each interaction under the theoretical label names the mechanism it is inferred from (e.g., shared CYP3A4 metabolism, additive serotonergic activity, additive blood pressure lowering) and has no human interaction or pharmacokinetic study, product label or regulator behind it. No item under the theoretical label is an absolute contraindication
 
-* 20.13 If a mitigating action is known (dose reduction, timing separation, monitoring schedule), it is stated
+* 20.13 Where a human study tested a pairing and found no interaction, that finding is listed under the documented label, cited and phrased as no interaction found, instead of a mechanistic concern
 
-* 20.14 Populations to avoid include specific thresholds or classifications where a source gives them (e.g., "recent MI (<90 days)", "Child-Pugh Class C", "NYHA Class IV") — not only general categories
+* 20.14 If a mitigating action is known (dose reduction, timing separation, monitoring schedule), it is stated
 
-* 20.15 Each threshold for a population to avoid comes from a source (e.g., the product label, a guideline, or a trial's exclusion criteria), and that source is cited. Where no source gives one, the general category is named without a number.
+* 20.15 Populations to avoid include specific thresholds or classifications where a source gives them (e.g., "recent MI (<90 days)", "Child-Pugh Class C", "NYHA Class IV") — not only general categories
 
-* 20.16 Each interaction is at most 45 words
+* 20.16 Each population to avoid rests on a product label, a regulator, a guideline, or human evidence of harm in that group, cited. Where none exists, the item names the mechanism it is inferred from and says that it is inferred (e.g., "inferred from the pulmonary vasoconstriction of low oxygen; no human data")
 
-* 20.17 If the intervention is a combination, effects arising only from co-administration of its agents belong under 14.7 and 18.13, not here. This section covers interactions with substances and conditions outside the intervention
+`A trial's exclusion criteria are not a source for this item: they protect the trial, not the patient, and are often unrelated to the intervention's risk.`
+
+* 20.17 Each interaction is at most 45 words
+
+* 20.18 If the intervention is a combination, effects arising only from co-administration of its agents belong under 14.7 and 18.13, not here. This section covers interactions with substances and conditions outside the intervention
 
 
 ## 21. Risk Mitigation Strategies
@@ -1153,31 +1154,27 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 * 28.1 Content is framed for the target audience (see 1.12), not as population-level outcomes.
 
 * 28.2 Major ongoing clinical trials are mentioned (e.g., from clinicaltrials.gov)
-* 28.3 All clinical trial NCT IDs are hyperlinked to "https://clinicaltrials.gov/study/\<NCT ID>"
 
-* 28.4 Areas of future research that could change current understanding are noted
-* 28.5 Emerging research is presented from all relevant directions — studies that could strengthen and studies that could weaken the case for the intervention are both included
+* 28.3 Areas of future research that could change current understanding are noted
+* 28.4 Emerging research is presented from all relevant directions — studies that could strengthen and studies that could weaken the case for the intervention are both included
 
-* 28.6 All cited publications include a hyperlink: PubMed; if not in PubMed, the DOI; if it has none, the publisher page
-* 28.7 Every NCT ID, PMID, and DOI mentioned in the section is an active hyperlink, not plain text
-* 28.8 Any other referenced source with a known URL is linked
-* 28.9 Ongoing trials are presented with a descriptive title or aim, the NCT ID as a hyperlink (or a note if no NCT ID exists), and key details such as participant count, phase, or primary endpoint where available
-* 28.10 Each ongoing trial states what a positive and a null result would change in the conclusion.
-* 28.11 A trial whose registered completion date has passed is not described as ongoing; its status is stated (e.g., "completed 2025, no results posted").
-* 28.12 If such a trial has published or posted results, they are reported; results that bear on a benefit or risk are also cited in that item (16.16 / 18.16).
-* 28.13 Future research areas reference specific studies or meta-analyses by author/year with a hyperlink where relevant published evidence exists
-* 28.14 Emerging Research entries are presented as bulleted items beginning with a short bold label
+* 28.5 Ongoing trials are presented with a descriptive title or aim, the NCT ID as a hyperlink (or a note if no NCT ID exists), and key details such as participant count, phase, or primary endpoint where available
+* 28.6 Each ongoing trial states what a positive and a null result would change in the conclusion.
+* 28.7 A trial whose registered completion date has passed is not described as ongoing; its status is stated (e.g., "completed 2025, no results posted").
+* 28.8 If such a trial has published or posted results, they are reported; results that bear on a benefit or risk are also cited in that item (16.16 / 18.16).
+* 28.9 Future research areas reference specific studies or meta-analyses by author/year with a hyperlink where relevant published evidence exists
+* 28.10 Emerging Research entries are presented as bulleted items beginning with a short bold label
 
-* 28.15 Each link is verified per Section 5 (Loading, Content, Semantics)
-* 28.16 For PubMed links: the PubMed-retrieved title matches the title in the ER
+* 28.11 Each link is verified per Section 5
+* 28.12 For PubMed links: the PubMed-retrieved title matches the title in the ER
 
 `Use "d-pubmed" ("pubmed_fetch_articles") to retrieve the article metadata for the PMID and check that the returned title matches the title given in the ER.`
 
-* 28.17 For clinicaltrials.gov links: the NCT ID resolves to a trial related to the intervention
+* 28.13 For clinicaltrials.gov links: the NCT ID resolves to a trial related to the intervention
 
 `Use "d-clinicaltrialsgov" ("clinicaltrials_get_study_record") to retrieve the study record for the NCT ID and check that the study title, condition, and intervention relate to the ER's claim.`
 
-* 28.18 Each item is at most 55 words
+* 28.14 Each item is at most 55 words
 
 
 ## 29. Conclusion
