@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(*)",
+      "Mcp(d-browser:*)",
+      "Mcp(d-clinicaltrialsgov:*)",
+      "Mcp(d-fetch:*)",
+      "Mcp(d-proxy-1:*)",
+      "Mcp(d-pubmed:*)"
+    ],
+    "deny": []
+  }
+}
