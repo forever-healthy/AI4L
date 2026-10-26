@@ -1,11 +1,13 @@
 # AI4L - Change Log
 
 
-### v2.0.2 — 2026-10-25
+### v2.0.2 — 2026-10-26
 
 #### Support for Combination Treatments
 
-* AI4L can now create evidence reviews for two or more interventions given together. Following the pattern `Combining A, B & C [for goal]`.
+AI4L can now create evidence reviews for two or more interventions given together, titled after the pattern `Combining A, B & C [for goal]`. 
+
+The combination is treated as one intervention: the review states why the agents are given together, and every benefit and risk says whether the evidence tested the combination or a single named agent.
 
 Already live in production on [evipedia.ai](https://evipedia.ai/)
 
@@ -63,6 +65,8 @@ The ER prompt was reviewed against multiple leading frontier models (Opus 5.5, G
 * **Google Antigravity:** (`agy`), with the agents and MCP servers configured as the `ai4l` plugin in `.agents/plugins/ai4l/` and the skills registered in `.agents/skills.json`. Its permissions live only in the global settings, so merge the provided template once — see [Using CLI Environments](docs/Using-CLI-Environments.md#antigravity-setup)
 
 * **OpenCode 2:** (`opencode`), with its own installer; the agents run as subagents and web search works out of the box — see [Using CLI Environments](docs/Using-CLI-Environments.md#opencode-setup)
+
+* **Cursor:** the MCP servers come from `.cursor/mcp.json` (a link to `.mcp.json`), and the agents run as Cursor subagents from `.cursor/agents/`, model-free so they inherit the session's model
 
 
 #### Updated Environments
