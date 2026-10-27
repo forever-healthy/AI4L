@@ -1,7 +1,7 @@
 # AI4L - Change Log
 
 
-### v2.0.2 — 2026-10-26
+### v2.0.2 — 2026-10-27
 
 #### Support for Combination Treatments
 
@@ -28,7 +28,7 @@ Already live in production on [evipedia.ai](https://evipedia.ai/)
 
 #### Improved Evidence Handling
 
-The ER prompt was reviewed against multiple leading frontier models (Opus 5.5, GPT-6, Grok 4.7, Gemini 4 Argon & Muse Wonder Full) on about 100 evidence reviews of the same topics, and refined where the comparison showed systematic strengths/weaknesses
+The AI4L prompt was reviewed against multiple leading frontier models (Opus 5.5, GPT-6, Grok 4.7, Gemini 4 Argon & Muse Wonder Full) on about 100 evidence reviews of the same topics, and refined where the comparison showed systematic strengths/weaknesses
 
 * Research results: contrary trials and reviews are searched for, cited in the item, flagged ⚠️ Conflicted and weighed; evidence from a different dose, form, route, or compound is graded as indirect; High now needs more than one independent research group; retracted papers are excluded, and errata are applied
 
