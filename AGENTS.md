@@ -1,4 +1,4 @@
-![Version 2.0.2](https://img.shields.io/badge/Version-2.0.2-green.svg)
+![Version 2.0.5](https://img.shields.io/badge/Version-2.0.5-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # Project Instructions
@@ -31,8 +31,6 @@
 * [creation_dir]  = "creation/"
 * [tmp_dir]       = "creation/tmp/"
 * [trash_dir]     = "creation/trash/"
-
-* [library_dir]   = "library/"
 
 * [max_audits]    = 20
 * [needed_passes] = 1

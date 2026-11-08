@@ -1,6 +1,24 @@
 # AI4L - Change Log
 
 
+### v2.0.5 — 2026-11-08
+
+* **Antigravity:** agents use the renamed subagent tools; Muse Code and Antigravity share `.agents/agents/`, the plugin keeps only the MCP servers
+
+
+### v2.0.4 — 2026-11-05
+
+#### Citations and Drug Labels
+
+* New checklist items 2.18–2.20: a figure carries the citation of the paper that reports it and no other, each finding in a sentence carries its own citation, and a figure from a label, registry record or guideline cites that document only
+* Drug labels get their own Hyperlinks items: 5.13 links a US label to its DailyMed page by set ID (non-US labels to the regulator's product page), 5.14 names it by brand ("Cialis label"), one link text per label; 5.15 covers the other non-paper sources
+
+
+### v2.0.3 — 2026-11-04
+
+* The read-scope rule in the prompt and the creator, fixer, and auditor agents now names the MCP research servers it exempts (`d-pubmed`, `d-clinicaltrialsgov`, `d-browser`, `d-fetch`, `d-proxy-1`, `d-proxy-2`, `d-library`) instead of describing them generically
+
+
 ### v2.0.2 — 2026-10-27
 
 #### Support for Combination Treatments

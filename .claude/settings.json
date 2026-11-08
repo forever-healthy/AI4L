@@ -1,6 +1,8 @@
 {
   "permissions": {
-    "deny": ["WebFetch"],
+    "deny": [
+      "WebFetch"
+    ],
     "allow": [
       "Edit(creation/**)",
       "Write(creation/**)",
@@ -18,11 +20,11 @@
       "Bash(cp:*)",
       "Bash(printf:*)",
       "WebSearch",
-      "mcp__d-clinicaltrialsgov__*",
-      "mcp__d-pubmed__*",
-      "mcp__d-fetch__*",
       "mcp__d-browser__*",
-      "mcp__d-proxy-1__*"
+      "mcp__d-clinicaltrialsgov__*",
+      "mcp__d-fetch__*",
+      "mcp__d-proxy-1__*",
+      "mcp__d-pubmed__*"
     ]
   },
   "enableAllProjectMcpServers": true,

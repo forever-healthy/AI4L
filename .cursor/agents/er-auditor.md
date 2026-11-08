@@ -29,7 +29,7 @@ description: AI4L - audit ER
 
 * An audit or a fix is derived from [evidence_review] and [er_prompt] — never from another review.
 
-* READ SCOPE covers local files only. Web search and the MCP research tools (PubMed, ClinicalTrials.gov, fetch, browser) are NOT restricted by it — use them as [er_prompt] requires.
+* READ SCOPE covers local files only. Web search and the MCP research servers (d-pubmed, d-clinicaltrialsgov, d-browser, d-fetch, d-proxy-1, d-proxy-2, fh-library) are NOT restricted by it — use them as [er_prompt] requires.
 
 * Read [er_prompt] in chunks of 250 lines, from the top to its end
 

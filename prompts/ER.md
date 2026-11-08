@@ -1,4 +1,4 @@
-![Version 2.0.2](https://img.shields.io/badge/Version-2.0.2-green.svg)
+![Version 2.0.5](https://img.shields.io/badge/Version-2.0.5-green.svg)
 [![Forever Healthy](https://img.shields.io/badge/(c)_2026-Forever_Healthy-573D7D.svg)](https://forever-healthy.org)
 
 # AI4L Quality Assurance Guideline for Evidence Reviews
@@ -18,7 +18,7 @@ It not only allows an auditor to evaluate the quality of an ER but also guides a
 
 ## Globals
 
-* Set [total_items] to 476 (which is the number of all checklist items)
+* Set [total_items] to 481 (which is the number of all checklist items)
 
 * Set [review_filename] to the filename of the review to be audited
 * Set [review_canonical_topic] to the canonical_topic as stated in the frontmatter of the review to be audited
@@ -44,7 +44,7 @@ The following rules govern how this checklist must be used when performing an au
 
 * DO NOT use or take into account any prior audit's results in any way in relation to this audit. Every audit must be performed independently. The prior audit may have missed issues or made mistakes. Each iteration must be a fully independent, item-by-item audit.
 
-* DO NOT use or access any other local files besides this one, the ER in question, the audit file you create during this audit, and files you yourself create in [tmp_dir] during this audit. This covers local files only: web search and the MCP research tools (PubMed, ClinicalTrials.gov, fetch, browser) are not restricted by it — use them as the hints require
+* DO NOT use or access any other local files besides this one, the ER in question, the audit file you create during this audit, and files you yourself create in [tmp_dir] during this audit. This covers local files only: web search and the MCP research servers (d-pubmed, d-clinicaltrialsgov, d-browser, d-fetch, d-proxy-1, d-proxy-2, fh-library) are not restricted by it — use them as the hints require
 
 * DO NOT take any shortcuts to optimize token usage or cut processing time. The goal is thoroughness, not token optimization.
 
@@ -390,6 +390,18 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 2.17 Where a cited paper's abstract and full text disagree on a cited figure or conclusion (e.g., significant in the abstract, not significant in the results), the ER follows the full text and notes the discrepancy where the paper is cited.
 
+* 2.18 A figure carries the citation of the paper that reports it and no other; a statement about several trials cites each trial for what it did.
+
+`A figure followed by a citation group of several papers fails unless the text says that each of them reports it.`
+
+* 2.19 Where a sentence holds several findings, each finding carries its own citation directly after it.
+
+`A sentence with two figures and one citation group at its end fails.`
+
+* 2.20 A figure taken from a product label, registry record or guideline cites that document only.
+
+`A figure whose link text names a label, registry record or guideline fails when a paper citation follows it in the same citation group.`
+
 
 ## 3. General Formatting
 
@@ -492,19 +504,27 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 5.12 Where a paper is cited in running text, its link text is the first author's last name and the publication year, without "et al." (e.g., "Kim 2025"), and nothing else
 
-* 5.13 Where a non-paper source (a product label, a regulator, a registry record, a guideline) is cited in running text, its link text names the source and the document (e.g., "FDA label", "NCT04821310")
+* 5.13 A US drug label links to its DailyMed page by set ID (https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=<set ID>), never to a DailyMed search page, a PDF copy, the FDA's label archive or a third-party drug site. The brand's own label is cited; a generic label only where no brand label exists. A non-US label links to the regulator's product page (EMA: the EPAR product information; UK: the electronic Medicines Compendium)
 
-* 5.14 Where a paper is listed by its title, the title is the link text, shown in plain text, not bold, and is followed by " - <last name>, <year>"; two authors are joined by "&" (" - <last name> & <last name>, <year>"), more than two are written " - <last name> et al., <year>"
+`The set ID is the fixed identifier of one product's label across all its revisions, so the link always opens the current version.`
+
+* 5.14 Where a drug label is cited in running text, its link text is the brand name followed by "label" (e.g., "Cialis label", "Adcirca label"); a non-US label names the regulator's document and the brand (e.g., "EMA SmPC Cialis", "UK SmPC Cialis")
+
+`One label, one link text: the same link text always points to the same label, and two different labels never share a link text. "FDA label" fails.`
+
+* 5.15 Where a non-paper source other than a drug label (a regulator's notice or decision, a registry record, a guideline) is cited in running text, its link text names the source and the document (e.g., "FDA notice", "MHRA press release", "NCT04821310")
+
+* 5.16 Where a paper is listed by its title, the title is the link text, shown in plain text, not bold, and is followed by " - <last name>, <year>"; two authors are joined by "&" (" - <last name> & <last name>, <year>"), more than two are written " - <last name> et al., <year>"
 
 `The author is an actual person's last name, not a journal name, article type descriptor, or organization name. If uncertain, the auditor looks up the actual author(s) of the linked paper.`
 
-* 5.15 No link points to a web archive or cache — web.archive.org, archive.today/archive.ph, or a search-engine cache. If the live URL cannot be retrieved, the link is REMOVED rather than replaced with an archived copy.
+* 5.17 No link points to a web archive or cache — web.archive.org, archive.today/archive.ph, or a search-engine cache. If the live URL cannot be retrieved, the link is REMOVED rather than replaced with an archived copy.
 
-* 5.16 Every cited publication carries a hyperlink: to PubMed; if it is not in PubMed, to its DOI; if it has none, to the publisher page
-* 5.17 Every NCT ID, PMID, and DOI mentioned in the document is an active hyperlink, not plain text
-* 5.18 Any other referenced source with a known URL is linked
+* 5.18 Every cited publication carries a hyperlink: to PubMed; if it is not in PubMed, to its DOI; if it has none, to the publisher page
+* 5.19 Every NCT ID, PMID, and DOI mentioned in the document is an active hyperlink, not plain text
+* 5.20 Any other referenced source with a known URL is linked
 
-`To evaluate 5.16 through 5.18, read the whole document for papers, NCT IDs, PMIDs, DOIs and other sources mentioned without a link. The URL Verification table lists only existing links and cannot show a missing one.`
+`To evaluate 5.18 through 5.20, read the whole document for papers, NCT IDs, PMIDs, DOIs and other sources mentioned without a link. The URL Verification table lists only existing links and cannot show a missing one.`
 
 
 
@@ -682,7 +702,7 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 9.19 Each link is verified per Section 5
 
-`To evaluate 9.19: re-run Section 5 items 5.1 through 5.15 against every link in this section. 9.19 fails if any applicable Section 5 item fails for any link.`
+`To evaluate 9.19: re-run Section 5 items 5.1 through 5.17 against every link in this section. 9.19 fails if any applicable Section 5 item fails for any link.`
 
 * 9.20 Each item has a 1–2 sentence annotation in a new paragraph explaining its specific value
 
@@ -710,7 +730,7 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 10.6 If an article exists, the link is verified per Section 5 and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 10.6: re-run Section 5 items 5.1 through 5.15 against the Grokipedia link. 10.6 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 10.6: re-run Section 5 items 5.1 through 5.17 against the Grokipedia link. 10.6 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 10.7 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
@@ -736,7 +756,7 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 11.7 If an article exists, the link is verified per Section 5 and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 11.7: re-run Section 5 items 5.1 through 5.15 against the Examine link. 11.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 11.7: re-run Section 5 items 5.1 through 5.17 against the Examine link. 11.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 11.8 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 
@@ -764,7 +784,7 @@ Audit conducted on [audit_date reformatted as %m/%d/%Y %H:%M] using [AI4L](https
 
 * 12.7 If an article exists, the link is verified per Section 5 and points to the site's primary, dedicated page for the intervention — not a filtered search view, research feed, subpage, or FAQ entry
 
-`To evaluate 12.7: re-run Section 5 items 5.1 through 5.15 against the ConsumerLab link. 12.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
+`To evaluate 12.7: re-run Section 5 items 5.1 through 5.17 against the ConsumerLab link. 12.7 fails if any applicable Section 5 item fails, or if the link points to a search view, research feed, subpage, or FAQ entry instead of the primary page.`
 
 * 12.8 If an article exists, a 1–2 sentence annotation explains its specific value (in a new paragraph)
 

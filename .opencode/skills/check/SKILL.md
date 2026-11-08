@@ -1,7 +1,7 @@
 ---
 name: check
 description: Project Verification & Consistency Checking
-version: 2.0.2
+version: 2.0.5
 ---
 
 # AI4L - Project Verification & Consistency Checking
@@ -19,11 +19,13 @@ Handles consistency checking for all major files in the repo, including version 
 - `.claude/agents/er-combiner.md`
 
 - `AGENTS.md`
+- `.public/AGENTS.md`
 - `CLAUDE.md`
 - `README.md`
 - `CONTRIBUTING.md`
 
 - `prompts/ER.md`
+- `prompts/ER-LIB.md`
 - `prompts/PERSONA.md`
 
 - `.grok/rules/rules.md`

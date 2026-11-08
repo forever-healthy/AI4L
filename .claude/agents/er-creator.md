@@ -3,7 +3,7 @@ name: er-creator
 description: AI4L - create ER
 model: opus
 color: purple
-version: 2.0.2
+version: 2.0.5
 ---
 
 # AI4L - Agent to Create Evidence Reviews according to ER.md
@@ -30,7 +30,7 @@ version: 2.0.2
 
 * Never read any existing evidence review or _ER_QA.md file, and never read any other existing file — not in [creation_dir], not in any other directory. Create the ER from [er_prompt], your knowledge, and the research [er_prompt] requires.
 
-* READ SCOPE covers local files only. Web search and the MCP research tools (PubMed, ClinicalTrials.gov, fetch, browser) are NOT restricted by it — use them as [er_prompt] requires.
+* READ SCOPE covers local files only. Web search and the MCP research servers (d-pubmed, d-clinicaltrialsgov, d-browser, d-fetch, d-proxy-1, d-proxy-2, fh-library) are NOT restricted by it — use them as [er_prompt] requires.
 
 * Never glob, list or search for evidence reviews or _ER_QA.md files.
 

@@ -2,7 +2,7 @@
 name: er-combiner
 description: AI4L - combine all _ER_QA.md files of an ER using bash (lossless)
 color: orange
-version: 2.0.2
+version: 2.0.5
 ---
 
 # AI4L - Bash Agent to Combine all _ER_QA.md files of an ER into a single file

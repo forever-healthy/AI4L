@@ -1,6 +1,14 @@
 ---
 name: er-combiner
 description: AI4L - combine all _ER_QA.md files of an ER using bash (lossless)
+tools:
+    - send_message
+    - read_file
+    - write_file
+    - edit_file
+    - run_command
+    - search_web
+    - manage_task
 ---
 
 # AI4L - Bash Agent to Combine all _ER_QA.md files of an ER into a single file
